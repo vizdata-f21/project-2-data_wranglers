@@ -31,6 +31,10 @@ large number of years. We will join this dataset with the one above to
 illustrate the states that players are from within the United States for
 the first research question.
 
+3.  <https://www.kaggle.com/drgilermo/nba-players-stats>
+
+INCLUDE DESCRIPTION!
+
 Research questions:
 
 1.  Where are NBA All-Stars originally from?
@@ -50,3 +54,5 @@ All-Stars played for an when players were drafted. We chose this because
 we wanted to see which teams had the most players make the All-Star game
 in the 2000s, and also were curious how many late draft picks versus
 earlier draft picks became good enough to make the all-star game.
+
+3.  ADD 3rd RESEARCH QUESTION
