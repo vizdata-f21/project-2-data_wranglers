@@ -1,0 +1,9 @@
+---
+title: "Project Proposal"
+author: "Data Wranglers"
+output: github_document
+---
+
+```{r load-packages, echo=F, message = FALSE, warning = F}
+library(tidyverse)
+```
