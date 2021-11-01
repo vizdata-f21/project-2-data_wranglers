@@ -2,4 +2,51 @@ Project Proposal
 ================
 Data Wranglers
 
+### High Level Goals
 
+We wanted to create visualizations based on NBA all-star data, including
+where they are originally from, what colleges they went to, what team
+they played for, and important statistics. We will create a shiny app
+with different panels to answer each of our three research questions
+described below.
+
+### Research Questions
+
+Our motivation behind our ideas for this project are that we are all NBA
+fans and thought it was an interesting, unique idea and we found
+relevant datasets to help us create effective and interesting
+visuatlizations. The datasets we found are:
+
+1.  <https://data.world/gmoney/nba-all-stars-2000-2016/workspace/file?filename=NBA+All+Star+Games.xlsx>
+
+This dataset includes NBA all stars from 2000-2016 and information on
+the team they played for, their draft pick, and where they are from. We
+will use this dataset for visualizations in the shiny app, including
+their nationalities, where they were drafted, and all-stars by team.
+
+2.  <https://data.world/gmoney/nba-players-birthplaces/workspace/file?filename=NBA+Players+by+State.xlsx>
+
+This second dataset includes more information on NBA players through a
+large number of years. We will join this dataset with the one above to
+illustrate the states that players are from within the United States for
+the first research question.
+
+Research questions:
+
+1.  Where are NBA All-Stars originally from?
+
+With the NBA becoming increasing global, we were curious to look into
+where the best players (the ones that made the all-star game) were
+originally from. We also thought it would be interesting to create a
+panel in the SHiny App first demonstrating where NBA players are from
+globally, and then for those born in the US, what states they were born
+in.
+
+2.  When were all-stars drafted and what team did they played for?
+
+For a second question, we thought we could create an animated bar chart
+where you could manually switch between looking at what teams NBA
+All-Stars played for an when players were drafted. We chose this because
+we wanted to see which teams had the most players make the All-Star game
+in the 2000s, and also were curious how many late draft picks versus
+earlier draft picks became good enough to make the all-star game.
