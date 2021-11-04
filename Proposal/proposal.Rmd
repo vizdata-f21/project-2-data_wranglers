@@ -22,7 +22,7 @@ Our motivation behind our ideas for this project are that we are all NBA fans an
 
 https://data.world/gmoney/nba-all-stars-2000-2016/workspace/file?filename=NBA+All+Star+Games.xlsx
 
-This dataset includes NBA all stars from 2000-2016 and information on the team they played for, their draft pick, and where they are from. We will use this dataset for visualizations in the shiny app, including players' nationalities, when they were drafted, and all-stars by team. 
+This dataset includes NBA all stars from 2000-2016 and information on the team they played for, their draft pick, and where they are from. We will use this dataset for visualizations in the shiny app, including players' nationalities, when they were drafted, and all-stars by team. The dataset has 9 variables and 439 rows.
 
 
 
@@ -30,7 +30,7 @@ This dataset includes NBA all stars from 2000-2016 and information on the team t
 
 https://data.world/gmoney/nba-players-birthplaces/workspace/file?filename=NBA+Players+by+State.xlsx
 
-This second dataset includes more information on NBA players through a large number of years. The most important column in this dataset is `state`, as we will be using this to visualize which state our all-stars are from; we will join this dataset with the one above to achieve this visualization.
+This second dataset has 28 variables and 3,407 rows and includes more information on NBA players through a large number of years. The most important column in this dataset is `state`, as we will be using this to visualize which state our all-stars are from; we will join this dataset with the one above to achieve this visualization.
 
 
 
@@ -54,7 +54,7 @@ For a second question, we will create an animated bar chart where you can manual
 
 3. Which colleges did NBA all-stars attend?
 
-Our final visualization will show which colleges NBA all stars attended on a map and will allow users to search for a college and pull up a list of all the all-stars from 2000-2016 that attended that college.
+Our final visualization will show which colleges NBA all stars attended on a map and will allow users to search for a college and pull up a list of all the all-stars from 2000-2016 that attended that college. We chose this question do to our genuine interest in both college basketball and the NBA, as well as wanting to know which colleges produced the most NBA all stars.
 
 ### Weekly Plan of Attack
 
