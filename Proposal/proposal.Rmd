@@ -8,6 +8,13 @@ output: github_document
 library(tidyverse)
 ```
 
+```{r load-data}
+all_stars <- read_csv("../data/all_star.csv", show_col_types = F)
+colleges <- read_csv("../data/colleges.csv", show_col_types = F)
+states <- read_csv("../data/states.csv", show_col_types = F)
+stats <- read_csv("../data/stats.csv", show_col_types = F)
+```
+
 ### High Level Goal
 
 We want to build a shiny app with visualizations based on NBA all-star data, including where the athletes are originally from, what colleges they went to, what team they played for, and important statistics from their career. We will answer each of our three research questions described below with separate visualizations in the shiny app, some of which will be interactive.

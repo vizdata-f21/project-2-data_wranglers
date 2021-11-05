@@ -20,7 +20,8 @@ for (year in 1950:2021) {
   
   weight <- page %>%
     html_nodes(".nowrap:nth-child(4)") %>%
-    html_text()
+    html_text() %>%
+    as.numeric()
   
   team <- page %>%
     html_nodes(".nowrap:nth-child(5)") %>%
@@ -34,7 +35,7 @@ for (year in 1950:2021) {
     html_nodes(".nowrap:nth-child(8)") %>%
     html_text()
   
-  all_star <- bind_rows(all_star, tibble(year, players, positions, height, weight, team, nationality))
+  all_star <- bind_rows(all_star, tibble(year, players, positions, height, weight, team, draft_pick, nationality))
   
 }
 
