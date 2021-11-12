@@ -84,8 +84,8 @@ and an increasing number of players were born internationally. We also
 thought it would be interesting to create a panel in the Shiny App first
 demonstrating where NBA players are from globally, and then for those
 born in the US, what states they were born in. We will join the first
-dataset, which lists players and their nationalities, to the second
-dataset, which lists which state players were born in. Here, we
+dataset, listing players and their nationalities, to the dataset that
+holds information regarding a players’ birth state. With this, we
 anticipate plotting the players’ origin locations on a map. An animation
 of where players come from over time is another goal of ours.
 
