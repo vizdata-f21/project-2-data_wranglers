@@ -65,7 +65,7 @@ and other data.
 
 This third dataset includes 2 variables and 4961 observation. It
 contains the college that each NBA player has attended. This can be used
-to show which players produce the most NBA players and NBA All-Stars.
+to show which colleges produce the most NBA players and NBA All-Stars.
 
 ### Research questions
 
@@ -121,22 +121,8 @@ colleges.
 
 ### Weekly Plan of Attack
 
-Week 1 (week of Mon, Oct 18): - Picked theme for project and found
-relevant datasets that fit our theme - Assigned to entire group
-
-Week 2 (week of Mon, Oct 25): - Finalized research questions and worked
-on our project proposal and weekly plan of attack for the entire project
-- Assigned to entire team
-
-Week 3 (week of Mon, Nov 1):
-
--   Fix revisions and make correctiosn to finalize proposal - Assigned
-    to entire group
-
 Week 4 (week of Mon, Nov 8):
 
--   Make final updates to proposal and conduct peer review of other
-    projects - Assigned to entire team
 -   Combine datasets and start working on different panels of shiny app-
     Each team member will clean one of the three datasets and will
     establish one panel of the Shiny App
