@@ -16,15 +16,17 @@ data, including where the athletes are originally from, what colleges
 they went to, what team they played for, and important statistics from
 their career. We will answer each of our three research questions
 described below with separate visualizations in the shiny app, some of
-which will be interactive.
+which will be interactive plots (including animations, buttons, and
+sliders) that allow the user to specify year ranges and specific player
+information that they want to explore.
 
 ### Motivation
 
 Our motivation behind our ideas for this project are that we are all NBA
-fans and thought it was an interesting, unique idea. We found a lot of
-relevant data to help us create effective and interesting
-visualizations, which we were able to use by scraping the web. These
-data are listed below:
+fans and thought it was an interesting, unique idea to make a Shiny app
+that looked at NBA All-Star data. We found a lot of relevant data to
+help us create effective and interesting visualizations, which we were
+able to use by scraping the web. These data are listed below:
 
 ### Data
 
@@ -37,7 +39,7 @@ will use this dataset for visualizations in the shiny app, including
 players’ nationalities, when they were drafted, and All-Stars by team.
 The dataset has 8 variables and 1739 observations.
 
-2.  NBA Player Birthplaces - scraped from [Basketball
+1.  NBA Player Birthplaces - scraped from [Basketball
     Reference](https://www.basketball-reference.com/)
 
 This second dataset has 4 variables and 4071 observations and includes
@@ -48,7 +50,7 @@ are from; we will join this dataset with the one above to achieve this
 visualization. The data only includes American born players at present,
 which is something we may change later.
 
-3.  NBA player stats - scraped from [Basketball
+1.  NBA player stats - scraped from [Basketball
     Reference](https://www.basketball-reference.com/)
 
 This third dataset includes 4 variables and 4071 observation. It
@@ -56,7 +58,7 @@ contains player statistics in each season played in the NBA since 1951.
 We will use this dataset to create interactive visualizations of stats
 and other data.
 
-4.  NBA player colleges - scraped from [Basketball
+1.  NBA player colleges - scraped from [Basketball
     Reference](https://www.basketball-reference.com/)
 
 This third dataset includes 2 variables and 4961 observation. It
@@ -65,34 +67,55 @@ to show which players produce the most NBA players and NBA All-Stars.
 
 ### Research questions
 
-1.  Where are NBA All-Stars originally from?
+1.  Where are NBA All-Stars originally from geographically? How many
+    All-Stars, on average, are there from outside the United States per
+    year?
 
 With the NBA becoming an increasingly international league, we are
 curious to look into where the best players (the ones that made the
-All-Star game) were originally from. We also thought it would be
-interesting to create a panel in the Shiny App first demonstrating where
-NBA players are from globally, and then for those born in the US, what
-states they were born in. We will join the first dataset, which lists
-players and their nationalities, to the second dataset, which lists
-which state players were born in.
+All-Star game) were originally from. We initially chose this question
+because we were curious to see how many All-Stars are typically not from
+the United States and, if so, where they originated from. This would be
+interested as, historically, most of the greatest basketball players
+have been born in the US, but the NBA has grown dramatically globally
+and an increasing number of players were born internationally. We also
+thought it would be interesting to create a panel in the Shiny App first
+demonstrating where NBA players are from globally, and then for those
+born in the US, what states they were born in. We will join the first
+dataset, which lists players and their nationalities, to the second
+dataset, which lists which state players were born in. Here, we
+anticipate plotting the players’ origin locations on a map. An animation
+of where players come from over time is another goal of ours.
 
-2.  When were All-Stars drafted and what team did they play for?
+1.  When were All-Stars drafted and what team did they play for?
 
 For a second question, we will create an animated bar chart where you
 can manually switch between looking at what teams NBA All-Stars played
 for and when players were drafted. We chose this because we wanted to
 see which teams had the most players make the All-Star game in the
 2000s, and also were curious how many late draft picks versus earlier
-draft picks became good enough to make the All-Star game.
+draft picks became good enough to make the All-Star game. This was
+interesting to us especially because we wanted to see how important it
+is to get a top pick in the NBA draft for a player to turn out to be an
+All-Star. A racing bar chart of the amount of cumulative All-Stars by
+team could be used here. Additionally, we plan to plot where All-Stars
+were drafted using a simple plot like a density plot. We may also
+include an animated proportion chart showing what percentage of players
+drafted at each pick make an All-Star game over time.
 
-3.  Which colleges did NBA players and NBA All-Stars attend?
+1.  Which colleges did the most NBA players attend? Geographically,
+    which regions in the US are those colleges in that produce the most
+    NBA players?
 
 Our final visualization will show which colleges NBA All-Stars attended
 on a map and will allow users to search for a college and pull up a list
 of all the All-Stars from 2000-2016 that attended that college. We chose
 this question do to our genuine interest in both college basketball and
 the NBA, as well as wanting to know which colleges produced the most NBA
-All-Stars.
+All-Stars. Our goal is to see which colleges are the greatest feeders
+into the NBA. Plotting a map object would again be useful here, and
+animations would illuminate trends of where players emerge out of
+colleges.
 
 ### Weekly Plan of Attack
 
@@ -105,20 +128,20 @@ on our project proposal and weekly plan of attack for the entire project
 
 Week 3 (week of Mon, Nov 1):
 
-  - Fix revisions and make correctiosn to finalize proposal - Assigned
+-   Fix revisions and make correctiosn to finalize proposal - Assigned
     to entire group
 
 Week 4 (week of Mon, Nov 8):
 
-  - Make final updates to proposal and conduct peer review of other
+-   Make final updates to proposal and conduct peer review of other
     projects - Assigned to entire team
-  - Combine datasets and start working on different panels of shiny app-
+-   Combine datasets and start working on different panels of shiny app-
     Each team member will clean one of the three datasets and will
     establish one panel of the Shiny App
 
 Week 5 (week of Mon, Nov 15):
 
-  - Each team member will work on one panel for the Shiny app and we
+-   Each team member will work on one panel for the Shiny app and we
     will meet weekly (outside of lab) to discuss progress - Sarab will
     work on the map for “Where All-Stars are originally from?”, Zach
     will work on “When were All-Stars drafted and what team did they
@@ -127,7 +150,7 @@ Week 5 (week of Mon, Nov 15):
 
 Week 6 (week of Mon, Nov 22):
 
-  - Finish up visualizations and start working on write-up and
+-   Finish up visualizations and start working on write-up and
     presentation - Each team member will conduct the appropriate
     write-ups and interpretations/discussions (along with the slides in
     the presentation) for their own visualization, we will then
@@ -136,39 +159,25 @@ Week 6 (week of Mon, Nov 22):
 
 Week 7 (week of Mon, Nov 29):
 
-  - Finalize write-up and presentation and final edits
-  - Conduct peer review - Assigned to entire group
+-   Finalize write-up and presentation and final edits
+-   Conduct peer review - Assigned to entire group
 
 ### Repository Organization
 
 1.  Data
 
-<!-- end list -->
+-   Contains files used to scrape data
+-   Contains .csv files
+-   Contains data dictionaries for all data files
 
-  - Contains files used to scrape data
-  - Contains .csv files
-  - Contains data dictionaries for all data files
+1.  Shiny
 
-<!-- end list -->
+-   Contains files for work done on Shiny app
 
-2.  Shiny
+1.  Presentation
 
-<!-- end list -->
+-   Contains Shiny App output
 
-  - Contains files for work done on Shiny app
+1.  Proposal
 
-<!-- end list -->
-
-3.  Presentation
-
-<!-- end list -->
-
-  - Contains Shiny App output
-
-<!-- end list -->
-
-4.  Proposal
-
-<!-- end list -->
-
-  - Contains Proposal
+-   Contains Proposal
