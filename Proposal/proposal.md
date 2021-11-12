@@ -3,10 +3,10 @@ Project Proposal
 Data Wranglers
 
 ``` r
-all_stars <- read_csv("../data/all_star.csv", show_col_types = F)
-colleges <- read_csv("../data/colleges.csv", show_col_types = F)
-states <- read_csv("../data/states.csv", show_col_types = F)
-stats <- read_csv("../data/stats.csv", show_col_types = F)
+all_stars <- read_csv("../Data/all_star.csv", show_col_types = F)
+colleges <- read_csv("../Data/colleges.csv", show_col_types = F)
+states <- read_csv("../Data/states.csv", show_col_types = F)
+stats <- read_csv("../Data/stats.csv", show_col_types = F)
 ```
 
 ### High Level Goal
@@ -41,7 +41,7 @@ will use this dataset for visualizations in the shiny app, including
 players’ nationalities, when they were drafted, and All-Stars by team.
 The dataset has 8 variables and 1739 observations.
 
-1.  NBA Player Birthplaces - scraped from [Basketball
+2.  NBA Player Birthplaces - scraped from [Basketball
     Reference](https://www.basketball-reference.com/)
 
 This second dataset has 4 variables and 4071 observations and includes
@@ -52,7 +52,7 @@ are from; we will join this dataset with the one above to achieve this
 visualization. The data only includes American born players at present,
 which is something we may change later.
 
-1.  NBA player stats - scraped from [Basketball
+3.  NBA player stats - scraped from [Basketball
     Reference](https://www.basketball-reference.com/)
 
 This third dataset includes 4 variables and 4071 observation. It
@@ -60,7 +60,7 @@ contains player statistics in each season played in the NBA since 1951.
 We will use this dataset to create interactive visualizations of stats
 and other data.
 
-1.  NBA player colleges - scraped from [Basketball
+4.  NBA player colleges - scraped from [Basketball
     Reference](https://www.basketball-reference.com/)
 
 This third dataset includes 2 variables and 4961 observation. It
@@ -89,7 +89,7 @@ holds information regarding a players’ birth state. With this, we
 anticipate plotting the players’ origin locations on a map. An animation
 of where players come from over time is another goal of ours.
 
-1.  When were All-Stars drafted and what team did they play for?
+2.  When were All-Stars drafted and what team did they play for?
 
 For a second question, we will create an animated bar chart where you
 can manually switch between looking at what teams NBA All-Stars played
@@ -105,7 +105,7 @@ were drafted using a simple plot like a density plot. We may also
 include an animated proportion chart showing what percentage of players
 drafted at each pick make an All-Star game over time.
 
-1.  Which colleges did the most NBA players attend? Geographically,
+3.  Which colleges did the most NBA players attend? Geographically,
     which regions in the US are those colleges in that produce the most
     NBA players?
 
@@ -158,14 +158,14 @@ Week 7 (week of Mon, Nov 29):
 -   Contains .csv files
 -   Contains data dictionaries for all data files
 
-1.  Shiny
+2.  Shiny
 
 -   Contains files for work done on Shiny app
 
-1.  Presentation
+3.  Presentation
 
 -   Contains Shiny App output
 
-1.  Proposal
+4.  Proposal
 
 -   Contains Proposal
