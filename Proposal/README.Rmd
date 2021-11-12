@@ -42,7 +42,7 @@ This third dataset includes `r length(states)` variables and `r nrow(states)` ob
 
 4. NBA player colleges - scraped from [Basketball Reference](https://www.basketball-reference.com/)
 
-This third dataset includes `r length(colleges)` variables and `r nrow(colleges)` observation. It contains the college that each NBA player has attended. This can be used to show which players produce the most NBA players and NBA All-Stars.
+This third dataset includes `r length(colleges)` variables and `r nrow(colleges)` observation. It contains the college that each NBA player has attended. This can be used to show which colleges produce the most NBA players and NBA All-Stars.
 
 
 ### Research questions
