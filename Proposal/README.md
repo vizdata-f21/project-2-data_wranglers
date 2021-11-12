@@ -24,9 +24,11 @@ information that they want to explore.
 
 Our motivation behind our ideas for this project are that we are all NBA
 fans and thought it was an interesting, unique idea to make a Shiny app
-that looked at NBA All-Star data. We found a lot of relevant data to
-help us create effective and interesting visualizations, which we were
-able to use by scraping the web. These data are listed below:
+that looked at NBA All-Star data. We wanted to explore the prevalence of
+NBA players and NBA All-Stars from around the country and the world. We
+found a lot of relevant data to help us create effective and interesting
+visualizations, which we were able to use by scraping the web. These
+data are listed below:
 
 ### Data
 
