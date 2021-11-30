@@ -1,8 +1,11 @@
+extrafont::loadfonts(device="win")
 library(tidyverse)
+library(gganimate)
+library(scales)
 
-all_stars <- read_csv("./Data/all_star.csv", show_col_types = F) %>%
+all_stars <- read_csv("../data/all_star.csv", show_col_types = F) %>%
   filter(!(year == 1999 & str_detect(draft_pick, "20")))
-colleges <- read_csv("./Data/colleges.csv", show_col_types = F)
+colleges <- read_csv("../data/colleges.csv", show_col_types = F)
 
 data <- right_join(colleges, all_stars) %>%
   select(players, college, year) %>%
@@ -18,7 +21,7 @@ data <- right_join(colleges, all_stars) %>%
   mutate(college = ifelse(str_detect(college, "Trinity Valley CC, Cincinnati"), "Cincinnati", college)) %>%
   filter(duplicated(players, college) == FALSE)
 
-college_locations <- read_csv("college_locations.csv") %>%
+college_locations <- read_csv("../data/college_locations.csv", show_col_types = F) %>%
   select(NAME, LAT, LON, STATE) %>%
   rename(college = NAME,
          lat1 = LAT) %>%
@@ -27,6 +30,8 @@ college_locations <- read_csv("college_locations.csv") %>%
 
 locations_all_stars <- left_join(data, college_locations)
   
+
+pop <- read_csv("../data/nst-est2020.csv", show_col_types = F)
 
 # Chloropleth -------------------------------------------------------------
 
@@ -50,13 +55,41 @@ merge(locations_all_stars, mapping, by = "state")
 
 ggplot(mapping_data, aes(long, lat, group = group))+
   geom_polygon(aes(fill = n), color = "white") +
-  scale_fill_gradient()
+  scale_fill_gradient2(low = muted("red"), mid = "white",
+                      high = muted("green"), midpoint = 10,
+                      guide = guide_legend(label.position = "bottom"),
+                      limits = c(0, 30),
+                      breaks = c(0, 10, 20, 30),
+                      labels = paste(c(0, 10, 20, 30))) +
+  theme_void() +
+  labs(fill = NULL) +
+  theme(plot.background = element_rect(fill = "gainsboro"),
+        legend.position = c(0.2, 0.15),
+        legend.key.size = unit(0.8, "cm"), legend.direction="horizontal")
 
 
 # Per-Capita --------------------------------------------------------------
 
 
+pop <- pop %>% mutate(state = state.abb[match(pop$state, state.name)]) %>%
+  mutate(state = ifelse(is.na(state), "DC", state))
 
+states_pop <- left_join(mapping_data, pop)
+
+
+ggplot(states_pop, aes(long, lat, group = group))+
+  geom_polygon(aes(fill = n/(pop2020/1000000)), color = "white") +
+  scale_fill_gradient2(low = muted("red"), mid = "white",
+                       high = muted("green"), midpoint = 2,
+                       guide = guide_legend(label.position = "bottom"),
+                       limits = c(0, 6),
+                       breaks = c(0, 2, 4, 6),
+                       labels = paste(c(0, 2, 4, 6))) +
+  theme_void() +
+  labs(fill = NULL) +
+  theme(plot.background = element_rect(fill = "gainsboro"),
+        legend.position = c(0.2, 0.15),
+        legend.key.size = unit(0.8, "cm"), legend.direction="horizontal")
 
 # Point-mapping -----------------------------------------------------------
 
@@ -76,16 +109,32 @@ by_college <- locations_all_stars %>%
   ungroup()
 
 
-cumulative_college_data <- full_join(by_college, college_locations, by = "college")
+cumulative_college_data <- left_join(by_college, college_locations, by = "college") %>%
+  filter(sum_all_stars > 0)
 
 
-ggplot(map_data("state")) + 
+point_map <- ggplot(map_data("state")) + 
   geom_polygon(aes(x=long, y=lat, group=group),
-                color="black") +
+                color="black", fill = "white") +
   geom_point(data = cumulative_college_data, 
-             aes(x = lon, y = lat1, size = sum_all_stars), 
+             aes(x = lon, y = lat1, size = sum_all_stars+1), 
              shape = 23, fill = "red", show.legend = F) +
+  geom_point(data = (cumulative_college_data %>% filter(n > 0)),
+           aes(x = lon, y = lat1, size = n+1), color = "blue", show.legend = F) + 
   theme_void() +
-  scale_x_continuous(limits = c(-125, -65)) +
-  scale_y_continuous(limits = c(25, 50))
+  scale_x_continuous(limits = c(-125, -66)) +
+  scale_y_continuous(limits = c(25, 50)) +  
+  facet_wrap(~ year) +
+  facet_null() +
+  aes(group = college) +
+  theme(plot.background = element_rect(fill = "gainsboro")) +
+  geom_text(data = (cumulative_college_data %>% filter(n > 0)),
+    x = -115, y = 27,
+    aes(label = as.character(year)),
+    size = 25,  
+    family = "Times"
+  ) +
+  gganimate::transition_time(year)
+
+animate(point_map, duration = 15, end_pause = 50, fps = 20)
   
