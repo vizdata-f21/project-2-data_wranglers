@@ -5,7 +5,7 @@ library(scales)
 library(dplyr)
 all_stars <- read_csv("./Data/all_star.csv", show_col_types = F)
 
-all_stars <- all_stars %>%
+all_stars_n <- all_stars %>%
   mutate(team = str_replace(team, "Seattle SuperSonics", "Oklahoma City Thunder")) %>%
   mutate(team = str_replace(team, "Tri-Cities Blackhawks", "Atlanta Hawks")) %>%
   mutate(team = str_replace(team, "St. Louis Hawks", "Atlanta Hawks")) %>%
@@ -14,7 +14,7 @@ all_stars <- all_stars %>%
   mutate(team = str_replace(team, "Minneapolis Lakers", "Los Angeles Lakers")) %>%
   mutate(team = str_replace(team, "Charlotte Bobcats", "Charlotte Hornets")) %>%
   mutate(team = str_replace(team, "Baltimore Bullets (BAA)", "Washington Wizards")) %>%
-  mutate(team = str_replace(team, "Washington Wizards (BAA)", "Washington Wizards"))
+  mutate(team = str_replace(team, "Washington Wizards (BAA)", "Washington Wizards")) %>%
   mutate(team = str_replace(team, "Baltimore Bullets", "Washington Wizards")) %>%
   mutate(team = str_replace(team, "Chicago Zephyrs", "Washington Wizards")) %>%
   mutate(team = str_replace(team, "Fort Wayne Pistons", "Detroit Pistons")) %>%
@@ -34,24 +34,45 @@ all_stars <- all_stars %>%
   mutate(team = str_replace(team, "New Orleans Hornets", "New Orleans Pelicans")) %>%
   mutate(team = str_replace(team, "Cincinnati Royals", "Sacramento Kings")) %>%
   mutate(team = str_replace(team, "Chicago Packers", "Washington Wizards")) 
-
-all_stars <- all_stars %>%
+  
+all_stars_n <- all_stars_n %>%
   filter(!(year == 1999 & str_detect(draft_pick, "20"))) %>%
   mutate()
 
 
-plot <- all_stars %>%
-  ggplot(mapping = aes(y = team)) +
-  geom_bar(show.legend = FALSE, mapping = aes(fill = team)) +
-  facet_wrap(~year) +
+plot <- all_stars_n %>%
+  filter(year >= 1980, year <= 2020) %>%
+  select(team, year) %>%
+  group_by(year) %>%
+  count(team) %>% 
+  pivot_wider(names_from = team, values_from = n) %>%
+  pivot_longer(-1, names_to = "team", values_to = "n") %>% 
+  mutate(n = replace_na(n, 0)) %>%
+  group_by(team) %>%
+  mutate(sum_all_stars = cumsum(n)) %>%
+  ungroup() %>%
+  group_by(year) %>%  
+  arrange(year, sum_all_stars) %>%
+  mutate(rank = 1:n()) %>%
+  ggplot() +
+  aes(xmin = 0 , xmax = sum_all_stars) +
+  aes(ymin = rank - .45, ymax = rank + .45, y = rank) +
+  facet_wrap(~year) +  
+  geom_rect(alpha = .8, show.legend = FALSE) +
+  aes(fill = team) +
+  +
+  scale_x_continuous(
+    limits = c(-5, 16),
+    breaks = c(2*(0:8)) +
+  geom_text(hjust = "right", aes(label = team), x = -0.25, size = 3) +
   theme(axis.text.y = element_blank(), axis.ticks.y = element_blank(),
         axis.title.y = element_blank(), axis.ticks.x = element_blank()) +
   facet_null() +
   theme_minimal() +
   aes(group = team) +
-  transition_time(as.integer(year), range = c(1980L, 2020L)) + 
+  transition_time(as.integer(year)) + 
   labs(title = "Number of Total All-Stars by Team", subtitle = "from 1980-2020", 
-       y = NULL, x = "Number of All-Stars (Continuous) {frame_time}")
+       y = NULL, fill = NULL, x = "Number of All-Stars (Continuous) {frame_time}")
 
-animate(plot, duration = 18)
+animate(plot, duration = 20, end_pause = 20)
 
