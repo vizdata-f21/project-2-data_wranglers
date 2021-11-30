@@ -1,7 +1,3 @@
-extrafont::loadfonts(device="win")
-library(tidyverse)
-library(gganimate)
-library(scales)
 
 all_stars <- read_csv("../data/all_star.csv", show_col_types = F) %>%
   filter(!(year == 1999 & str_detect(draft_pick, "20")))
