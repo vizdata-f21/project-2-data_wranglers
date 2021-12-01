@@ -32,6 +32,7 @@ all_stars_by_state <- function (per_capita = T,
     filter(year >= year_start & year <= year_end)
   
   
+
   pop <- read_csv("../Data/nst-est2020.csv", show_col_types = F)
   
   # Chloropleth -------------------------------------------------------------
@@ -139,6 +140,7 @@ all_stars_by_college_loc <- function (year_start = 1951,
     mutate(college = ifelse(str_detect(college, "Trinity Valley CC, Cincinnati"), "Cincinnati", college)) %>%
     filter(duplicated(players, college) == FALSE)
   
+
   college_locations <- read_csv("../Data/college_locations.csv", show_col_types = F) %>%
     select(NAME, LAT, LON, STATE) %>%
     rename(college = NAME,
