@@ -13,6 +13,7 @@ number_of_all_stars_by_draft <- function(year_start = 1951,
   
   draft_plot <- data %>%
     select(draft_range, year) %>%
+    filter(draft_range != "NA") %>%
     group_by(year) %>%
     count(draft_range) %>% 
     pivot_wider(names_from = draft_range, values_from = n) %>%
@@ -30,7 +31,7 @@ number_of_all_stars_by_draft <- function(year_start = 1951,
     facet_wrap(~year) +  
     geom_rect(alpha = .8, show.legend = FALSE) +
     aes(fill = draft_range) +
-    scale_x_continuous(limits = c(-100, 1000), breaks = c(100*(0:10))) +
+    scale_x_continuous(limits = c(-150, 1400), breaks = c(100*(0:14))) +
     geom_text(hjust = "right", aes(label = draft_range), x = -0.50, size = 3) +
     theme(axis.text.y = element_blank(), axis.ticks.y = element_blank(),
           axis.title.y = element_blank(), axis.ticks.x = element_blank()) +

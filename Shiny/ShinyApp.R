@@ -8,6 +8,9 @@ library(scales)
 library(shinymaterial)
 
 source("all_star_colleges.R")
+source("college_locations.R")
+source("draft_position.R")
+source("all_star_teams.R")
 
 
 ui <- fluidPage(
@@ -151,7 +154,7 @@ ui <- fluidPage(
                               depth = 4,
                               sliderInput("year_range_by_team", "Year Range",
                                           min = 1951, max = 2021, value = c(1951, 2021), sep = "", ticks = FALSE),
-                              sliderInput("teams_to_rank", "Teams to Rank:",
+                              sliderInput("teams_to_rank", "Teams to Rank (with the most All-Stars):",
                                           value = 30, min = 10, max = 30, ticks = FALSE),
                               sliderInput("duration_anim_by_team", "Duration:",
                                           value = 10, min = 5, max = 30, step = 5, ticks = FALSE),
