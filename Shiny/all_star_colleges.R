@@ -1,9 +1,7 @@
 number_of_all_stars_by_college <- function (duplicate_players = T,
                                             year_start = 1951,
                                             year_end = 2021,
-                                            duration_of_animation = 10,
-                                            fps_of_animation = 10,
-                                            end_pause_of_animation = 20
+                                            number_to_rank = 10
                                             ) {
   all_stars <- read_csv("../data/all_star.csv", show_col_types = F) %>%
     filter(!(year == 1999 & str_detect(draft_pick, "20")))
@@ -41,7 +39,7 @@ number_of_all_stars_by_college <- function (duplicate_players = T,
     group_by(year) %>%  
     arrange(year, -sum_all_stars) %>%
     mutate(rank = 1:n()) %>%  
-    filter(rank <= 10) %>%
+    filter(rank <= number_to_rank) %>%
     ggplot() +  
     aes(xmin = 0 ,  
         xmax = sum_all_stars) +  
