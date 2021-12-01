@@ -40,7 +40,7 @@ all_stars_n <- all_stars_n %>%
   mutate()
 
 
-plot <- all_stars_n %>%
+team_plot <- all_stars_n %>%
   filter(year >= 1980, year <= 2020) %>%
   select(team, year) %>%
   group_by(year) %>%
@@ -60,19 +60,23 @@ plot <- all_stars_n %>%
   facet_wrap(~year) +  
   geom_rect(alpha = .8, show.legend = FALSE) +
   aes(fill = team) +
-  +
-  scale_x_continuous(
-    limits = c(-5, 16),
-    breaks = c(2*(0:8)) +
+  scale_x_continuous(limits = c(-25, 100), breaks = c(10*(0:10))) +
   geom_text(hjust = "right", aes(label = team), x = -0.25, size = 3) +
   theme(axis.text.y = element_blank(), axis.ticks.y = element_blank(),
         axis.title.y = element_blank(), axis.ticks.x = element_blank()) +
   facet_null() +
   theme_minimal() +
+  scale_fill_viridis_d(option = "magma", direction = -1) +
   aes(group = team) +
   transition_time(as.integer(year)) + 
   labs(title = "Number of Total All-Stars by Team", subtitle = "from 1980-2020", 
        y = NULL, fill = NULL, x = "Number of All-Stars (Continuous) {frame_time}")
 
-animate(plot, duration = 20, end_pause = 20)
+animate(team_plot, duration = 20, end_pause = 20)
+
+all_stars_n <- all_stars_n %>%
+  mutate(draft_range = case_when(str_detect(draft_pick, "Undrafted") ~ "Undrafted",
+                                 str_detect(draft_pick, "Rnd 1") ~ "First Round",
+                                 str_detect(draft_pick, "Rnd 2") ~ "Second Round",
+                                 else ~ "Undrafted"))
 
