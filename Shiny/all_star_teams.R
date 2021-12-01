@@ -1,7 +1,6 @@
-number_of_all_stars_by_team <- function (duplicate_players = T,
-                                            year_start = 1951,
+number_of_all_stars_by_team <- function (year_start = 1951,
                                             year_end = 2021,
-                                            number_to_rank = 10) {
+                                            number_to_rank = 30) {
   all_stars <- read_csv("../data/all_star.csv", show_col_types = F) %>%
     filter(!(year == 1999 & str_detect(draft_pick, "20")))
   colleges <- read_csv("../data/colleges.csv", show_col_types = F)
@@ -68,7 +67,7 @@ number_of_all_stars_by_team <- function (duplicate_players = T,
     scale_fill_viridis_d(option = "magma", direction = -1) +
     aes(group = team) +
     transition_time(as.integer(year)) + 
-    labs(title = "Number of Total All-Stars by Team", subtitle = "from 1980-2020", 
+    labs(title = "Number of Total All-Stars by Team",
          y = NULL, fill = NULL, x = "Number of All-Stars (Continuous) {frame_time}")
   
   team_plot

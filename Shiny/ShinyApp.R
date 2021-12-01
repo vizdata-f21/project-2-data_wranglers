@@ -24,7 +24,8 @@ ui <- fluidPage(
                         menuSubItem("Colleges", tabName = "as_college"),
                         menuSubItem("College State", tabName = "as_state"),
                         menuSubItem("College Location", tabName = "as_loc"),
-                        menuSubItem("Draft Positions", tabName = "as_draft")
+                        menuSubItem("Draft Positions", tabName = "as_draft"),
+                        menuSubItem("Team", tabName = "as_team")
                     )
                   )
                 ),
@@ -136,7 +137,37 @@ ui <- fluidPage(
                               )
                             )
                           )
+                        ),
+                    
+                    tabItem(
+                      tabName = "as_team",
+                      material_page(
+                        nav_bar_color = 'black',
+                        material_row(
+                          material_column(
+                            width = 4,
+                            material_card(
+                              title = '',
+                              depth = 4,
+                              sliderInput("year_range_by_team", "Year Range",
+                                          min = 1951, max = 2021, value = c(1951, 2021), sep = "", ticks = FALSE),
+                              sliderInput("teams_to_rank", "Teams to Rank:",
+                                          value = 30, min = 10, max = 30, ticks = FALSE),
+                              sliderInput("duration_anim_by_team", "Duration:",
+                                          value = 10, min = 5, max = 30, step = 5, ticks = FALSE),
+                              sliderInput("fps_anim_by_team", "Frames per Second:",
+                                          value = 10, min = 5, max = 40, step = 5, ticks = FALSE),
+                              sliderInput("end_pause_anim_by_team", "End Pause:",
+                                          value = 25, min = 5, max = 100, step = 5, ticks = FALSE),
+                              actionButton("animate_by_draft", "Animate!")
+                            )
+                          ),
+                          material_column(
+                            imageOutput("plot_anim_by_team")
+                          )
                         )
+                      )
+                    )
                     
                 )
                 )
@@ -205,6 +236,22 @@ server <- function(input, output, session) {
            contentType = 'image/gif'
       )}, deleteFile = TRUE)
 
+  }) 
+  
+  observeEvent(input$anim_by_team, {
+    output$plot_anim_by_team <- renderImage({
+      all_stars_by_team <- number_of_all_stars_by_team(year_start = input$year_range_by_draft[[1]],
+                                                         year_end = input$year_range_draft[[2]])
+      
+      anim_save("all_stars_by_team.gif", animate(all_stars_by_team,
+                                                  fps = input$fps_anim_by_team,
+                                                  end_pause = input$end_pause_anim_by_team,
+                                                  duration = input$duration_anim_by_team))
+      
+      list(src = "all_stars_by_team.gif",
+           contentType = 'image/gif'
+      )}, deleteFile = TRUE)
+    
   }) 
   
       
