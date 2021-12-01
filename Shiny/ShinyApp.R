@@ -1,7 +1,7 @@
 library(shiny)
 library(shinydashboard)
 library(dashboardthemes)
-extrafont::loadfonts(device="win")
+#extrafont::loadfonts(device="win")
 library(tidyverse)
 library(gganimate)
 library(scales)
@@ -23,7 +23,8 @@ ui <- fluidPage(
                     menuItem("All-Stars", icon = icon("star"), startExpanded = TRUE,
                         menuSubItem("Colleges", tabName = "as_college"),
                         menuSubItem("College State", tabName = "as_state"),
-                        menuSubItem("College Location", tabName = "as_loc")
+                        menuSubItem("College Location", tabName = "as_loc"),
+                        menuSubItem("Draft Positions", tabName = "as_draft")
                     )
                   )
                 ),
@@ -108,7 +109,37 @@ ui <- fluidPage(
                           )
                         )
                       )
-                    )
+                    ),
+                    
+                    tabItems(
+                        tabItem(
+                          tabName = "as_draft",
+                          material_page(
+                            nav_bar_color = 'black',
+                            material_row(
+                              material_column(
+                                width = 4,
+                                material_card(
+                                  title = '',
+                                  depth = 4,
+                                  sliderInput("year_range_by_draft", "Year Range",
+                                              min = 1951, max = 2021, value = c(1951, 2021), sep = "", ticks = FALSE),
+                                  sliderInput("duration_anim_by_draft", "Duration:",
+                                              value = 10, min = 5, max = 30, step = 5, ticks = FALSE),
+                                  sliderInput("fps_anim_by_draft", "Frames per Second:",
+                                              value = 10, min = 5, max = 40, step = 5, ticks = FALSE),
+                                  sliderInput("end_pause_anim_by_draft", "End Pause:",
+                                              value = 25, min = 5, max = 100, step = 5, ticks = FALSE),
+                                  actionButton("animate_by_draft", "Animate!")
+                                )
+                              ),
+                              material_column(
+                                imageOutput("plot_anim_by_draft")
+                              )
+                            )
+                          )
+                        ))
+                    
                 )
                 )
   )
@@ -162,9 +193,22 @@ server <- function(input, output, session) {
       )}, deleteFile = TRUE)
   })
 
+  observeEvent(input$anim_by_draft, {
+    output$plot_anim_by_draft <- renderImage({
+      all_stars_by_draft <- all_stars_by_draft(year_start = input$year_range_by_draft[[1]],
+                                                                year_end = input$year_range_draft[[2]])
+      
+      anim_save("all_stars_by_draft.gif", animate(all_stars_by_draft,
+                                                     fps = input$fps_anim_by_draft,
+                                                     end_pause = input$end_pause_anim_by_draft,
+                                                     duration = input$duration_anim_by_draft))
+      
+      
+      list(src = "all_stars_by_draft.gif",
+           contentType = 'image/gif'
+      )}, deleteFile = TRUE)
 
-
-  
+  }) 
   
   
 }
