@@ -3,17 +3,11 @@ number_of_all_stars_by_college <- function (duplicate_players = T,
                                             year_end = 2021,
                                             number_to_rank = 10
                                             ) {
-  all_stars <- read_csv("../data/all_star.csv", show_col_types = F) %>%
+  all_stars <- read_csv("data/all_star.csv", show_col_types = F) %>%
     filter(!(year == 1999 & str_detect(draft_pick, "20")))
-  colleges <- read_csv("../data/colleges.csv", show_col_types = F)
+  colleges <- read_csv("data/colleges.csv", show_col_types = F)
   
-  data <- right_join(colleges, all_stars)
-  
-  data <- data %>% filter(year >= year_start & year <= year_end)
-  
-  if (duplicate_players){
-    anim_w_duplicates <- data %>%
-    select(players, college, year) %>%
+  data <- right_join(colleges, all_stars) %>%
     filter(!is.na(college)) %>%
     mutate(college = ifelse(str_detect(college, "Indiana, Georgetown"), "Georgetown", college)) %>%
     mutate(college = ifelse(str_detect(college, "Niagara"), "Niagara", college)) %>%
@@ -21,7 +15,14 @@ number_of_all_stars_by_college <- function (duplicate_players = T,
     mutate(college = ifelse(str_detect(college, "Bradley, New Mexico"), "Oklahoma", college)) %>%
     mutate(college = ifelse(str_detect(college, "Vincennes University, Michigan"), "Michigan", college)) %>%
     mutate(college = ifelse(str_detect(college, "Vincennes University, UNLV"), "UNLV", college)) %>%
-    mutate(college = ifelse(str_detect(college, "Trinity Valley CC, Cincinnati"), "Cincinnati", college)) %>%
+    mutate(college = ifelse(str_detect(college, "Trinity Valley CC, Cincinnati"), "Cincinnati", college))
+  
+  colors <- read_csv("data/college_colors.csv", show_col_types = F)
+  
+  data <- data %>% filter(year >= year_start & year <= year_end)
+  
+  if (duplicate_players){
+  data <- data %>%
     select(college, year) %>%
     group_by(year) %>%
     count(college) %>% 
@@ -38,19 +39,23 @@ number_of_all_stars_by_college <- function (duplicate_players = T,
     ungroup() %>%
     group_by(year) %>%  
     arrange(year, -sum_all_stars) %>%
-    mutate(rank = 1:n()) %>%  
-    filter(rank <= number_to_rank) %>%
-    ggplot() +  
-    aes(xmin = 0 ,  
-        xmax = sum_all_stars) +  
-    aes(ymin = rank - .45,  
-        ymax = rank + .45,  
-        y = rank) +  
-    facet_wrap(~ year) +  
+    mutate(rank = 1:n()) %>%
+    filter(rank <= number_to_rank)
+      
+      
+  data <- left_join(data, colors)
+  color_codes <- setNames(data$colors, c(data$college))
+    
+  anim_w_duplicates <- ggplot(data) +
+    aes(xmin = 0,
+        xmax = sum_all_stars) +
+    aes(ymin = rank - .45,
+        ymax = rank + .45,
+        y = rank,
+        fill = college) +
     geom_rect(alpha = .7, show.legend = F) +  
-    aes(fill = college) +  
-    scale_fill_viridis_d(option = "magma",  
-                         direction = -1) +
+    facet_wrap(~ year) +
+    scale_fill_manual(name = "college",values = color_codes) +
     scale_x_continuous(
       limits = c(-12, 40),
       breaks = c(5*(0:8))
@@ -61,10 +66,10 @@ number_of_all_stars_by_college <- function (duplicate_players = T,
       x = -0.5, size = 5
     ) +
     theme_classic(base_family = "Times") +
-    theme(axis.text.y = element_blank(), axis.ticks.y = element_blank(), 
-          axis.line.y = element_blank(), legend.background = element_rect(fill = "gainsboro"), 
+    theme(axis.text.y = element_blank(), axis.ticks.y = element_blank(),
+          axis.line.y = element_blank(), legend.background = element_rect(fill = "gainsboro"),
           plot.background = element_rect(fill = "gainsboro"),
-          panel.background = element_rect(fill = "gainsboro")) +  
+          panel.background = element_rect(fill = "gainsboro")) +
     scale_y_reverse() +
     labs(fill = NULL, x = "All-Stars", y = NULL) +  
     facet_null() +
@@ -77,8 +82,7 @@ number_of_all_stars_by_college <- function (duplicate_players = T,
       aes(label = as.character(year)),
       size = 25,  
       family = "Times"
-    ) +
-    aes(group = college) +  
+    ) +  
     gganimate::transition_time(year)
   
   anim_w_duplicates
@@ -88,16 +92,8 @@ number_of_all_stars_by_college <- function (duplicate_players = T,
   
   
   else {
-    anim_no_duplicates <- data %>%
+    data <- data %>%
       select(players, college, year) %>%
-      filter(!is.na(college)) %>%
-      mutate(college = ifelse(str_detect(college, "Indiana, Georgetown"), "Georgetown", college)) %>%
-      mutate(college = ifelse(str_detect(college, "Niagara"), "Niagara", college)) %>%
-      mutate(college = ifelse(str_detect(college, "Midland College, Oklahoma"), "Oklahoma", college)) %>%
-      mutate(college = ifelse(str_detect(college, "Bradley, New Mexico"), "Oklahoma", college)) %>%
-      mutate(college = ifelse(str_detect(college, "Vincennes University, Michigan"), "Michigan", college)) %>%
-      mutate(college = ifelse(str_detect(college, "Vincennes University, UNLV"), "UNLV", college)) %>%
-      mutate(college = ifelse(str_detect(college, "Trinity Valley CC, Cincinnati"), "Cincinnati", college)) %>%
       filter(duplicated(players, college) == FALSE) %>%
       select(college, year) %>%
       group_by(year) %>%
@@ -116,8 +112,13 @@ number_of_all_stars_by_college <- function (duplicate_players = T,
       group_by(year) %>%  
       arrange(year, -sum_all_stars) %>%
       mutate(rank = 1:n()) %>%  
-      filter(rank <= 10) %>%
-      ggplot() +  
+      filter(rank <= number_to_rank)
+    
+    
+    data <- left_join(data, colors)
+    color_codes <- setNames(data$colors, c(data$college))
+    
+    anim_no_duplicates <- ggplot(data) +  
       aes(xmin = 0 ,  
           xmax = sum_all_stars) +  
       aes(ymin = rank - .45,  
@@ -125,9 +126,8 @@ number_of_all_stars_by_college <- function (duplicate_players = T,
           y = rank) +  
       facet_wrap(~ year) +  
       geom_rect(alpha = .7, show.legend = F) +  
-      aes(fill = college) +  
-      scale_fill_viridis_d(option = "magma",  
-                           direction = -1) +
+      aes(fill = college) +
+      scale_fill_manual(name = "college",values = color_codes) +
       scale_x_continuous(
         limits = c(-5, 16),
         breaks = c(2*(0:8))

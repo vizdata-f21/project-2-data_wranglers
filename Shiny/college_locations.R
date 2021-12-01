@@ -1,9 +1,9 @@
 all_stars_by_state <- function (per_capita = T,
                                             year_start = 1951,
                                             year_end = 2021) {
-  all_stars <- read_csv("../data/all_star.csv", show_col_types = F) %>%
+  all_stars <- read_csv("data/all_star.csv", show_col_types = F) %>%
     filter(!(year == 1999 & str_detect(draft_pick, "20")))
-  colleges <- read_csv("../data/colleges.csv", show_col_types = F)
+  colleges <- read_csv("data/colleges.csv", show_col_types = F)
   
   data <- right_join(colleges, all_stars) %>%
     select(players, college, year) %>%
@@ -19,7 +19,7 @@ all_stars_by_state <- function (per_capita = T,
     mutate(college = ifelse(str_detect(college, "Trinity Valley CC, Cincinnati"), "Cincinnati", college)) %>%
     filter(duplicated(players, college) == FALSE)
   
-  college_locations <- read_csv("../data/college_locations.csv", show_col_types = F) %>%
+  college_locations <- read_csv("data/college_locations.csv", show_col_types = F) %>%
     select(NAME, LAT, LON, STATE) %>%
     rename(college = NAME,
            lat1 = LAT) %>%
@@ -32,7 +32,7 @@ all_stars_by_state <- function (per_capita = T,
     filter(year >= year_start & year <= year_end)
   
   
-  pop <- read_csv("../data/nst-est2020.csv", show_col_types = F)
+  pop <- read_csv("data/nst-est2020.csv", show_col_types = F)
   
   # Chloropleth -------------------------------------------------------------
   
@@ -121,9 +121,9 @@ all_stars_by_state <- function (per_capita = T,
 # Point-mapping -----------------------------------------------------------
 all_stars_by_college_loc <- function (year_start = 1951,
                                 year_end = 2021) {
-  all_stars <- read_csv("../data/all_star.csv", show_col_types = F) %>%
+  all_stars <- read_csv("data/all_star.csv", show_col_types = F) %>%
     filter(!(year == 1999 & str_detect(draft_pick, "20")))
-  colleges <- read_csv("../data/colleges.csv", show_col_types = F)
+  colleges <- read_csv("data/colleges.csv", show_col_types = F)
   
   data <- right_join(colleges, all_stars) %>%
     select(players, college, year) %>%
@@ -139,7 +139,7 @@ all_stars_by_college_loc <- function (year_start = 1951,
     mutate(college = ifelse(str_detect(college, "Trinity Valley CC, Cincinnati"), "Cincinnati", college)) %>%
     filter(duplicated(players, college) == FALSE)
   
-  college_locations <- read_csv("../data/college_locations.csv", show_col_types = F) %>%
+  college_locations <- read_csv("data/college_locations.csv", show_col_types = F) %>%
     select(NAME, LAT, LON, STATE) %>%
     rename(college = NAME,
            lat1 = LAT) %>%
