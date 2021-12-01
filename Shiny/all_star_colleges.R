@@ -3,9 +3,9 @@ number_of_all_stars_by_college <- function (duplicate_players = T,
                                             year_end = 2021,
                                             number_to_rank = 10
                                             ) {
-  all_stars <- read_csv("../data/all_star.csv", show_col_types = F) %>%
+  all_stars <- read_csv("../Data/all_star.csv", show_col_types = F) %>%
     filter(!(year == 1999 & str_detect(draft_pick, "20")))
-  colleges <- read_csv("../data/colleges.csv", show_col_types = F)
+  colleges <- read_csv("../Data/colleges.csv", show_col_types = F)
   
   data <- right_join(colleges, all_stars)
   

@@ -28,7 +28,9 @@ ui <- fluidPage(
                         menuSubItem("College State", tabName = "as_state"),
                         menuSubItem("College Location", tabName = "as_loc"),
                         menuSubItem("Draft Positions", tabName = "as_draft"),
-                        menuSubItem("Team", tabName = "as_team")
+                        menuSubItem("Team", tabName = "as_team"),
+                        menuSubItem("World Map", tabName = "world_map"),
+                        menuSubItem("U.S. Map", tabName = "us_map")
                     )
                   )
                 ),
@@ -170,6 +172,27 @@ ui <- fluidPage(
                           )
                         )
                       )
+                    ),
+                    tabItem(
+                      tabName = "world_map",
+                      material_page(
+                        nav_bar_color = 'black',
+                        material_row(
+                          material_column(
+                            width = 4,
+                            material_card(
+                              title = '',
+                              depth = 1,
+                              sliderInput("year_range_all_stars", "Year Range",
+                                          min = 1951, max = 2021, value = c(1951, 2021), sep = "", ticks = FALSE),
+                              actionButton("world_map", "Visualize!")
+                            )
+                          ),
+                          material_column(
+                            imageOutput("plot_world_map")
+                          )
+                        )
+                      )
                     )
                     
                 )
@@ -252,6 +275,17 @@ server <- function(input, output, session) {
                                                   duration = input$duration_anim_by_team))
       
       list(src = "all_stars_by_team.gif",
+           contentType = 'image/gif'
+      )}, deleteFile = TRUE)
+    
+  }) 
+  
+  observeEvent(input$world_map, {
+    output$plot_world_map <- renderImage({
+      world_map <- world_map_fn(year_start = input$year_range_by_team[[1]],
+                                                       year_end = input$year_range_team[[2]])
+      
+      list(src = "world_map",
            contentType = 'image/gif'
       )}, deleteFile = TRUE)
     

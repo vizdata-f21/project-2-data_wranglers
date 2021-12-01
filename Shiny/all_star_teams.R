@@ -1,7 +1,7 @@
 number_of_all_stars_by_team <- function (year_start = 1951,
                                             year_end = 2021,
                                             number_to_rank = 30) {
-  all_stars <- read_csv("../data/all_star.csv", show_col_types = F) %>%
+  all_stars <- read_csv("../Data/all_star.csv", show_col_types = F) %>%
     filter(!(year == 1999 & str_detect(draft_pick, "20")))
   
   data <- all_stars %>%
