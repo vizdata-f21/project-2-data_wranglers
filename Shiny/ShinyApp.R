@@ -243,8 +243,8 @@ server <- function(input, output, session) {
   
   observeEvent(input$anim_by_team, {
     output$plot_anim_by_team <- renderImage({
-      all_stars_by_team <- number_of_all_stars_by_team(year_start = input$year_range_by_draft[[1]],
-                                                         year_end = input$year_range_draft[[2]])
+      all_stars_by_team <- number_of_all_stars_by_team(year_start = input$year_range_by_team[[1]],
+                                                         year_end = input$year_range_team[[2]])
       
       anim_save("all_stars_by_team.gif", animate(all_stars_by_team,
                                                   fps = input$fps_anim_by_team,

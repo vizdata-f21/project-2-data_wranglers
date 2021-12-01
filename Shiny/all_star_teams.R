@@ -3,7 +3,6 @@ number_of_all_stars_by_team <- function (year_start = 1951,
                                             number_to_rank = 30) {
   all_stars <- read_csv("../data/all_star.csv", show_col_types = F) %>%
     filter(!(year == 1999 & str_detect(draft_pick, "20")))
-  colleges <- read_csv("../data/colleges.csv", show_col_types = F)
   
   data <- all_stars %>%
     mutate(team = str_replace(team, "Seattle SuperSonics", "Oklahoma City Thunder")) %>%
@@ -67,8 +66,7 @@ number_of_all_stars_by_team <- function (year_start = 1951,
     scale_fill_viridis_d(option = "magma", direction = -1) +
     aes(group = team) +
     transition_time(as.integer(year)) + 
-    labs(title = "Number of Total All-Stars by Team",
-         y = NULL, fill = NULL, x = "Number of All-Stars (Continuous) {frame_time}")
+    labs(title = "Number of Total All-Stars by Team", y = NULL, fill = NULL, x = "Number of All-Stars (Continuous) {frame_time}")
   
   team_plot
 
@@ -111,7 +109,6 @@ number_of_all_stars_by_team <- function (year_start = 1951,
 
 
 #team_plot <- all_stars_n %>%
- # filter(year >= 1980, year <= 2020) %>%
  # select(team, year) %>%
 #  group_by(year) %>%
 #  count(team) %>% 
@@ -140,7 +137,7 @@ number_of_all_stars_by_team <- function (year_start = 1951,
   #scale_fill_viridis_d(option = "magma", direction = -1) +
 #  aes(group = team) +
  # transition_time(as.integer(year)) + 
-#  labs(title = "Number of Total All-Stars by Team", subtitle = "from 1980-2020", 
+#  labs(title = "Number of Total All-Stars by Team", 
  #      y = NULL, fill = NULL, x = "Number of All-Stars (Continuous) {frame_time}")
 
 #animate(team_plot, duration = 20, end_pause = 20)
