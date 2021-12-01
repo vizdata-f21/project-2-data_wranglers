@@ -110,8 +110,6 @@ ui <- fluidPage(
                         )
                       )
                     ),
-                    
-                    tabItems(
                         tabItem(
                           tabName = "as_draft",
                           material_page(
@@ -138,7 +136,7 @@ ui <- fluidPage(
                               )
                             )
                           )
-                        ))
+                        )
                     
                 )
                 )
@@ -195,7 +193,7 @@ server <- function(input, output, session) {
 
   observeEvent(input$anim_by_draft, {
     output$plot_anim_by_draft <- renderImage({
-      all_stars_by_draft <- all_stars_by_draft(year_start = input$year_range_by_draft[[1]],
+      all_stars_by_draft <- number_of_all_stars_by_draft(year_start = input$year_range_by_draft[[1]],
                                                                 year_end = input$year_range_draft[[2]])
       
       anim_save("all_stars_by_draft.gif", animate(all_stars_by_draft,
@@ -203,14 +201,13 @@ server <- function(input, output, session) {
                                                      end_pause = input$end_pause_anim_by_draft,
                                                      duration = input$duration_anim_by_draft))
       
-      
-      list(src = "all_stars_by_draft.gif",
+            list(src = "all_stars_by_draft.gif",
            contentType = 'image/gif'
       )}, deleteFile = TRUE)
 
   }) 
   
-  
+      
 }
 
 
