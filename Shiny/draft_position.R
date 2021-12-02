@@ -1,12 +1,23 @@
 number_of_all_stars_by_draft <- function(year_start = 1951,
                                year_end = 2021) {
-  all_stars <- read_csv("../data/all_star.csv", show_col_types = F) %>%
+  all_stars <- read_csv("../Data/all_star.csv", show_col_types = F) %>%
     filter(!(year == 1999 & str_detect(draft_pick, "20")))
   
   data <- all_stars %>%
     mutate(draft_range = case_when(str_detect(draft_pick, "Undrafted") ~ "Undrafted",
                                    str_detect(draft_pick, "Rnd 1") ~ "First Round",
                                    str_detect(draft_pick, "Rnd 2") ~ "Second Round"))
+  
+  #all_stars$y <- stringr::str_split(all_stars$draft_pick, "Rnd 1 Pick ")
+  #all_stars$z <- stringr::str_split(all_stars$draft_pick, "Rnd 2 Pick ")
+  
+#  all_stars <- all_stars %>%
+ #   mutate(draft_range_n = case_when(str_detect(draft_pick, "Undrafted") ~ "Undrafted",
+  #                                   as.numeric(y[1]) <= 10 ~ "Top 10", 
+   #                                  as.numeric(y[1]) <= 20 ~ "10-20",
+    #                                 as.numeric(y[1]) <= 30 ~ "20-30"))
+           
+                          
   
   data <- data %>%
     filter(year >= year_start & year <= year_end)
@@ -33,10 +44,12 @@ number_of_all_stars_by_draft <- function(year_start = 1951,
     aes(fill = draft_range) +
     scale_x_continuous(limits = c(-150, 1400), breaks = c(100*(0:14))) +
     geom_text(hjust = "right", aes(label = draft_range), x = -0.50, size = 3) +
-    theme(axis.text.y = element_blank(), axis.ticks.y = element_blank(),
-          axis.title.y = element_blank(), axis.ticks.x = element_blank()) +
+    theme_classic(base_family = "Times") +
+    theme(axis.text.y = element_blank(), axis.ticks.y = element_blank(), 
+          axis.line.y = element_blank(), legend.background = element_rect(fill = "gainsboro"), 
+          plot.background = element_rect(fill = "gainsboro"),
+          panel.background = element_rect(fill = "gainsboro")) +
     facet_null() +
-    theme_minimal() +
     scale_fill_viridis_d(option = "magma") +
     aes(group = draft_range) +
     transition_time(as.integer(year)) + 
