@@ -10,6 +10,8 @@ library(shinyWidgets)
 
 source("shiny/all_star_colleges.R")
 source("shiny/college_locations.R")
+source("shiny/draft_position_edited.R")
+source("shiny/all_star_teams_edited.R")
 
 
 ui <- fluidPage(
@@ -108,7 +110,59 @@ ui <- fluidPage(
                             imageOutput("plot_anim_by_college_loc")
                           )
                         )
+                      ),
+                    tabItem(
+                      tabName = "as_draft",
+                      material_page(
+                        nav_bar_color = 'black',
+                        material_row(
+                            material_card(
+                              title = '',
+                              depth = 4,
+                              sliderInput("year_range_by_draft", "Year Range",
+                                          min = 1951, max = 2021, value = c(1951, 2021), sep = "", ticks = FALSE),
+                              sliderInput("duration_anim_by_draft", "Duration:",
+                                          value = 10, min = 5, max = 30, step = 5, ticks = FALSE),
+                              sliderInput("fps_anim_by_draft", "Frames per Second:",
+                                          value = 10, min = 5, max = 40, step = 5, ticks = FALSE),
+                              sliderInput("end_pause_anim_by_draft", "End Pause:",
+                                          value = 25, min = 5, max = 100, step = 5, ticks = FALSE),
+                              submitButton("Animate!")
+                            )
+                          ),
+                          material_row(
+                            imageOutput("plot_anim_by_draft")
+                          )
+                        )
+                      ),
+                    
+                    tabItem(
+                      tabName = "as_team",
+                      material_page(
+                        nav_bar_color = 'black',
+                        material_row(
+                            material_card(
+                              title = '',
+                              depth = 4,
+                              sliderInput("year_range_by_team", "Year Range",
+                                          min = 1951, max = 2021, value = c(1951, 2021), sep = "", ticks = FALSE),
+                              sliderInput("teams_to_rank", "Teams to Rank (with the most All-Stars):",
+                                          value = 30, min = 3, max = 30, ticks = FALSE),
+                              sliderInput("duration_anim_by_team", "Duration:",
+                                          value = 10, min = 5, max = 30, step = 5, ticks = FALSE),
+                              sliderInput("fps_anim_by_team", "Frames per Second:",
+                                          value = 10, min = 5, max = 40, step = 5, ticks = FALSE),
+                              sliderInput("end_pause_anim_by_team", "End Pause:",
+                                          value = 25, min = 5, max = 100, step = 5, ticks = FALSE),
+                              submitButton("Animate!")
+                            )
+                          ),
+                          material_row(
+                            imageOutput("plot_anim_by_team")
+                          )
+                        
                       )
+                    )
                     )
                     
                   )
@@ -184,6 +238,43 @@ server <- function(input, output, session) {
       list(src = "all_stars_by_location.gif",
            contentType = 'image/gif'
       )}, deleteFile = TRUE)
+    
+
+# ALL STARS BY DRAFT ------------------------------------------------------
+
+    
+    
+      output$plot_anim_by_draft <- renderImage({
+        all_stars_by_draft <- number_of_all_stars_by_draft(year_start = input$year_range_by_draft[[1]],
+                                                           year_end = input$year_range_by_draft[[2]])
+        
+        anim_save("all_stars_by_draft.gif", animate(all_stars_by_draft,
+                                                    fps = input$fps_anim_by_draft,
+                                                    end_pause = input$end_pause_anim_by_draft,
+                                                    duration = input$duration_anim_by_draft))
+        
+        list(src = "all_stars_by_draft.gif",
+             contentType = 'image/gif'
+        )}, deleteFile = TRUE)
+    
+
+# ALL STARS BY TEAM -------------------------------------------------------
+    
+    
+      output$plot_anim_by_team <- renderImage({
+        all_stars_by_team <- number_of_all_stars_by_team(year_start = input$year_range_by_team[[1]],
+                                                         year_end = input$year_range_by_team[[2]],
+                                                         number_to_rank = input$teams_to_rank)
+        
+        anim_save("all_stars_by_team.gif", animate(all_stars_by_team,
+                                                   fps = input$fps_anim_by_team,
+                                                   end_pause = input$end_pause_anim_by_team,
+                                                   duration = input$duration_anim_by_team))
+        
+        list(src = "all_stars_by_team.gif",
+             contentType = 'image/gif'
+        )}, deleteFile = TRUE)
+    
   
 }
 
