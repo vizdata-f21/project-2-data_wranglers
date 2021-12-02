@@ -1,10 +1,7 @@
-<<<<<<< HEAD
 number_of_all_stars_by_team <- function (year_start = 1951, year_end = 2021, number_to_rank = 30) {
-=======
 number_of_all_stars_by_team <- function (year_start = 1951,
                                             year_end = 2021,
-                                            number_to_rank = 30) {
->>>>>>> 2843a0dade127096bb57b33d53dfe2949e6a49c2
+                                            number_to_rank = 30) 
   all_stars <- read_csv("../Data/all_star.csv", show_col_types = F) %>%
     filter(!(year == 1999 & str_detect(draft_pick, "20")))
   
@@ -53,7 +50,7 @@ number_of_all_stars_by_team <- function (year_start = 1951,
     ungroup() %>%
     group_by(year) %>%  
     arrange(year, sum_all_stars) %>%
-    mutate(rank = 1:n()) %>%
+    mutate(rank = n():1) %>%
     filter(rank <= number_to_rank) %>%
     ggplot() +
     aes(xmin = 0 , xmax = sum_all_stars) +
@@ -61,12 +58,14 @@ number_of_all_stars_by_team <- function (year_start = 1951,
     facet_wrap(~year) +  
     geom_rect(alpha = .8, show.legend = FALSE) +
     aes(fill = team) +
-    scale_x_continuous(limits = c(-25, 100), breaks = c(12*(0:10))) +
+    scale_x_continuous(limits = c(-50, 200), breaks = c(20*(0:10))) +
     geom_text(hjust = "right", aes(label = team), x = -0.25, size = 3) +
-    theme(axis.text.y = element_blank(), axis.ticks.y = element_blank(),
-          axis.title.y = element_blank(), axis.ticks.x = element_blank()) +
+    theme_classic(base_family = "Times") +
+    theme(axis.text.y = element_blank(), axis.ticks.y = element_blank(), 
+          axis.line.y = element_blank(), legend.background = element_rect(fill = "gainsboro"), 
+          plot.background = element_rect(fill = "gainsboro"),
+          panel.background = element_rect(fill = "gainsboro")) +
     facet_null() +
-    theme_minimal() +
     scale_fill_viridis_d(option = "magma", direction = -1) +
     aes(group = team) +
     transition_time(as.integer(year)) + 

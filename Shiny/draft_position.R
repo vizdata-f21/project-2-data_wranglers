@@ -44,10 +44,12 @@ number_of_all_stars_by_draft <- function(year_start = 1951,
     aes(fill = draft_range) +
     scale_x_continuous(limits = c(-150, 1400), breaks = c(100*(0:14))) +
     geom_text(hjust = "right", aes(label = draft_range), x = -0.50, size = 3) +
-    theme(axis.text.y = element_blank(), axis.ticks.y = element_blank(),
-          axis.title.y = element_blank(), axis.ticks.x = element_blank()) +
+    theme_classic(base_family = "Times") +
+    theme(axis.text.y = element_blank(), axis.ticks.y = element_blank(), 
+          axis.line.y = element_blank(), legend.background = element_rect(fill = "gainsboro"), 
+          plot.background = element_rect(fill = "gainsboro"),
+          panel.background = element_rect(fill = "gainsboro")) +
     facet_null() +
-    theme_minimal() +
     scale_fill_viridis_d(option = "magma") +
     aes(group = draft_range) +
     transition_time(as.integer(year)) + 

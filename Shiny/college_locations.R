@@ -32,10 +32,7 @@ all_stars_by_state <- function (per_capita = T,
     filter(year >= year_start & year <= year_end)
   
   
-<<<<<<< HEAD
-=======
 
->>>>>>> 2843a0dade127096bb57b33d53dfe2949e6a49c2
   pop <- read_csv("../Data/nst-est2020.csv", show_col_types = F)
   
   # Chloropleth -------------------------------------------------------------
