@@ -3,9 +3,9 @@ number_of_all_stars_by_college <- function (duplicate_players = T,
                                             year_end = 2021,
                                             number_to_rank = 10
                                             ) {
-  all_stars <- read_csv("../Data/all_star.csv", show_col_types = F) %>%
+  all_stars <- read_csv("data/all_star.csv", show_col_types = F) %>%
     filter(!(year == 1999 & str_detect(draft_pick, "20")))
-  colleges <- read_csv("../Data/colleges.csv", show_col_types = F)
+  colleges <- read_csv("data/colleges.csv", show_col_types = F)
   
   data <- right_join(colleges, all_stars) %>%
     filter(!is.na(college)) %>%
@@ -43,8 +43,38 @@ number_of_all_stars_by_college <- function (duplicate_players = T,
     filter(rank <= number_to_rank)
       
       
-  data <- left_join(data, colors)
+  data <- left_join(data, colors) %>%
+    mutate(college = case_when(
+      str_detect(college, "American") ~ "American",
+      str_detect(college, "Fullerton") ~ "CSU Fullerton",
+      str_detect(college, "Central Michigan") ~ "Central Michigan",
+      str_detect(college, "Columbia") ~ "Columbia",
+      str_detect(college, "Dartmouth") ~ "Dartmouth",
+      str_detect(college, "Eastern Illinois") ~ "Eastern Illinois",
+      str_detect(college, "Furman") ~ "Furman",
+      str_detect(college, "Gardner-Webb") ~ "Gardner-Webb",
+      str_detect(college, "Guilford") ~ "Guilford",
+      str_detect(college, "Iona") ~ "Iona",
+      str_detect(college, "Long Island") ~ "Long Island",
+      str_detect(college, "Marist") ~ "Marist",
+      str_detect(college, "Louisiana-Monroe") ~ "UL-Monroe",
+      str_detect(college, "Miami University") ~ "Miami (OH)",
+      str_detect(college, "Northeastern") ~ "Northeastern",
+      str_detect(college, "Rice") ~ "Rice",
+      str_detect(college, "Saint Francis") ~ "Saint Francis",
+      str_detect(college, "Seattle") ~ "Seattle",
+      str_detect(college, "Southern University") ~ "Southern",
+      str_detect(college, "Evansville") ~ "Evansville",
+      str_detect(college, "Texas Rio Grande Valley") ~ "Texas Rio Grande Valley",
+      str_detect(college, "Wisconsin-Stevens Point") ~ "UW-Stevens Point",
+      str_detect(college, "Virginia Union") ~ "Virginia Union",
+      str_detect(college, "Hartford") ~ "Hartford",
+      TRUE ~ college
+    ))
+  
+  
   color_codes <- setNames(data$colors, c(data$college))
+
     
   anim_w_duplicates <- ggplot(data) +
     aes(xmin = 0,
@@ -115,7 +145,34 @@ number_of_all_stars_by_college <- function (duplicate_players = T,
       filter(rank <= number_to_rank)
     
     
-    data <- left_join(data, colors)
+    data <- left_join(data, colors) %>%
+      mutate(college = case_when(
+        str_detect(college, "American") ~ "American",
+        str_detect(college, "Fullerton") ~ "CSU Fullerton",
+        str_detect(college, "Central Michigan") ~ "Central Michigan",
+        str_detect(college, "Columbia") ~ "Columbia",
+        str_detect(college, "Dartmouth") ~ "Dartmouth",
+        str_detect(college, "Eastern Illinois") ~ "Eastern Illinois",
+        str_detect(college, "Furman") ~ "Furman",
+        str_detect(college, "Gardner-Webb") ~ "Gardner-Webb",
+        str_detect(college, "Guilford") ~ "Guilford",
+        str_detect(college, "Iona") ~ "Iona",
+        str_detect(college, "Long Island") ~ "Long Island",
+        str_detect(college, "Marist") ~ "Marist",
+        str_detect(college, "Louisiana-Monroe") ~ "UL-Monroe",
+        str_detect(college, "Miami University") ~ "Miami (OH)",
+        str_detect(college, "Northeastern") ~ "Northeastern",
+        str_detect(college, "Rice") ~ "Rice",
+        str_detect(college, "Saint Francis") ~ "Saint Francis",
+        str_detect(college, "Seattle") ~ "Seattle",
+        str_detect(college, "Southern University") ~ "Southern",
+        str_detect(college, "Evansville") ~ "Evansville",
+        str_detect(college, "Texas Rio Grande Valley") ~ "Texas Rio Grande Valley",
+        str_detect(college, "Wisconsin-Stevens Point") ~ "UW-Stevens Point",
+        str_detect(college, "Virginia Union") ~ "Virginia Union",
+        TRUE ~ college
+      ))
+    
     color_codes <- setNames(data$colors, c(data$college))
     
     anim_no_duplicates <- ggplot(data) +  
