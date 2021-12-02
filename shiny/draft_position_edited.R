@@ -1,6 +1,6 @@
 number_of_all_stars_by_draft <- function(year_start = 1951,
                                year_end = 2021) {
-  all_stars <- read_csv("../Data/all_star.csv", show_col_types = F) %>%
+  all_stars <- read_csv("data/all_star.csv", show_col_types = F) %>%
     filter(!(year == 1999 & str_detect(draft_pick, "20")))
   
   data <- all_stars %>%
@@ -42,23 +42,29 @@ number_of_all_stars_by_draft <- function(year_start = 1951,
     facet_wrap(~year) +  
     geom_rect(alpha = .8, show.legend = FALSE) +
     aes(fill = draft_range) +
-    scale_x_continuous(limits = c(-150, 1400), breaks = c(100*(0:14))) +
-    geom_text(hjust = "right", aes(label = draft_range), x = -0.50, size = 3) +
+    scale_x_continuous(limits = c(-350, 1400), breaks = c(100*(0:14))) +
+    geom_text(hjust = "right", aes(label = draft_range), x = -25, size = 5) +
     theme_classic(base_family = "Times") +
     theme(axis.text.y = element_blank(), axis.ticks.y = element_blank(), 
           axis.line.y = element_blank(), legend.background = element_rect(fill = "gainsboro"), 
           plot.background = element_rect(fill = "gainsboro"),
-          panel.background = element_rect(fill = "gainsboro")) +
+          panel.background = element_rect(fill = "gainsboro"),
+          plot.title = element_text(size = 24),
+          plot.subtitle = element_text(size = 16),
+          axis.title.x = element_text(size = 20)) +
     facet_null() +
     scale_fill_viridis_d(option = "magma") +
     aes(group = draft_range) +
     transition_time(as.integer(year)) + 
-    labs(title = "Number of Total All-Stars by Draft Round", 
-         y = NULL, fill = NULL, x = "Number of All-Stars (Continuous) {frame_time}")
+    labs(title = "Total All-Star appearances",
+    subtitle = paste0("By draft round, ", year_start, " to ", year_end), 
+         y = NULL, fill = NULL, x = "Total All-Star Appearances: {frame_time}")
   
   draft_plot
 
 }
+
+number_of_all_stars_by_draft()
 
 #all_stars_n <- all_stars %>%
  #   mutate(draft_range = case_when(str_detect(draft_pick, "Undrafted") ~ "Undrafted",

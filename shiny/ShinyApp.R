@@ -11,8 +11,6 @@ source("all_star_colleges.R")
 source("college_locations.R")
 source("draft_position.R")
 source("all_star_teams.R")
-source("world_map.R")
-source("state_map.R")
 
 
 ui <- fluidPage(
@@ -32,7 +30,7 @@ ui <- fluidPage(
                         menuSubItem("Draft Positions", tabName = "as_draft"),
                         menuSubItem("Team", tabName = "as_team"),
                         menuSubItem("World Map", tabName = "world_map"),
-                        menuSubItem("U.S. Map", tabName = "state_map")
+                        menuSubItem("U.S. Map", tabName = "us_map")
                     )
                   )
                 ),
@@ -166,7 +164,7 @@ ui <- fluidPage(
                                           value = 10, min = 5, max = 40, step = 5, ticks = FALSE),
                               sliderInput("end_pause_anim_by_team", "End Pause:",
                                           value = 25, min = 5, max = 100, step = 5, ticks = FALSE),
-                              actionButton("animate_by_team", "Animate!")
+                              actionButton("animate_by_draft", "Animate!")
                             )
                           ),
                           material_column(
@@ -180,35 +178,23 @@ ui <- fluidPage(
                       material_page(
                         nav_bar_color = 'black',
                         material_row(
-                          material_card(
-                            title = '',
-                            depth = 4,
-                            sliderInput("year_range_world", "Year Range",
-                                        min = 1951, max = 2021, value = c(1951, 2021), sep = "", ticks = FALSE)
+                          material_column(
+                            width = 4,
+                            material_card(
+                              title = '',
+                              depth = 1,
+                              sliderInput("year_range_all_stars", "Year Range",
+                                          min = 1951, max = 2021, value = c(1951, 2021), sep = "", ticks = FALSE),
+                              actionButton("world_map", "Visualize!")
+                            )
+                          ),
+                          material_column(
+                            imageOutput("plot_world_map")
                           )
-                        ),
-                        material_row(
-                          plotOutput("plot_world")
-                        )
-                      )
-                    ),
-                    tabItem(
-                      tabName = "state_map",
-                      material_page(
-                        nav_bar_color = 'black',
-                        material_row(
-                          material_card(
-                            title = '',
-                            depth = 4,
-                            sliderInput("year_range_state", "Year Range",
-                                        min = 1951, max = 2021, value = c(1951, 2021), sep = "", ticks = FALSE)
-                          )
-                        ),
-                        material_row(
-                          plotOutput("plot_state")
                         )
                       )
                     )
+                    
                 )
                 )
   )
@@ -262,10 +248,10 @@ server <- function(input, output, session) {
       )}, deleteFile = TRUE)
   })
 
-  observeEvent(input$animate_by_draft, {
+  observeEvent(input$anim_by_draft, {
     output$plot_anim_by_draft <- renderImage({
       all_stars_by_draft <- number_of_all_stars_by_draft(year_start = input$year_range_by_draft[[1]],
-                                                                year_end = input$year_range_by_draft[[2]])
+                                                                year_end = input$year_range_draft[[2]])
       
       anim_save("all_stars_by_draft.gif", animate(all_stars_by_draft,
                                                      fps = input$fps_anim_by_draft,
@@ -278,11 +264,10 @@ server <- function(input, output, session) {
 
   }) 
   
-  observeEvent(input$animate_by_team, {
+  observeEvent(input$anim_by_team, {
     output$plot_anim_by_team <- renderImage({
       all_stars_by_team <- number_of_all_stars_by_team(year_start = input$year_range_by_team[[1]],
-                                                         year_end = input$year_range_by_team[[2]],
-                                                       number_to_rank = input$teams_to_rank)
+                                                         year_end = input$year_range_team[[2]])
       
       anim_save("all_stars_by_team.gif", animate(all_stars_by_team,
                                                   fps = input$fps_anim_by_team,
@@ -295,18 +280,21 @@ server <- function(input, output, session) {
     
   }) 
   
-    output$plot_world <- renderPlot({
-      world_map_fn(year_start = input$year_range_world[[1]],
-                                year_end = input$year_range_world[[2]])
-    })
-  
-    output$plot_state <- renderPlot({
-      state_map_fn(year_start = input$year_range_state[[1]],
-                                year_end = input$year_range_state[[2]])
-    })
+  observeEvent(input$world_map, {
+    output$plot_world_map <- renderImage({
+      world_map <- world_map_fn(year_start = input$year_range_by_team[[1]],
+                                                       year_end = input$year_range_team[[2]])
+      
+      list(src = "world_map",
+           contentType = 'image/gif'
+      )}, deleteFile = TRUE)
+    
+  }) 
   
       
 }
+
+
 
 
 # run the application 
