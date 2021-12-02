@@ -12,6 +12,8 @@ source("shiny/all_star_colleges.R")
 source("shiny/college_locations.R")
 source("shiny/draft_position_edited.R")
 source("shiny/all_star_teams_edited.R")
+source("shiny/world_map.R")
+source("shiny/state_map.R")
 
 
 ui <- fluidPage(
@@ -29,7 +31,9 @@ ui <- fluidPage(
                              menuSubItem("College State", tabName = "as_state"),
                              menuSubItem("College Location", tabName = "as_loc"),
                              menuSubItem("Draft Positions", tabName = "as_draft"),
-                             menuSubItem("Team", tabName = "as_team")
+                             menuSubItem("Team", tabName = "as_team"),
+                             menuSubItem("World Map", tabName = "world_map"),
+                             menuSubItem("U.S. Map", tabName = "state_map")
                     )
                   )
                 ),
@@ -162,6 +166,42 @@ ui <- fluidPage(
                           )
                         
                       )
+                    ),
+                    tabItem(
+                      tabName = "world_map",
+                      material_page(
+                        nav_bar_color = 'black',
+                        material_row(
+                          material_card(
+                            title = '',
+                            depth = 4,
+                            sliderInput("year_range_world", "Year Range",
+                                        min = 1951, max = 2021, value = c(1951, 2021), sep = "", ticks = FALSE),
+                            submitButton("Plot!")
+                          )
+                        ),
+                        material_row(
+                          plotOutput("plot_world")
+                        )
+                      )
+                    ),
+                    tabItem(
+                      tabName = "state_map",
+                      material_page(
+                        nav_bar_color = 'black',
+                        material_row(
+                          material_card(
+                            title = '',
+                            depth = 4,
+                            sliderInput("year_range_state", "Year Range",
+                                        min = 1951, max = 2021, value = c(1951, 2021), sep = "", ticks = FALSE),
+                            submitButton("Plot!")
+                          )
+                        ),
+                        material_row(
+                          plotOutput("plot_state")
+                        )
+                      )
                     )
                     )
                     
@@ -274,6 +314,20 @@ server <- function(input, output, session) {
         list(src = "all_stars_by_team.gif",
              contentType = 'image/gif'
         )}, deleteFile = TRUE)
+      
+# ALL STARS BY BIRTHPLACE (WORLD) -------------------------------------------------------      
+      
+      output$plot_world <- renderPlot({
+        world_map_fn(year_start = input$year_range_world[[1]],
+                     year_end = input$year_range_world[[2]])
+      })
+      
+# ALL STARS BY BIRTHPLACE (US) -------------------------------------------------------            
+      
+      output$plot_state <- renderPlot({
+        state_map_fn(year_start = input$year_range_state[[1]],
+                     year_end = input$year_range_state[[2]])
+      })
     
   
 }
