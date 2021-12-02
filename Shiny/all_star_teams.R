@@ -1,7 +1,5 @@
-number_of_all_stars_by_team <- function (year_start = 1951,
-                                            year_end = 2021,
-                                            number_to_rank = 30) {
-  all_stars <- read_csv("../data/all_star.csv", show_col_types = F) %>%
+number_of_all_stars_by_team <- function (year_start = 1951, year_end = 2021, number_to_rank = 30) {
+  all_stars <- read_csv("../Data/all_star.csv", show_col_types = F) %>%
     filter(!(year == 1999 & str_detect(draft_pick, "20")))
   
   data <- all_stars %>%
@@ -57,7 +55,7 @@ number_of_all_stars_by_team <- function (year_start = 1951,
     facet_wrap(~year) +  
     geom_rect(alpha = .8, show.legend = FALSE) +
     aes(fill = team) +
-    scale_x_continuous(limits = c(-25, 100), breaks = c(10*(0:10))) +
+    scale_x_continuous(limits = c(-25, 100), breaks = c(12*(0:10))) +
     geom_text(hjust = "right", aes(label = team), x = -0.25, size = 3) +
     theme(axis.text.y = element_blank(), axis.ticks.y = element_blank(),
           axis.title.y = element_blank(), axis.ticks.x = element_blank()) +
