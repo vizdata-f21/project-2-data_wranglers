@@ -112,18 +112,18 @@ ui <- fluidPage(
                     ),
                     tabItem(
                       tabName = "world_map",
-                            sliderInput("year_range_world", "Year Range",
-                                        min = 1951, max = 2021, value = c(1951, 2021), sep = "", ticks = FALSE),
+                      sliderInput("year_range_world", "Year Range",
+                                  min = 1951, max = 2021, value = c(1951, 2021), sep = "", ticks = FALSE),
                       actionButton("plot_world_button", "Plot!"),
-                          plotOutput("plot_world")
+                      plotOutput("plot_world")
                     ),
                     tabItem(
                       tabName = "state_map",
-                            sliderInput("year_range_state", "Year Range",
-                                        min = 1951, max = 2021, value = c(1951, 2021), sep = "", ticks = FALSE),
-                            actionButton("plot_usa_state_button", "Plot!"),
-                          plotOutput("plot_state")
-                        )
+                      sliderInput("year_range_state", "Year Range",
+                                  min = 1951, max = 2021, value = c(1951, 2021), sep = "", ticks = FALSE),
+                      actionButton("plot_usa_state_button", "Plot!"),
+                      plotOutput("plot_state")
+                    )
                     
                   )
                 )
@@ -323,9 +323,9 @@ server <- function(input, output, session) {
     list(src = "all_stars_by_team.gif",
          contentType = 'image/gif'
     )}, deleteFile = TRUE)
- 
   
-   # ALL STARS BY BIRTHPLACE (WORLD) -------------------------------------------------------      
+  
+  # ALL STARS BY BIRTHPLACE (WORLD) -------------------------------------------------------      
   
   func_out_world <- eventReactive(input$plot_world_button, {
     world_map_fn(year_start = input$year_range_world[[1]],
@@ -340,7 +340,7 @@ server <- function(input, output, session) {
   
   func_out_state_usa <- eventReactive(input$plot_usa_state_button, {
     state_map_fn(year_start = input$year_range_state[[1]],
-               year_end = input$year_range_state[[2]])
+                 year_end = input$year_range_state[[2]])
   })
   
   output$plot_state <- renderPlot({
