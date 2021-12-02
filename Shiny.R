@@ -10,8 +10,8 @@ library(shinyWidgets)
 
 source("shiny/all_star_colleges.R")
 source("shiny/college_locations.R")
-source("shiny/draft_position_edited.R")
-source("shiny/all_star_teams_edited.R")
+source("shiny/draft_position.R")
+source("shiny/all_star_teams.R")
 source("shiny/world_map.R")
 source("shiny/state_map.R")
 
