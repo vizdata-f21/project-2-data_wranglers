@@ -1,12 +1,3 @@
-library(shiny)
-library(shinydashboard)
-library(tidyverse)
-library(jsonlite)
-library(DT)
-library(shinymaterial)
-library(httr)
-library(rsconnect)
-
 world_map_fn <- function(year_start = 1951, year_end = 2021){
   
   all_stars <- read_csv("data/all_star.csv", show_col_types = F) %>%
