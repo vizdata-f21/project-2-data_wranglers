@@ -11,6 +11,8 @@ source("all_star_colleges.R")
 source("college_locations.R")
 source("draft_position.R")
 source("all_star_teams.R")
+source("world_map.R")
+source("state_map.R")
 
 
 ui <- fluidPage(
@@ -30,7 +32,7 @@ ui <- fluidPage(
                         menuSubItem("Draft Positions", tabName = "as_draft"),
                         menuSubItem("Team", tabName = "as_team"),
                         menuSubItem("World Map", tabName = "world_map"),
-                        menuSubItem("U.S. Map", tabName = "us_map")
+                        menuSubItem("U.S. Map", tabName = "state_map")
                     )
                   )
                 ),
@@ -178,23 +180,35 @@ ui <- fluidPage(
                       material_page(
                         nav_bar_color = 'black',
                         material_row(
-                          material_column(
-                            width = 4,
-                            material_card(
-                              title = '',
-                              depth = 1,
-                              sliderInput("year_range_all_stars", "Year Range",
-                                          min = 1951, max = 2021, value = c(1951, 2021), sep = "", ticks = FALSE),
-                              actionButton("world_map", "Visualize!")
-                            )
-                          ),
-                          material_column(
-                            imageOutput("plot_world_map")
+                          material_card(
+                            title = '',
+                            depth = 4,
+                            sliderInput("year_range_world", "Year Range",
+                                        min = 1951, max = 2021, value = c(1951, 2021), sep = "", ticks = FALSE)
                           )
+                        ),
+                        material_row(
+                          plotOutput("plot_world")
+                        )
+                      )
+                    ),
+                    tabItem(
+                      tabName = "state_map",
+                      material_page(
+                        nav_bar_color = 'black',
+                        material_row(
+                          material_card(
+                            title = '',
+                            depth = 4,
+                            sliderInput("year_range_state", "Year Range",
+                                        min = 1951, max = 2021, value = c(1951, 2021), sep = "", ticks = FALSE)
+                          )
+                        ),
+                        material_row(
+                          plotOutput("plot_state")
                         )
                       )
                     )
-                    
                 )
                 )
   )
@@ -280,16 +294,15 @@ server <- function(input, output, session) {
     
   }) 
   
-  observeEvent(input$world_map, {
-    output$plot_world_map <- renderImage({
-      world_map <- world_map_fn(year_start = input$year_range_by_team[[1]],
-                                                       year_end = input$year_range_team[[2]])
-      
-      list(src = "world_map",
-           contentType = 'image/gif'
-      )}, deleteFile = TRUE)
-    
-  }) 
+    output$plot_world <- renderPlot({
+      world_map_fn(year_start = input$year_range_world[[1]],
+                                year_end = input$year_range_world[[2]])
+    })
+  
+    output$plot_state <- renderPlot({
+      state_map_fn(year_start = input$year_range_state[[1]],
+                                year_end = input$year_range_state[[2]])
+    })
   
       
 }
