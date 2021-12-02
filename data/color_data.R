@@ -9,9 +9,7 @@ nodes <- html %>%   html_nodes('td') %>%
   html_attr("style")
 
 colors <- nodes[seq(6, length(nodes), 10)]
-
-nodes <- html %>%   html_nodes('td') %>%
-  html_attr("style")
+secondary <- nodes[seq(8, length(nodes), 10)]
 
 
 teams <- html %>%
@@ -23,7 +21,9 @@ teams <- teams[[1]] %>% tail(-1)
 teams <- teams$Team
 
 colors <- substr(colors, start = 12, stop = 18)
+secondary <- substr(secondary, start = 12, stop = 18)
 
-x <- cbind(teams = teams[1:1041], colors = colors[1:1041]) %>%
+x <- cbind(teams = teams[1:1041], colors = colors[1:1041], secondary = secondary[1:1041]) %>%
   as_tibble()
 
+write_csv(x, "college_colors_secondary.csv")
