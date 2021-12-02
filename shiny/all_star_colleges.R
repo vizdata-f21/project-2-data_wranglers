@@ -12,12 +12,16 @@ number_of_all_stars_by_college <- function (duplicate_players = T,
     mutate(college = ifelse(str_detect(college, "Indiana, Georgetown"), "Georgetown", college)) %>%
     mutate(college = ifelse(str_detect(college, "Niagara"), "Niagara", college)) %>%
     mutate(college = ifelse(str_detect(college, "Midland College, Oklahoma"), "Oklahoma", college)) %>%
-    mutate(college = ifelse(str_detect(college, "Bradley, New Mexico"), "Oklahoma", college)) %>%
+    mutate(college = ifelse(str_detect(college, "Bradley, New Mexico"), "New Mexico", college)) %>%
     mutate(college = ifelse(str_detect(college, "Vincennes University, Michigan"), "Michigan", college)) %>%
     mutate(college = ifelse(str_detect(college, "Vincennes University, UNLV"), "UNLV", college)) %>%
     mutate(college = ifelse(str_detect(college, "Trinity Valley CC, Cincinnati"), "Cincinnati", college))
   
-  colors <- read_csv("data/college_colors.csv", show_col_types = F)
+  colors <- read_csv("data/college_colors.csv", show_col_types = F) %>%
+    mutate(secondary = case_when(
+      secondary == "transpa" ~ "#000000",
+      TRUE ~ secondary
+    ))
   
   data <- data %>% filter(year >= year_start & year <= year_end)
   
@@ -74,6 +78,7 @@ number_of_all_stars_by_college <- function (duplicate_players = T,
   
   
   color_codes <- setNames(data$colors, c(data$college))
+  secondary_codes <- setNames(data$secondary, c(data$college))
 
     
   anim_w_duplicates <- ggplot(data) +
@@ -82,10 +87,12 @@ number_of_all_stars_by_college <- function (duplicate_players = T,
     aes(ymin = rank - .45,
         ymax = rank + .45,
         y = rank,
-        fill = college) +
-    geom_rect(alpha = .7, show.legend = F) +  
+        fill = college,
+        color = college) +
+    geom_rect(alpha = 1, show.legend = F, size = 0.8) +  
     facet_wrap(~ year) +
     scale_fill_manual(name = "college",values = color_codes) +
+    scale_color_manual(name = "college",values = secondary_codes) +
     scale_x_continuous(
       limits = c(-12, 40),
       breaks = c(5*(0:8))
@@ -93,15 +100,19 @@ number_of_all_stars_by_college <- function (duplicate_players = T,
     geom_text(
       hjust = "right",
       aes(label = college),
-      x = -0.5, size = 5
+      x = -0.5, size = 5,
+      color = "black"
     ) +
     theme_classic(base_family = "Times") +
     theme(axis.text.y = element_blank(), axis.ticks.y = element_blank(),
           axis.line.y = element_blank(), legend.background = element_rect(fill = "gainsboro"),
           plot.background = element_rect(fill = "gainsboro"),
-          panel.background = element_rect(fill = "gainsboro")) +
+          panel.background = element_rect(fill = "gainsboro"),
+          plot.title = element_text(size = 20),
+          plot.subtitle = element_text(size = 16)) +
     scale_y_reverse() +
-    labs(fill = NULL, x = "All-Stars", y = NULL) +  
+    labs(fill = NULL, x = "All-Stars", y = NULL, title = "Number of All-Star Game appearances",
+         subtitle = paste0("By college, ", year_start, " to ", year_end)) +
     facet_null() +
     scale_x_continuous(
       limits = c(-12, 40),
@@ -111,7 +122,8 @@ number_of_all_stars_by_college <- function (duplicate_players = T,
       x = 30, y = -10,
       aes(label = as.character(year)),
       size = 25,  
-      family = "Times"
+      family = "Times",
+      color = "black"
     ) +  
     gganimate::transition_time(year)
   
@@ -174,6 +186,7 @@ number_of_all_stars_by_college <- function (duplicate_players = T,
       ))
     
     color_codes <- setNames(data$colors, c(data$college))
+    secondary_codes <- setNames(data$secondary, c(data$college))
     
     anim_no_duplicates <- ggplot(data) +  
       aes(xmin = 0 ,  
@@ -182,9 +195,11 @@ number_of_all_stars_by_college <- function (duplicate_players = T,
           ymax = rank + .45,  
           y = rank) +  
       facet_wrap(~ year) +  
-      geom_rect(alpha = .7, show.legend = F) +  
-      aes(fill = college) +
+      geom_rect(alpha = 1, show.legend = F, size = 0.8) +  
+      aes(fill = college,
+          color = college) +
       scale_fill_manual(name = "college",values = color_codes) +
+      scale_color_manual(name = "college",values = secondary_codes) +
       scale_x_continuous(
         limits = c(-5, 16),
         breaks = c(2*(0:8))
@@ -192,15 +207,19 @@ number_of_all_stars_by_college <- function (duplicate_players = T,
       geom_text(
         hjust = "right",
         aes(label = college),
-        x = -0.5, size = 5
+        x = -0.5, size = 5,
+        color = "black"
       ) +
       theme_classic(base_family = "Times") +
       theme(axis.text.y = element_blank(), axis.ticks.y = element_blank(), 
             axis.line.y = element_blank(), legend.background = element_rect(fill = "gainsboro"), 
             plot.background = element_rect(fill = "gainsboro"),
-            panel.background = element_rect(fill = "gainsboro")) +  
+            panel.background = element_rect(fill = "gainsboro"),
+            plot.title = element_text(size = 20),
+            plot.subtitle = element_text(size = 16)) +  
       scale_y_reverse() +
-      labs(fill = NULL, x = "All-Stars", y = NULL) +  
+      labs(fill = NULL, x = "All-Stars", y = NULL, title = "Total number of All-Star players",
+           subtitle = paste0("By college, ", year_start, " to ", year_end)) +  
       facet_null() +
       scale_x_continuous(
         limits = c(-4.5, 16),
@@ -210,7 +229,8 @@ number_of_all_stars_by_college <- function (duplicate_players = T,
         x = 12, y = -10,
         aes(label = as.character(year)),
         size = 25,  
-        family = "Times"
+        family = "Times",
+        color = "black"
       ) +
       aes(group = college) +  
       gganimate::transition_time(year)
@@ -220,3 +240,4 @@ number_of_all_stars_by_college <- function (duplicate_players = T,
   }
   
 }
+

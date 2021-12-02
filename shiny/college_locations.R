@@ -1,9 +1,9 @@
 all_stars_by_state <- function (per_capita = T,
                                             year_start = 1951,
                                             year_end = 2021) {
-  all_stars <- read_csv("../Data/all_star.csv", show_col_types = F) %>%
+  all_stars <- read_csv("data/all_star.csv", show_col_types = F) %>%
     filter(!(year == 1999 & str_detect(draft_pick, "20")))
-  colleges <- read_csv("../Data/colleges.csv", show_col_types = F)
+  colleges <- read_csv("data/colleges.csv", show_col_types = F)
   
   data <- right_join(colleges, all_stars) %>%
     select(players, college, year) %>%
@@ -13,13 +13,13 @@ all_stars_by_state <- function (per_capita = T,
     mutate(college = ifelse(str_detect(college, "Indiana, Georgetown"), "Georgetown", college)) %>%
     mutate(college = ifelse(str_detect(college, "Niagara"), "Niagara", college)) %>%
     mutate(college = ifelse(str_detect(college, "Midland College, Oklahoma"), "Oklahoma", college)) %>%
-    mutate(college = ifelse(str_detect(college, "Bradley, New Mexico"), "Oklahoma", college)) %>%
+    mutate(college = ifelse(str_detect(college, "Bradley, New Mexico"), "New Mexico", college)) %>%
     mutate(college = ifelse(str_detect(college, "Vincennes University, Michigan"), "Michigan", college)) %>%
     mutate(college = ifelse(str_detect(college, "Vincennes University, UNLV"), "UNLV", college)) %>%
     mutate(college = ifelse(str_detect(college, "Trinity Valley CC, Cincinnati"), "Cincinnati", college)) %>%
     filter(duplicated(players, college) == FALSE)
   
-  college_locations <- read_csv("../Data/college_locations.csv", show_col_types = F) %>%
+  college_locations <- read_csv("data/college_locations.csv", show_col_types = F) %>%
     select(NAME, LAT, LON, STATE) %>%
     rename(college = NAME,
            lat1 = LAT) %>%
@@ -33,7 +33,7 @@ all_stars_by_state <- function (per_capita = T,
   
   
 
-  pop <- read_csv("../Data/nst-est2020.csv", show_col_types = F)
+  pop <- read_csv("data/nst-est2020.csv", show_col_types = F)
   
   # Chloropleth -------------------------------------------------------------
   
@@ -67,7 +67,12 @@ all_stars_by_state <- function (per_capita = T,
       labs(fill = NULL) +
       theme(plot.background = element_rect(fill = "gainsboro"),
             legend.position = c(0.2, 0.15),
-            legend.key.size = unit(0.8, "cm"), legend.direction="horizontal") +
+            legend.key.size = unit(0.8, "cm"), legend.direction="horizontal",
+            panel.border = element_rect(fill = NA, color = "black", size = 1),
+            plot.title = element_text(family = "Times", size = 20, hjust = 0.02),
+            plot.subtitle = element_text(family = "Times", size = 16, margin=margin(3,0,4,0), hjust = 0.015)) +
+      labs(title = "Number of All-Stars by college state",
+           subtitle = paste0("Per million residents, ", year_start, " to ", year_end)) +
       theme(aspect.ratio=0.6)
     }
     else if(max(mapping_data$n) < 20){
@@ -83,7 +88,12 @@ all_stars_by_state <- function (per_capita = T,
         labs(fill = NULL) +
         theme(plot.background = element_rect(fill = "gainsboro"),
               legend.position = c(0.2, 0.15),
-              legend.key.size = unit(0.8, "cm"), legend.direction="horizontal") +
+              legend.key.size = unit(0.8, "cm"), legend.direction="horizontal",
+            panel.border = element_rect(fill = NA, color = "black", size = 1),
+            plot.title = element_text(family = "Times", size = 20, hjust = 0.02),
+            plot.subtitle = element_text(family = "Times", size = 16, margin=margin(3,0,4,0), hjust = 0.015)) +
+      labs(title = "Number of All-Stars by college state",
+           subtitle = paste0("Per million residents, ", year_start, " to ", year_end)) +
         theme(aspect.ratio=0.6)
     }
   }
@@ -111,7 +121,12 @@ all_stars_by_state <- function (per_capita = T,
       labs(fill = NULL) +
       theme(plot.background = element_rect(fill = "gainsboro"),
             legend.position = c(0.2, 0.15),
-            legend.key.size = unit(0.8, "cm"), legend.direction="horizontal") +
+            legend.key.size = unit(0.8, "cm"), legend.direction="horizontal",
+            panel.border = element_rect(fill = NA, color = "black", size = 1),
+            plot.title = element_text(family = "Times", size = 20, hjust = 0.02),
+            plot.subtitle = element_text(family = "Times", size = 16, margin=margin(3,0,4,0), hjust = 0.015)) +
+      labs(title = "Number of All-Stars by college state",
+           subtitle = paste0("Per million residents, ", year_start, " to ", year_end)) +
       theme(aspect.ratio=0.6)
   }
   
@@ -122,9 +137,9 @@ all_stars_by_state <- function (per_capita = T,
 # Point-mapping -----------------------------------------------------------
 all_stars_by_college_loc <- function (year_start = 1951,
                                 year_end = 2021) {
-  all_stars <- read_csv("../Data/all_star.csv", show_col_types = F) %>%
+  all_stars <- read_csv("data/all_star.csv", show_col_types = F) %>%
     filter(!(year == 1999 & str_detect(draft_pick, "20")))
-  colleges <- read_csv("../Data/colleges.csv", show_col_types = F)
+  colleges <- read_csv("data/colleges.csv", show_col_types = F)
   
   data <- right_join(colleges, all_stars) %>%
     select(players, college, year) %>%
@@ -134,14 +149,14 @@ all_stars_by_college_loc <- function (year_start = 1951,
     mutate(college = ifelse(str_detect(college, "Indiana, Georgetown"), "Georgetown", college)) %>%
     mutate(college = ifelse(str_detect(college, "Niagara"), "Niagara", college)) %>%
     mutate(college = ifelse(str_detect(college, "Midland College, Oklahoma"), "Oklahoma", college)) %>%
-    mutate(college = ifelse(str_detect(college, "Bradley, New Mexico"), "Oklahoma", college)) %>%
+    mutate(college = ifelse(str_detect(college, "Bradley, New Mexico"), "New Mexico", college)) %>%
     mutate(college = ifelse(str_detect(college, "Vincennes University, Michigan"), "Michigan", college)) %>%
     mutate(college = ifelse(str_detect(college, "Vincennes University, UNLV"), "UNLV", college)) %>%
     mutate(college = ifelse(str_detect(college, "Trinity Valley CC, Cincinnati"), "Cincinnati", college)) %>%
     filter(duplicated(players, college) == FALSE)
   
 
-  college_locations <- read_csv("../Data/college_locations.csv", show_col_types = F) %>%
+  college_locations <- read_csv("data/college_locations.csv", show_col_types = F) %>%
     select(NAME, LAT, LON, STATE) %>%
     rename(college = NAME,
            lat1 = LAT) %>%
@@ -173,12 +188,11 @@ all_stars_by_college_loc <- function (year_start = 1951,
     filter(sum_all_stars > 0)
   
   
-  point_map <- ggplot(map_data("state")) + 
-    geom_polygon(aes(x=long, y=lat, group=group),
+  point_map <- ggplot(cumulative_college_data) + 
+    geom_polygon(data = map_data("state"), aes(x=long, y=lat, group=group),
                  color="black", fill = "white") +
     geom_point(data = cumulative_college_data, 
-               aes(x = lon, y = lat1, size = sum_all_stars+1), 
-               shape = 23, fill = "red", show.legend = F) +
+               aes(x = lon, y = lat1, size = sum_all_stars+1),color = "red", show.legend = F) +
     geom_point(data = (cumulative_college_data %>% filter(n > 0)),
                aes(x = lon, y = lat1, size = n+1), color = "blue", show.legend = F) + 
     scale_x_continuous(limits = c(-125, -66)) +
@@ -186,14 +200,18 @@ all_stars_by_college_loc <- function (year_start = 1951,
     facet_wrap(~ year) +
     facet_null() +
     theme_void() +
-    aes(group = college) +
-    theme(plot.background = element_rect(fill = "gainsboro")) +
+    theme(panel.background = element_rect(fill = "gainsboro"),
+          panel.border = element_rect(fill = NA, color = "black", size = 1),
+          plot.title = element_text(family = "Times", size = 24, hjust = 0.01),
+          plot.subtitle = element_text(family = "Times", size = 16, margin=margin(3,0,4,0), hjust = 0.01)) +
+    labs(fill = NULL, x = NULL, y = NULL, title = "All-Stars by college location",
+         subtitle = paste0("By college, ", year_start, " to ", year_end)) +
     geom_text(data = (cumulative_college_data %>% filter(n > 0)),
               x = -115, y = 27,
               aes(label = as.character(year)),
               size = 25,  
               family = "Times"
-    ) + 
+    ) +
     gganimate::transition_time(year)
   
   point_map
