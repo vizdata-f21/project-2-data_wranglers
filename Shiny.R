@@ -5,11 +5,11 @@ library(tidyverse)
 library(gganimate)
 library(scales)
 library(shinymaterial)
+library(shinyWidgets)
 # windowsFonts("Times" = windowsFont("Times"))
 
 source("shiny/all_star_colleges.R")
 source("shiny/college_locations.R")
-source("shiny/all_star_teams.R")
 
 
 ui <- fluidPage(
@@ -38,8 +38,6 @@ ui <- fluidPage(
                       material_page(
                         nav_bar_color = 'black',
                         material_row(
-                          material_column(
-                            width = 4,
                             material_card(
                               title = '',
                               depth = 4,
@@ -53,12 +51,11 @@ ui <- fluidPage(
                                           value = 10, min = 5, max = 30, step = 5, ticks = FALSE),
                               sliderInput("fps_anim_by_college", "Frames per Second:",
                                           value = 10, min = 5, max = 40, step = 5, ticks = FALSE),
-                              sliderInput("end_pause_anim_by_college", "End Pause:",
-                                          value = 25, min = 5, max = 100, step = 5, ticks = FALSE),
+                              sliderTextInput("end_pause_anim_by_college_in", "Pause at End of Animation:",
+                                          choices = c("Short", "Medium", "Long"), selected = "Medium"),
                               actionButton("animate_by_college", "Animate!")
-                            )
                           ),
-                          material_column(
+                          material_row(
                             imageOutput("plot_anim_by_college")
                           )
                         )
@@ -189,9 +186,19 @@ server <- function(input, output, session) {
       all_stars_by_college_anim <- number_of_all_stars_by_college(year_start = input$year_range_by_college[[1]],
                                                                   year_end = input$year_range_by_college[[2]])
       
+      if(input$end_pause_anim_by_college_in == "Short"){
+        end_pause_anim_by_college <- (input$fps_anim_by_college*input$duration_anim_by_college)%/%10
+      }
+      else if(input$end_pause_anim_by_college_in == "Medium"){
+        end_pause_anim_by_college <- (input$fps_anim_by_college*input$duration_anim_by_college)%/%5
+      }
+      else {
+        end_pause_anim_by_college <- (input$fps_anim_by_college*input$duration_anim_by_college)%/%3
+      }
+      
       anim_save("all_stars_by_college.gif", animate(all_stars_by_college_anim,
                                                     fps = input$fps_anim_by_college,
-                                                    end_pause = input$end_pause_anim_by_college,
+                                                    end_pause = end_pause_anim_by_college,
                                                     duration = input$duration_anim_by_college))
       
       
