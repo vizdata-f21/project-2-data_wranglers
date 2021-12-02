@@ -164,7 +164,7 @@ ui <- fluidPage(
                                           value = 10, min = 5, max = 40, step = 5, ticks = FALSE),
                               sliderInput("end_pause_anim_by_team", "End Pause:",
                                           value = 25, min = 5, max = 100, step = 5, ticks = FALSE),
-                              actionButton("animate_by_team", "Animate!")
+                              actionButton("animate_by_draft", "Animate!")
                             )
                           ),
                           material_column(
@@ -248,10 +248,10 @@ server <- function(input, output, session) {
       )}, deleteFile = TRUE)
   })
 
-  observeEvent(input$animate_by_draft, {
+  observeEvent(input$anim_by_draft, {
     output$plot_anim_by_draft <- renderImage({
       all_stars_by_draft <- number_of_all_stars_by_draft(year_start = input$year_range_by_draft[[1]],
-                                                                year_end = input$year_range_by_draft[[2]])
+                                                                year_end = input$year_range_draft[[2]])
       
       anim_save("all_stars_by_draft.gif", animate(all_stars_by_draft,
                                                      fps = input$fps_anim_by_draft,
@@ -264,11 +264,10 @@ server <- function(input, output, session) {
 
   }) 
   
-  observeEvent(input$animate_by_team, {
+  observeEvent(input$anim_by_team, {
     output$plot_anim_by_team <- renderImage({
       all_stars_by_team <- number_of_all_stars_by_team(year_start = input$year_range_by_team[[1]],
-                                                         year_end = input$year_range_by_team[[2]],
-                                                       number_to_rank = input$teams_to_rank)
+                                                         year_end = input$year_range_team[[2]])
       
       anim_save("all_stars_by_team.gif", animate(all_stars_by_team,
                                                   fps = input$fps_anim_by_team,
@@ -294,6 +293,8 @@ server <- function(input, output, session) {
   
       
 }
+
+
 
 
 # run the application 
