@@ -177,7 +177,8 @@ server <- function(input, output, session) {
       anim_save("all_stars_by_location.gif", animate(all_stars_by_college_location,
                                                      fps = input$fps_anim_loc,
                                                      end_pause = input$end_pause_anim_loc,
-                                                     duration = input$duration_anim_loc))
+                                                     duration = input$duration_anim_loc,
+                                                     height = 450, width = 650))
       
       
       list(src = "all_stars_by_location.gif",
