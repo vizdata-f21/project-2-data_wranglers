@@ -69,7 +69,7 @@ all_stars_by_state <- function (per_capita = T,
             legend.position = c(0.2, 0.15),
             legend.key.size = unit(0.8, "cm"), legend.direction="horizontal",
             panel.border = element_rect(fill = NA, color = "black", size = 1),
-            plot.title = element_text(family = "Times", size = 24, hjust = 0.02),
+            plot.title = element_text(family = "Times", size = 20, hjust = 0.02),
             plot.subtitle = element_text(family = "Times", size = 16, margin=margin(3,0,4,0), hjust = 0.015)) +
       labs(title = "Number of All-Stars by college state",
            subtitle = paste0("Per million residents, ", year_start, " to ", year_end)) +
@@ -90,7 +90,7 @@ all_stars_by_state <- function (per_capita = T,
               legend.position = c(0.2, 0.15),
               legend.key.size = unit(0.8, "cm"), legend.direction="horizontal",
             panel.border = element_rect(fill = NA, color = "black", size = 1),
-            plot.title = element_text(family = "Times", size = 24, hjust = 0.02),
+            plot.title = element_text(family = "Times", size = 20, hjust = 0.02),
             plot.subtitle = element_text(family = "Times", size = 16, margin=margin(3,0,4,0), hjust = 0.015)) +
       labs(title = "Number of All-Stars by college state",
            subtitle = paste0("Per million residents, ", year_start, " to ", year_end)) +
@@ -202,7 +202,7 @@ all_stars_by_college_loc <- function (year_start = 1951,
     theme_void() +
     theme(panel.background = element_rect(fill = "gainsboro"),
           panel.border = element_rect(fill = NA, color = "black", size = 1),
-          plot.title = element_text(family = "Times", size = 24, hjust = 0.01),
+          plot.title = element_text(family = "Times", size = 20, hjust = 0.01),
           plot.subtitle = element_text(family = "Times", size = 16, margin=margin(3,0,4,0), hjust = 0.01)) +
     labs(fill = NULL, x = NULL, y = NULL, title = "All-Stars by college location",
          subtitle = paste0("By college, ", year_start, " to ", year_end)) +

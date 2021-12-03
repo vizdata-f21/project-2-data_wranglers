@@ -2,57 +2,197 @@ Project 2
 ================
 Data Wranglers
 
+Our Shiny App can be found
+[here](https://ohenry34.shinyapps.io/data-wranglers/). Our source code
+can be found [here](https://github.com/vizdata-f21) (the shiny folder,
+specifically, holds our code, while Shiny.R is our complete App).
+
 # Introduction
 
 The NBA is an increasingly global league where its top talent comes from
-countries all over the world. Over the years, more of the NBA’s All-Star
-talent have come from outside the US, which has brought along many fans
-globally. As fans of basketball, we were very interested in looking at
-how many NBA All-Stars come from countries other than the United States
-and how international talent has grown over the years.
+countries all over the world and colleges around the United States. Over
+the years, more and more of the NBA’s All-Star talent have come from
+outside the United States, which has brought along many fans globally.
+As fans of basketball, we were very interested in looking at how many
+NBA All-Stars (or the NBA’s best players) come from countries other than
+the United States and how international talent has grown over the years.
 
-In many professional sports, there is also the concept of “tanking”
-where teams that are not expected to do well begin to lose games on
-purpose to get a higher draft pick. For one of our research questions,
-we were interested in doing an analysis on whether earlier round draft
-picks were much more important in leading to players that make the
-All-Star game versus second round picks or undrafted players. Therefore,
-we could analyze and draw conclusions on whether the idea of “tanking”
-is valid for NBA teams or if they should just try to win as many games
-as they can.
+Additionally, as Duke and college basketball fans, we wanted to explore
+which colleges had the most NBA All-Stars and which states had the most
+colleges with top NBA talent too. We chose to analyze which colleges
+produce the best NBA players and draw conclusions to see if the best NBA
+players come from prominent college basketball schools, such as Duke or
+Kentucky, or from colleges that aren’t as consistently good at
+basketball. Our Shiny App enables users to analyze which colleges are
+most useful in producing NBA All-Star players, and where these colleges
+are found.
 
-Another hypothesis we had was that a lot of the NBA’s top talent comes
-from the same few organizations over the years (such as the Boston
-Celtics and LA Lakers). We were interested in exploring the number of
-All-Stars per team over the years to draw conclusions on the
-distribution of talent in the NBA.
-
-Finally, as fans of college basketball as well we wanted to visualize
-which colleges had the most NBA All-Stars, as well as which states had
-the most colleges with top NBA talent. This could be used by NBA front
-offices as well to see which colleges produce the best NBA players, and
-will allow us to draw conclusions to see if the best NBA players
-typically come from prominent college basketball schools.
-
-We built a Shiny app with interactive visualizations based on this NBA
-All-Star data that addressed all our hypotheses and ideas above, as well
-as looked at data that could help NBA team’s more effectively make
-management decisions. We will answer each of our research questions,
-described with more depth below, with interactive visualizations in our
-Shiny app.
+Our Shiny App also includes an interactive section that allows users to
+visualize where NBA All-Stars were from originally (that includes both a
+world map and a map of the US to see which states they are from) and see
+how that has changed over the years. This could also be used by NBA
+talent evaluators and general managers to see how important
+international scouting is and whether they should focus a lot of their
+attention going into an NBA draft on foreign players.
 
 # Data
 
+This data comes from [Basketball
+Reference](https://www.basketball-reference.com/), [Real
+GM](https://basketball.realgm.com/),
+[Wikipedia](https://en.wikipedia.org/wiki/Module:College_color/data),
+[The United States Census
+Bureau](https://www.census.gov/programs-surveys/popest/technical-documentation/research/evaluation-estimates/2020-evaluation-estimates/2010s-totals-national.html),
+& [The United States Department of
+Education](https://data.ed.gov/dataset/college-scorecard-all-data-files-through-6-2020/resources).
+Data from Wikipedia, Basketball Reference, and RealGM was scraped by us.
+Prior to scraping data, we verified using the `robots.txt` file that the
+data was scrape-able.
+
 # Research Questions
 
-1.  Where are NBA All-Stars originally from geographically? How many
-    All-Stars, on average, are there from outside the United States per
-    year?
-
-…
+1.  Which colleges did the most NBA All-Star players attend?
+    Geographically, which regions in the US are those colleges in that
+    produce the most NBA All-Star players?
 
 2.  What proportion of NBA All-Stars were drafted in the first round of
     the NBA draft? Which teams did these All-Stars play for?
+
+3.  Where are NBA All-Stars originally from geographically? How many
+    All-Stars, on average, are there from outside the United States per
+    year?
+
+# NBA All-Stars by College
+
+Our third research question was primarily motivated by our group members
+being Duke basketball fans and fans of college basketball as a whole. We
+wanted to do a deeper dive into relationships between college basketball
+teams and NBA player success. In our analysis, we defined a player’s
+college as being the place that they attended immediately prior to
+starting their NBA career, regardless of whether they graduated.
+
+In our Shiny App, we explored these relationships in the first three
+tabs: the “Colleges”, “College Map”, and “College State” tabs.
+
+In the “Colleges” tab, we created a dynamic racing bar chart that
+measures the amount of All-Stars a college has produced since the
+introduction of the All-Star game in 1951. We allow the user to define
+whether they would like to count every appearance made in an All-Star
+game or to only count each player once per college, even if they made
+several All-Star games. We also allowed the user to define the length of
+the animation, the number of frames per second, and the length of the
+pause at the end of the animation loop. We chose to let the user define
+the year range for the animation and the number of colleges to include
+in the ranking. Our options provided are shown below.
+
+<figure>
+<img src="images/colleges-tab.png" style="width:50.0%" alt="“Colleges” tab user interface" /><figcaption aria-hidden="true">“Colleges” tab user interface</figcaption>
+</figure>
+
+To give us a broad sense of what colleges have been most successful in
+producing All-Star NBA players, we chose to plot the number of All-Star
+game appearances over time by college, yielding the result that
+Kentucky, UCLA, and UNC are the leaders of the pack.
+
+One thing I should point out here is the use of University colors to
+give the plot more life (which took way more effort than I had
+anticipated).
+
+<figure>
+<img src="images/all_stars_by_college_total_app.gif" style="width:50.0%" alt="Total All-Star appearances by college, 1951-2021" /><figcaption aria-hidden="true">Total All-Star appearances by college, 1951-2021</figcaption>
+</figure>
+
+To account for the fact that some players may have accounted for many
+All-Star appearances, we then limit the query to count just the number
+of players who have made an All-Star game, rather than the total amount
+of appearances. Unsurprisingly, this plot shows similar results, however
+Duke does leap UNC in cumulative All-Star players, undoubtedly due to
+the fact that Michael Jordan’s 14 appearances in the prestigious game
+are only counting as one tally in UNC’s column here.
+
+<figure>
+<img src="images/all_stars_by_college_by_player.gif" style="width:50.0%" alt="All-Star players by college, 1951-2021" /><figcaption aria-hidden="true">All-Star players by college, 1951-2021</figcaption>
+</figure>
+
+One aspect of this data that we were keen to explore was the recent
+years. In 2006, the NBA instituted the “One-and-Done” rule, requiring
+players to be one year removed from high school before entering the NBA
+draft. This meant elite high school basketball players would be
+significantly more likely to spend at least one year in college prior to
+joining the NBA, contrasting the trend of players joining the NBA
+immediately following high school that had persisted in years prior. In
+the wake of this rule, colleges like Kentucky and Duke elected to pursue
+these elite athletes, valuing their basketball ability highly and
+dismissing concerns about the lack of continuity that would result from
+players coming and going yearly.
+
+We chose to plot the same data as previously, limiting the starting year
+to be 2007, which was the first All-Star that “One-and-Dones” were in
+the NBA for.
+
+<figure>
+<img src="images/all_stars_by_college_total_app_oad.gif" style="width:50.0%" alt="Total All-Star appearances by college, 2007-2021" /><figcaption aria-hidden="true">Total All-Star appearances by college, 2007-2021</figcaption>
+</figure>
+
+<figure>
+<img src="images/all_stars_by_college_by_player_oad.gif" style="width:50.0%" alt="All-Star players by college, 2007-2021" /><figcaption aria-hidden="true">All-Star players by college, 2007-2021</figcaption>
+</figure>
+
+In both total All-Star game appearances and number of players with an
+All-Star appearance, Kentucky has dominated the “One-and-Done” era,
+offering evidence for our hypothesis. Duke has had six All-Star players
+in the same era, good enough for second place. The effect of one
+dominant player can be seen clearly in the first chart, with Texas’
+Kevin Durant’s 11 All-Star game appearances propelling Texas to a second
+place finish in the timespan. Kevin Durant was a “One-and-Done” player,
+drafted second overall in the 2007 NBA draft.
+
+To find where NBA players attended colleges geographically, we plotted
+both a chloropleth map of states and a point location map showing where
+players have attended. Customizability for the user in the Shiny App is
+shown below.
+
+<figure>
+<img src="images/colleges-loc-tab.png" style="width:50.0%" alt="“Colleges Map” tab user interface" /><figcaption aria-hidden="true">“Colleges Map” tab user interface</figcaption>
+</figure>
+
+<figure>
+<img src="images/collegesmap-tab.png" style="width:50.0%" alt="“College State” tab user interface" /><figcaption aria-hidden="true">“College State” tab user interface</figcaption>
+</figure>
+
+We chose to use our Shiny App to examine the geography of where NBA
+All-Stars have gone to college over time.
+
+<figure>
+<img src="images/all_stars_by_location_college_map.gif" style="width:50.0%" alt="Map of All-Star players’ college locations, 1951-2021" /><figcaption aria-hidden="true">Map of All-Star players’ college locations, 1951-2021</figcaption>
+</figure>
+
+We then chose to look on a bigger scale, comparing across states. To
+avoid problems that arise with red-green colorblindness, we chose a
+blue-red color palette, using the NBA logo’s colors for guidance.
+
+![All-Star players’ college locations by state,
+1951-2021](images/all_stars_by_state.png)
+
+California, North Carolina, and Kentucky stand out most among states.
+However, because states with many people in them would be more likely to
+have NBA All-Star players attend college there, we wanted to standardize
+states for comparison by population.
+
+![All-Star players’ college locations by state (per million residents),
+1951-2021](images/all_stars_by_state_pc.png)
+
+After normalizing states, Kentucky and North Carolina are still among
+the leaders. These states feature heralded basketball programs from
+which many great NBA players have emerged. Wyoming and Montana also
+stand out, but their values are more a product of their minuscule
+populations.
+
+Which colleges did the most NBA All-Star players attend? Geographically,
+which regions in the US are those colleges in that produce the most NBA
+All-Star players?
+
+# NBA All-Stars by Draft, Team
 
 For our second question, we wanted to see how important early picks in
 the NBA draft are for finding the best players. We created an animated,
@@ -65,6 +205,12 @@ for us to look at how many undrafted All-Stars there have been, as we
 hypothesized that would be a very small percentage of the NBA’s top
 talent.
 
+Another hypothesis we had was that a lot of the NBA’s top talent comes
+from the same few organizations over the years (such as the Boston
+Celtics and LA Lakers). We were interested in exploring the number of
+All-Stars per team over the years to draw conclusions on the
+distribution of talent in the NBA.
+
 We also wanted to see which teams have had the most cumulative All-Star
 selections, so we created an interactive plot to address the second part
 of this research question. This was interesting for our group as we
@@ -74,34 +220,6 @@ versus small market cities (such as Memphis or Minneapolis). We wanted
 to analyze if the location of cities plays a significant in attracting
 “All-Star” talent to the same few teams.
 
-3.  Which colleges did the most NBA players attend? Geographically,
-    which regions in the US are those colleges in that produce the most
-    NBA players?
-
-….
-
-# Question 1
-
--   Which tabs are associated with this question
--   Motivation!
--   How did we clean
--   Screenshots?
--   What are our conclusions!
-
-<figure>
-<img src="images/statemap1.png" style="width:50.0%" alt="alt text here" /><figcaption aria-hidden="true">alt text here</figcaption>
-</figure>
-
-<figure>
-<img src="images/statemap2.png" style="width:50.0%" alt="alt text here" /><figcaption aria-hidden="true">alt text here</figcaption>
-</figure>
-
-<figure>
-<img src="images/worldmap.png" style="width:50.0%" alt="alt text here" /><figcaption aria-hidden="true">alt text here</figcaption>
-</figure>
-
-# Question 2
-
 First, for the “Draft Positions” tab to clean up the data I had to
 create a new variable called “draft\_range” that used the str\_detect
 function to determine whether each NBA All-Star was a first round pick,
@@ -109,13 +227,13 @@ second round pick, or went undrafted. I also created a new variable
 called “sum\_all\_stars” which I used to count how many All-Stars there
 were from draft category each year.
 
-Our Shiny app displays the distribution of which NBA draft picks
+Our Shiny App displays the distribution of which NBA draft picks
 cumulatively (over a range of years) are from each round of the draft or
 are undrafted. The distribution over the full range of years is
 illustrated below:
 
 <figure>
-<img src="images/NBADraftDistribution.png" style="width:50.0%" alt="alt text here" /><figcaption aria-hidden="true">alt text here</figcaption>
+<img src="images/NBADraftDistribution.png" style="width:50.0%" alt="All-Star appearances by draft round" /><figcaption aria-hidden="true">All-Star appearances by draft round</figcaption>
 </figure>
 
 As you can see above, from 1951 to 2021 there have been significantly
@@ -161,7 +279,7 @@ the app would only display the teams with the 10 most All-Stars
 cumulatively each year. The distribution over the full range of years is
 illustrated below:
 
-![alt text here](images/NBATeamDistribution.png)
+![All-Star appearances by NBA team](images/NBATeamDistribution.png)
 
 As you could see in the plot above, the larger market teams (from
 bigger, more attractive cities) have had pretty significantly more
@@ -190,35 +308,17 @@ significant factor in that distribution.
 # Question 3
 
 -   Which tabs are associated with this question
--   Motivation
+-   Motivation!
 -   How did we clean
 -   Screenshots?
 -   What are our conclusions!
 
-<figure>
-<img src="images/all_stars_by_state.png" style="width:50.0%" alt="alt text here" /><figcaption aria-hidden="true">alt text here</figcaption>
-</figure>
-
-<figure>
-<img src="images/all_stars_by_college_total_app.gif" style="width:50.0%" alt="alt text here" /><figcaption aria-hidden="true">alt text here</figcaption>
-</figure>
-
-<figure>
-<img src="images/all_stars_by_college_by_player.gif" style="width:50.0%" alt="alt text here" /><figcaption aria-hidden="true">alt text here</figcaption>
-</figure>
-
-<figure>
-<img src="images/all_stars_by_college_total_app_oad.gif" style="width:50.0%" alt="alt text here" /><figcaption aria-hidden="true">alt text here</figcaption>
-</figure>
-
-<figure>
-<img src="images/all_stars_by_college_total_app_oad.gif" style="width:50.0%" alt="alt text here" /><figcaption aria-hidden="true">alt text here</figcaption>
-</figure>
-
-<figure>
-<img src="images/all_stars_by_location_college_map.gif" style="width:50.0%" alt="alt text here" /><figcaption aria-hidden="true">alt text here</figcaption>
-</figure>
-
 # Overall Conclusions
 
-# NBA Players Geographical Data
+In examining colleges, we found that Kentucky and Duke have emerged in
+recent years as All-Star producing powerhouses. After the introduction
+of the “One-and-Done” rule in 2006, both schools have elected to pursue
+elite high school basketball players which has enabled them to see their
+former players thrive in the NBA. UNC and UCLA are other schools that
+have produced many All-Star players, which is reasonable, as both
+schools have had immense success throughout their histories.
