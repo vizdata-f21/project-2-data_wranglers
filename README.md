@@ -89,11 +89,15 @@ to analyze if the location of cities plays a significant in attracting
 -   What are our conclusions!
 
 <figure>
-<img src="images/world_map_birth.png" style="width:50.0%" alt="alt text here" /><figcaption aria-hidden="true">alt text here</figcaption>
+<img src="images/statemap1.png" style="width:50.0%" alt="alt text here" /><figcaption aria-hidden="true">alt text here</figcaption>
 </figure>
 
 <figure>
-<img src="images/state_map_birth.png" style="width:50.0%" alt="alt text here" /><figcaption aria-hidden="true">alt text here</figcaption>
+<img src="images/statemap2.png" style="width:50.0%" alt="alt text here" /><figcaption aria-hidden="true">alt text here</figcaption>
+</figure>
+
+<figure>
+<img src="images/worldmap.png" style="width:50.0%" alt="alt text here" /><figcaption aria-hidden="true">alt text here</figcaption>
 </figure>
 
 # Question 2
