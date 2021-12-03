@@ -8,9 +8,7 @@ can be found
 [here](https://github.com/vizdata-f21/project-2-data_wranglers) (the
 [shiny
 folder](https://github.com/vizdata-f21/project-2-data_wranglers/tree/main/shiny),
-specifically, holds our code, while Shiny.R is our complete App). Link
-if the hyperlink doesn’t work:
-<https://github.com/vizdata-f21/project-2-data_wranglers>.
+specifically, holds our code, while Shiny.R is our complete App).
 
 A link to a screen recording for our presentation can be found [here
 (YouTube)](https://youtu.be/XccwwLk0Ssc).
