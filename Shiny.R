@@ -49,11 +49,35 @@ ui <- fluidPage(
                 dashboardBody(
                   tabItems(
                     tabItem(tabName = "home",
-                            br(),
+                            h1("Home"),
+                            h2("Overview"),
                             p("This Shiny App was created by the Data Wranglers, a group in Dr. Mine Çetinkaya-Rundel's class, Advanced Data Visualization.
                               Sarab Bhasin, Owen Henry, and Zach Khazzam contributed to the project."),
+                            
+                            p("The NBA is an increasingly global league where its top talent comes 
+                            from countries all over the world and colleges around the United States. 
+                            Over the years, more and more of the NBA’s All-Star talent have come from 
+                            outside the United States, which has brought along many fans globally. 
+                            As fans of basketball, we were very interested in looking at how many 
+                            NBA All-Stars (or the NBA’s best players) come from countries other than 
+                            the United States and how international talent has grown over the years."),
+                            
+                            p("Additionally, as Duke and college basketball fans, we wanted to explore 
+                            which colleges had the most NBA All-Stars and which states had the 
+                            most colleges with top NBA talent too. We chose to analyze which colleges produce the 
+                              best NBA players and draw conclusions to see if the best NBA players come from 
+                              prominent college basketball schools, such as Duke or Kentucky, or from colleges 
+                              that aren’t as consistently good at basketball."),
+                            
+                            p("Our Shiny app includes an interactive section that allows users to visualize 
+                            where NBA All-Stars were from originally (that includes both a world map 
+                            and a map of the US to see which states they are from) and see how that has 
+                            changed over the years. This could also be used by NBA talent evaluators and 
+                            general managers to see how important international scouting is and whether they 
+                            should focus a lot of their attention going into an NBA draft on foreign players."),
+                            
                             br(),
-                            h1("Data"),
+                            h2("Data"),
                             p("The data used in this project was accessed from",
                               tags$a(href="https://en.wikipedia.org/wiki/Module:College_color/data", 
                                      "Wikipedia"), ",",
@@ -80,7 +104,7 @@ ui <- fluidPage(
                                   value = 10, min = 3, max = 20, ticks = FALSE),
                       p(span("Caution:", style = "font-weight: bold; color: gray"),
                         span(HTML("Choosing higher animation length and FPS values<br/>will cause the animation to 
-                             take longer to render!<br/>(But will look nicer)"), style = "color: gray")),
+                             take longer to render!<br/>(But will look nicer!)"), style = "color: gray")),
                       sliderInput("duration_anim_by_college", "Animation Length (seconds):",
                                   value = 10, min = 5, max = 30, step = 5, ticks = FALSE),
                       sliderInput("fps_anim_by_college", "Frames per Second: ",
@@ -112,13 +136,13 @@ ui <- fluidPage(
                                   min = 1951, max = 2021, value = c(1951, 2021), sep = "", ticks = FALSE),
                         p(span("Caution:", style = "font-weight: bold; color: gray"),
                           span(HTML("Choosing higher animation length and FPS values<br/>will cause the animation to 
-                             take longer to render!<br/>(But will look nicer)"), style = "color: gray")),
+                             take longer to render!<br/>(But will look nicer!)"), style = "color: gray")),
                       sliderInput("duration_anim_loc", "Animation Length (seconds):",
                                   value = 10, min = 5, max = 30, step = 5, ticks = FALSE),
                       sliderInput("fps_anim_loc", "Frames per Second:",
                                   value = 10, min = 5, max = 40, step = 5, ticks = FALSE),
-                      sliderInput("end_pause_anim_loc", "End Pause:",
-                                  value = 25, min = 5, max = 100, step = 5, ticks = FALSE),
+                      sliderTextInput("end_pause_anim_by_college_loc", "Pause at End of Animation:",
+                                      choices = c("Short", "Medium", "Long"), selected = "Medium"),
                       actionButton("plot_anim_by_college_loc_button", "Animate!"),
                       br(), br(),
                       imageOutput("plot_anim_by_college_loc"),
@@ -130,7 +154,7 @@ ui <- fluidPage(
                                   min = 1951, max = 2021, value = c(1951, 2021), sep = "", ticks = FALSE),
                         p(span("Caution:", style = "font-weight: bold; color: gray"),
                           span(HTML("Choosing higher animation length and FPS values<br/>will cause the animation to 
-                             take longer to render!<br/>(But will look nicer)"), style = "color: gray")),
+                             take longer to render!<br/>(But will look nicer!)"), style = "color: gray")),
                       sliderInput("duration_anim_by_draft", "Animation Length (seconds):",
                                   value = 10, min = 5, max = 30, step = 5, ticks = FALSE),
                       sliderInput("fps_anim_by_draft", "Frames per Second:",
@@ -151,7 +175,7 @@ ui <- fluidPage(
                                   value = 30, min = 3, max = 30, ticks = FALSE),
                         p(span("Caution:", style = "font-weight: bold; color: gray"),
                           span(HTML("Choosing higher animation length and FPS values<br/>will cause the animation to 
-                             take longer to render!<br/>(But will look nicer)"), style = "color: gray")),
+                             take longer to render!<br/>(But will look nicer!)"), style = "color: gray")),
                       sliderInput("duration_anim_by_team", "Animation Length (seconds):",
                                   value = 10, min = 5, max = 30, step = 5, ticks = FALSE),
                       sliderInput("fps_anim_by_team", "Frames per Second:",
@@ -267,7 +291,7 @@ server <- function(input, output, session) {
   })
   
   end_by_college_pause_input_loc <- eventReactive(input$plot_anim_by_college_loc_button, {
-    input$end_pause_anim_loc
+    input$end_pause_anim_by_college_loc
   })
   
   
