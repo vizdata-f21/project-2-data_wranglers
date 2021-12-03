@@ -45,9 +45,9 @@ We also wanted to see which teams have had the most cumulative All-Star selectio
 - Screenshots?
 - What are our conclusions!
 
-![alt text here](images/){width=50%}
+![alt text here](images/world_map_birth.png){width=50%}
 
-
+![alt text here](images/state_map_birth.png){width=50%}
 
 
 

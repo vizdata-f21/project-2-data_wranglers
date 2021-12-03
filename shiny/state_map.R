@@ -58,14 +58,13 @@ state_map_fn <- function(per_capita = T, year_start = 1951, year_end = 2021){
                            limits = c(0, 5*(max(mapping_data$n)%/%5+1)),
                            breaks = c(seq(0, 5*(max(mapping_data$n)%/%5+1), by = 10)),
                            labels = paste(c(seq(0, 5*(max(mapping_data$n)%/%5+1), by = 10)))) +
-      theme_void() +
+      theme_void() +labs(fill = NULL, title = "Number of All-Stars by birth date",
+                         subtitle = paste0("United States, ", year_start, " to ", year_end)) +
       theme(plot.background = element_rect(fill = "gainsboro"),
             legend.position = c(0.03, 0.3),
             legend.key.size = unit(0.3, "cm"), legend.direction="vertical") +
       theme(aspect.ratio=0.6)
   } 
-  
-  #+labs(fill = NULL, title = "All-Stars by birth state",subtitle = paste0("United States, ", year_start, " to ", year_end)) 
   
   else if(per_capita == T){
     
