@@ -50,20 +50,38 @@ ui <- fluidPage(
                   tabItems(
                     tabItem(tabName = "home",
                             br(),
-                            p("This Shiny App was created by the", strong("Data Wranglers"),", a group in Dr. Mine Çetinkaya-Rundel's class, Advanced Data Visualization.
+                            p("This Shiny App was created by the Data Wranglers, a group in Dr. Mine Çetinkaya-Rundel's class, Advanced Data Visualization.
                               Sarab Bhasin, Owen Henry, and Zach Khazzam contributed to the project."),
                             br(),
-                            h1("Data")),
+                            h1("Data"),
+                            p("The data used in this project was accessed from",
+                              tags$a(href="https://en.wikipedia.org/wiki/Module:College_color/data", 
+                                     "Wikipedia"), ",",
+                              tags$a(href="https://www.basketball-reference.com/", "Basketball Reference"), ",",
+                              tags$a(href="https://basketball.realgm.com/", "RealGM"), ",",
+                              tags$a(href="https://www.census.gov/programs-surveys/popest/technical-documentation/research/evaluation-estimates/2020-evaluation-estimates/2010s-totals-national.html",
+                              "The United States Census Bureau"), ", and",
+                              tags$a(href="https://data.ed.gov/dataset/college-scorecard-all-data-files-through-6-2020/resources",
+                              "The United States Department of Education.")),
+                            p("Prior to scraping data from Wikipedia, Basketball Reference, and RealGM, we verified using the",
+                              code("robots.txt"), "file that scraping was scrape-able.")),
                     tabItem(
                       tabName = "as_college",
                       radioButtons("duplicate_players", "What would you like to count?",
                                    choices = c("Total All-Star Game appearances by players" = T,
                                                "Number of players who have made an All-Star Game" = F), selected = T),
+                      p(span("Example:", style = "font-weight: bold; color: gray"), span(HTML("If you would like to count Michael Jordan's 14<br/>All-Star appearances 
+                             14 times for UNC, choose"), style = "color: gray"), span("Option 1.", style = "font-weight: bold; color: gray"),
+                        span(HTML("<br/>If you would like to count Michael Jordan being an NBA<br/>All-Star just 1 time 
+                             for UNC, choose"), style = "color: gray"), span("Option 2.", style = "font-weight: bold; color: gray")),
                       sliderInput("year_range_by_college", "Year Range",
-                                  min = 1951, max = 2021, value = c(1951, 2021), sep = "", ticks = FALSE),
+                                  min = 1951, max = 2021, value = c(1951, 2021), sep = "", ticks = FALSE), 
                       sliderInput("colleges_to_rank", "Colleges to Rank:",
                                   value = 10, min = 3, max = 20, ticks = FALSE),
-                      sliderInput("duration_anim_by_college", "Duration:",
+                      p(span("Caution:", style = "font-weight: bold; color: gray"),
+                        span(HTML("Choosing higher animation length and FPS values<br/>will cause the animation to 
+                             take longer to render!<br/>(But will look nicer)"), style = "color: gray")),
+                      sliderInput("duration_anim_by_college", "Animation Length (seconds):",
                                   value = 10, min = 5, max = 30, step = 5, ticks = FALSE),
                       sliderInput("fps_anim_by_college", "Frames per Second: ",
                                   value = 10, min = 5, max = 40, step = 5, ticks = FALSE),
@@ -72,7 +90,7 @@ ui <- fluidPage(
                       actionButton("animate_by_college", "Animate!"),
                       br(), br(),
                       imageOutput("plot_anim_by_college"),
-                      br(), br(), br(),br(), br(), br(),br(), br(), br()
+                      br(), br(), br(),br(), br(), br(),br(), br(), br(),  style='width: 2000px'
                     ),
                     
                     tabItem(
@@ -92,7 +110,10 @@ ui <- fluidPage(
                       tabName = "as_loc",
                       sliderInput("year_range_by_college_loc", "Year Range",
                                   min = 1951, max = 2021, value = c(1951, 2021), sep = "", ticks = FALSE),
-                      sliderInput("duration_anim_loc", "Duration:",
+                        p(span("Caution:", style = "font-weight: bold; color: gray"),
+                          span(HTML("Choosing higher animation length and FPS values<br/>will cause the animation to 
+                             take longer to render!<br/>(But will look nicer)"), style = "color: gray")),
+                      sliderInput("duration_anim_loc", "Animation Length (seconds):",
                                   value = 10, min = 5, max = 30, step = 5, ticks = FALSE),
                       sliderInput("fps_anim_loc", "Frames per Second:",
                                   value = 10, min = 5, max = 40, step = 5, ticks = FALSE),
@@ -107,7 +128,10 @@ ui <- fluidPage(
                       tabName = "as_draft",
                       sliderInput("year_range_by_draft", "Year Range",
                                   min = 1951, max = 2021, value = c(1951, 2021), sep = "", ticks = FALSE),
-                      sliderInput("duration_anim_by_draft", "Duration:",
+                        p(span("Caution:", style = "font-weight: bold; color: gray"),
+                          span(HTML("Choosing higher animation length and FPS values<br/>will cause the animation to 
+                             take longer to render!<br/>(But will look nicer)"), style = "color: gray")),
+                      sliderInput("duration_anim_by_draft", "Animation Length (seconds):",
                                   value = 10, min = 5, max = 30, step = 5, ticks = FALSE),
                       sliderInput("fps_anim_by_draft", "Frames per Second:",
                                   value = 10, min = 5, max = 40, step = 5, ticks = FALSE),
@@ -125,7 +149,10 @@ ui <- fluidPage(
                                   min = 1951, max = 2021, value = c(1951, 2021), sep = "", ticks = FALSE),
                       sliderInput("teams_to_rank", "Teams to Rank (with the most All-Stars):",
                                   value = 30, min = 3, max = 30, ticks = FALSE),
-                      sliderInput("duration_anim_by_team", "Duration:",
+                        p(span("Caution:", style = "font-weight: bold; color: gray"),
+                          span(HTML("Choosing higher animation length and FPS values<br/>will cause the animation to 
+                             take longer to render!<br/>(But will look nicer)"), style = "color: gray")),
+                      sliderInput("duration_anim_by_team", "Animation Length (seconds):",
                                   value = 10, min = 5, max = 30, step = 5, ticks = FALSE),
                       sliderInput("fps_anim_by_team", "Frames per Second:",
                                   value = 10, min = 5, max = 40, step = 5, ticks = FALSE),
