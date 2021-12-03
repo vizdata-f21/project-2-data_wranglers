@@ -1,6 +1,7 @@
 # Data
 
-This deforestation data comes from [Basketball Reference](https://www.basketball-reference.com/) & [Real GM](https://basketball.realgm.com/). It was scraped by us.
+This data comes from [Basketball Reference](https://www.basketball-reference.com/), [Real GM](https://basketball.realgm.com/), [Wikipedia](https://en.wikipedia.org/wiki/Module:College_color/data), [The United States Census Bureau](https://www.census.gov/programs-surveys/popest/technical-documentation/research/evaluation-estimates/2020-evaluation-estimates/2010s-totals-national.html), & [The United States Department of Education](https://data.ed.gov/dataset/college-scorecard-all-data-files-through-6-2020/resources). Data from  Wikipedia, Basketball Reference, and RealGM was scraped by us. Prior to scraping data, we verified using the `robots.txt` file that the data was scrape-able.
+
 
 ## all_stars
 
@@ -54,4 +55,23 @@ NBA Player Stats (1951-2021)
 |pts                  |double | Points per game |
 
 
+## college_colors
 
+Colors of colleges
+
+
+|variable              |class     |description |
+|:---------------------|:---------|:-----------|
+|college                  |character | College Name |
+|color               |character | Hex code for primary color |
+|secondary              |character    | Hex code for secondary color |
+
+## college_locations
+
+Mapping coordinates of colleges
+
+|variable              |class     |description |
+|:---------------------|:---------|:-----------|
+|college                  |character | College Name |
+|lat               |character | Latitude |
+|long              |character    | Longitude |

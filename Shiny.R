@@ -37,12 +37,12 @@ ui <- fluidPage(
                     menuItem("Home", tabName = "home", icon = icon("home")),
                     menuItem("All-Stars", icon = icon("star"), startExpanded = TRUE,
                              menuSubItem("Colleges", tabName = "as_college"),
+                             menuSubItem("College Map", tabName = "as_loc"),
                              menuSubItem("College State", tabName = "as_state"),
                              menuSubItem("Draft Positions", tabName = "as_draft"),
                              menuSubItem("Team", tabName = "as_team"),
                              menuSubItem("World Map", tabName = "world_map"),
-                             menuSubItem("U.S. Map", tabName = "state_map"),
-                             menuSubItem("College Map", tabName = "as_loc")
+                             menuSubItem("U.S. Map", tabName = "state_map")
                     )
                   )
                 ),
@@ -88,7 +88,7 @@ ui <- fluidPage(
                               tags$a(href="https://data.ed.gov/dataset/college-scorecard-all-data-files-through-6-2020/resources",
                               "The United States Department of Education.")),
                             p("Prior to scraping data from Wikipedia, Basketball Reference, and RealGM, we verified using the",
-                              code("robots.txt"), "file that scraping was scrape-able.")),
+                              code("robots.txt"), "file that the data was scrape-able.")),
                     tabItem(
                       tabName = "as_college",
                       radioButtons("duplicate_players", "What would you like to count?",

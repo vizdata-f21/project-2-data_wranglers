@@ -57,8 +57,8 @@ all_stars_by_state <- function (per_capita = T,
     if(max(mapping_data$n) >=20){
     state_map_as <- ggplot(mapping_data, aes(long, lat, group = group))+
       geom_polygon(aes(fill = n), color = "white") +
-      scale_fill_gradient2(low = muted("red"), mid = "white",
-                           high = muted("green"), midpoint = mean(c(max(mapping_data$n), mean(mapping_data$n), 0)),
+      scale_fill_gradient2(low = muted("#C9082A"), mid = "white",
+                           high = muted("#17408B"), midpoint = mean(c(max(mapping_data$n), mean(mapping_data$n), 0)),
                            guide = guide_legend(label.position = "bottom"),
                            limits = c(0, 5*(max(mapping_data$n)%/%5+1)),
                            breaks = c(seq(0, 5*(max(mapping_data$n)%/%5+1), by = 10)),
@@ -78,8 +78,8 @@ all_stars_by_state <- function (per_capita = T,
     else if(max(mapping_data$n) < 20){
       state_map_as <- ggplot(mapping_data, aes(long, lat, group = group))+
         geom_polygon(aes(fill = n), color = "white") +
-        scale_fill_gradient2(low = muted("red"), mid = "white",
-                             high = muted("green"), midpoint = mean(c(max(mapping_data$n), mean(mapping_data$n), 0)),
+        scale_fill_gradient2(low = muted("#C9082A"), mid = "white",
+                             high = muted("#17408B"), midpoint = mean(c(max(mapping_data$n), mean(mapping_data$n), 0)),
                              guide = guide_legend(label.position = "bottom"),
                              limits = c(0, 5*(max(mapping_data$n)%/%5+1)),
                              breaks = c(seq(0, 5*(max(mapping_data$n)%/%5+1), by = 5)),
@@ -109,8 +109,8 @@ all_stars_by_state <- function (per_capita = T,
     
     state_map_as <- ggplot(states_pop, aes(long, lat, group = group))+
       geom_polygon(aes(fill = n/(pop2020/1000000)), color = "white") +
-      scale_fill_gradient2(low = muted("red"), mid = "white",
-                           high = muted("green"), 
+      scale_fill_gradient2(low = muted("#C9082A"), mid = "white",
+                           high = muted("#17408B"), 
                            midpoint = mean(c(max(states_pop$n/(states_pop$pop2020/1000000)),
                                              mean(states_pop$n/(states_pop$pop2020/1000000)), 0)),
                            guide = guide_legend(label.position = "bottom"),
