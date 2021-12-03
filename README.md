@@ -328,9 +328,7 @@ become a more international league recently, and better players from Europe,
 Africa, Asia, and other countries are starting to make a real impact on the
 league. Even still, there are very few international All-Stars, and we expect
 there to be more in the coming years, as scouts and teams use data like this to
-find international stars. One thing we found interesting is that there has never
-been a Canadian-born NBA All-Star, although this also may change in the coming 
-years with Canadian talent like Andrew Wiggins and Shai Gilgeous-Alexander.
+find international stars from high-performing countries.
 
 Now, moving to the U.S. Map tab, our motivation was to map the number of All-
 Stars that each state has produced, not by their college state but by their
