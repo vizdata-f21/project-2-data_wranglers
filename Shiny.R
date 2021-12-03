@@ -38,32 +38,74 @@ ui <- fluidPage(
                     menuItem("All-Stars", icon = icon("star"), startExpanded = TRUE,
                              menuSubItem("Colleges", tabName = "as_college"),
                              menuSubItem("College State", tabName = "as_state"),
-                             menuSubItem("College Location", tabName = "as_loc"),
                              menuSubItem("Draft Positions", tabName = "as_draft"),
                              menuSubItem("Team", tabName = "as_team"),
                              menuSubItem("World Map", tabName = "world_map"),
-                             menuSubItem("U.S. Map", tabName = "state_map")
+                             menuSubItem("U.S. Map", tabName = "state_map"),
+                             menuSubItem("College Map", tabName = "as_loc")
                     )
                   )
                 ),
                 dashboardBody(
                   tabItems(
                     tabItem(tabName = "home",
-                            br(),
-                            p("This Shiny App was created by the", strong("Data Wranglers"),", a group in Dr. Mine Çetinkaya-Rundel's class, Advanced Data Visualization.
+                            h1("Home"),
+                            h2("Overview"),
+                            p("This Shiny App was created by the Data Wranglers, a group in Dr. Mine Çetinkaya-Rundel's class, Advanced Data Visualization.
                               Sarab Bhasin, Owen Henry, and Zach Khazzam contributed to the project."),
+                            
+                            p("The NBA is an increasingly global league where its top talent comes 
+                            from countries all over the world and colleges around the United States. 
+                            Over the years, more and more of the NBA’s All-Star talent have come from 
+                            outside the United States, which has brought along many fans globally. 
+                            As fans of basketball, we were very interested in looking at how many 
+                            NBA All-Stars (or the NBA’s best players) come from countries other than 
+                            the United States and how international talent has grown over the years."),
+                            
+                            p("Additionally, as Duke and college basketball fans, we wanted to explore 
+                            which colleges had the most NBA All-Stars and which states had the 
+                            most colleges with top NBA talent too. We chose to analyze which colleges produce the 
+                              best NBA players and draw conclusions to see if the best NBA players come from 
+                              prominent college basketball schools, such as Duke or Kentucky, or from colleges 
+                              that aren’t as consistently good at basketball."),
+                            
+                            p("Our Shiny app includes an interactive section that allows users to visualize 
+                            where NBA All-Stars were from originally (that includes both a world map 
+                            and a map of the US to see which states they are from) and see how that has 
+                            changed over the years. This could also be used by NBA talent evaluators and 
+                            general managers to see how important international scouting is and whether they 
+                            should focus a lot of their attention going into an NBA draft on foreign players."),
+                            
                             br(),
-                            h1("Data")),
+                            h2("Data"),
+                            p("The data used in this project was accessed from",
+                              tags$a(href="https://en.wikipedia.org/wiki/Module:College_color/data", 
+                                     "Wikipedia"), ",",
+                              tags$a(href="https://www.basketball-reference.com/", "Basketball Reference"), ",",
+                              tags$a(href="https://basketball.realgm.com/", "RealGM"), ",",
+                              tags$a(href="https://www.census.gov/programs-surveys/popest/technical-documentation/research/evaluation-estimates/2020-evaluation-estimates/2010s-totals-national.html",
+                              "The United States Census Bureau"), ", and",
+                              tags$a(href="https://data.ed.gov/dataset/college-scorecard-all-data-files-through-6-2020/resources",
+                              "The United States Department of Education.")),
+                            p("Prior to scraping data from Wikipedia, Basketball Reference, and RealGM, we verified using the",
+                              code("robots.txt"), "file that scraping was scrape-able.")),
                     tabItem(
                       tabName = "as_college",
                       radioButtons("duplicate_players", "What would you like to count?",
                                    choices = c("Total All-Star Game appearances by players" = T,
                                                "Number of players who have made an All-Star Game" = F), selected = T),
+                      p(span("Example:", style = "font-weight: bold; color: gray"), span(HTML("If you would like to count Michael Jordan's 14<br/>All-Star appearances 
+                             14 times for UNC, choose"), style = "color: gray"), span("Option 1.", style = "font-weight: bold; color: gray"),
+                        span(HTML("<br/>If you would like to count Michael Jordan being an NBA<br/>All-Star just 1 time 
+                             for UNC, choose"), style = "color: gray"), span("Option 2.", style = "font-weight: bold; color: gray")),
                       sliderInput("year_range_by_college", "Year Range",
-                                  min = 1951, max = 2021, value = c(1951, 2021), sep = "", ticks = FALSE),
+                                  min = 1951, max = 2021, value = c(1951, 2021), sep = "", ticks = FALSE), 
                       sliderInput("colleges_to_rank", "Colleges to Rank:",
                                   value = 10, min = 3, max = 20, ticks = FALSE),
-                      sliderInput("duration_anim_by_college", "Duration:",
+                      p(span("Caution:", style = "font-weight: bold; color: gray"),
+                        span(HTML("Choosing higher animation length and FPS values<br/>will cause the animation to 
+                             take longer to render!<br/>(But will look nicer!)"), style = "color: gray")),
+                      sliderInput("duration_anim_by_college", "Animation Length (seconds):",
                                   value = 10, min = 5, max = 30, step = 5, ticks = FALSE),
                       sliderInput("fps_anim_by_college", "Frames per Second: ",
                                   value = 10, min = 5, max = 40, step = 5, ticks = FALSE),
@@ -72,7 +114,7 @@ ui <- fluidPage(
                       actionButton("animate_by_college", "Animate!"),
                       br(), br(),
                       imageOutput("plot_anim_by_college"),
-                      br(), br(), br(),br(), br(), br(),br(), br(), br()
+                      br(), br(), br(),br(), br(), br(),br(), br(), br(),  style='width: 2000px'
                     ),
                     
                     tabItem(
@@ -92,12 +134,15 @@ ui <- fluidPage(
                       tabName = "as_loc",
                       sliderInput("year_range_by_college_loc", "Year Range",
                                   min = 1951, max = 2021, value = c(1951, 2021), sep = "", ticks = FALSE),
-                      sliderInput("duration_anim_loc", "Duration:",
+                        p(span("Caution:", style = "font-weight: bold; color: gray"),
+                          span(HTML("Choosing higher animation length and FPS values<br/>will cause the animation to 
+                             take longer to render!<br/>(But will look nicer!)"), style = "color: gray")),
+                      sliderInput("duration_anim_loc", "Animation Length (seconds):",
                                   value = 10, min = 5, max = 30, step = 5, ticks = FALSE),
                       sliderInput("fps_anim_loc", "Frames per Second:",
                                   value = 10, min = 5, max = 40, step = 5, ticks = FALSE),
-                      sliderInput("end_pause_anim_loc", "End Pause:",
-                                  value = 25, min = 5, max = 100, step = 5, ticks = FALSE),
+                      sliderTextInput("end_pause_anim_by_college_loc", "Pause at End of Animation:",
+                                      choices = c("Short", "Medium", "Long"), selected = "Medium"),
                       actionButton("plot_anim_by_college_loc_button", "Animate!"),
                       br(), br(),
                       imageOutput("plot_anim_by_college_loc"),
@@ -107,7 +152,10 @@ ui <- fluidPage(
                       tabName = "as_draft",
                       sliderInput("year_range_by_draft", "Year Range",
                                   min = 1951, max = 2021, value = c(1951, 2021), sep = "", ticks = FALSE),
-                      sliderInput("duration_anim_by_draft", "Duration:",
+                        p(span("Caution:", style = "font-weight: bold; color: gray"),
+                          span(HTML("Choosing higher animation length and FPS values<br/>will cause the animation to 
+                             take longer to render!<br/>(But will look nicer!)"), style = "color: gray")),
+                      sliderInput("duration_anim_by_draft", "Animation Length (seconds):",
                                   value = 10, min = 5, max = 30, step = 5, ticks = FALSE),
                       sliderInput("fps_anim_by_draft", "Frames per Second:",
                                   value = 10, min = 5, max = 40, step = 5, ticks = FALSE),
@@ -125,7 +173,10 @@ ui <- fluidPage(
                                   min = 1951, max = 2021, value = c(1951, 2021), sep = "", ticks = FALSE),
                       sliderInput("teams_to_rank", "Teams to Rank (with the most All-Stars):",
                                   value = 30, min = 3, max = 30, ticks = FALSE),
-                      sliderInput("duration_anim_by_team", "Duration:",
+                        p(span("Caution:", style = "font-weight: bold; color: gray"),
+                          span(HTML("Choosing higher animation length and FPS values<br/>will cause the animation to 
+                             take longer to render!<br/>(But will look nicer!)"), style = "color: gray")),
+                      sliderInput("duration_anim_by_team", "Animation Length (seconds):",
                                   value = 10, min = 5, max = 30, step = 5, ticks = FALSE),
                       sliderInput("fps_anim_by_team", "Frames per Second:",
                                   value = 10, min = 5, max = 40, step = 5, ticks = FALSE),
@@ -145,7 +196,7 @@ ui <- fluidPage(
                     ),
                     tabItem(
                       tabName = "state_map",
-                      radioButtons("per_capita", "Per million residents?",
+                      radioButtons("per_capita_state", "Per million residents?",
                                    choices = c("Yes" = T, "No" = F), selected = T),
                       sliderInput("year_range_state", "Year Range",
                                   min = 1951, max = 2021, value = c(1951, 2021), sep = "", ticks = FALSE),
@@ -240,7 +291,7 @@ server <- function(input, output, session) {
   })
   
   end_by_college_pause_input_loc <- eventReactive(input$plot_anim_by_college_loc_button, {
-    input$end_pause_anim_loc
+    input$end_pause_anim_by_college_loc
   })
   
   
@@ -369,7 +420,7 @@ server <- function(input, output, session) {
   # ALL STARS BY BIRTHPLACE (US) -------------------------------------------------------            
   
   func_out_state_usa <- eventReactive(input$plot_usa_state_button, {
-    state_map_fn(per_capita = input$per_capita, year_start = input$year_range_state[[1]],
+    state_map_fn(per_capita = input$per_capita_state, year_start = input$year_range_state[[1]],
                  year_end = input$year_range_state[[2]])
   })
   
