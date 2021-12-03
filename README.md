@@ -288,7 +288,7 @@ All-Stars but they have had the most NBA championships. This is likely
 due to a combination of team and draft success, as well as their cities
 being attractive enough to bring in the best NBA players.
 
-# Question 3
+# NBA All-Stars by Birthplace
 
 Our third research question was motivated by a curiosity to not only understand
 the recent surge in international talent in the NBA, but also to identify which
