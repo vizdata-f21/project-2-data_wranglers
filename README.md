@@ -88,7 +88,15 @@ to analyze if the location of cities plays a significant in attracting
 -   Screenshots?
 -   What are our conclusions!
 
-# Queston 2
+<figure>
+<img src="images/world_map_birth.png" style="width:50.0%" alt="alt text here" /><figcaption aria-hidden="true">alt text here</figcaption>
+</figure>
+
+<figure>
+<img src="images/state_map_birth.png" style="width:50.0%" alt="alt text here" /><figcaption aria-hidden="true">alt text here</figcaption>
+</figure>
+
+# Question 2
 
 First, for the “Draft Positions” tab to clean up the data I had to
 create a new variable called “draft\_range” that used the str\_detect
@@ -102,7 +110,9 @@ cumulatively (over a range of years) are from each round of the draft or
 are undrafted. The distribution over the full range of years is
 illustrated below:
 
-![alt text here](images/NBADraftDistribution.png)
+<figure>
+<img src="images/NBADraftDistribution.png" style="width:50.0%" alt="alt text here" /><figcaption aria-hidden="true">alt text here</figcaption>
+</figure>
 
 As you can see above, from 1951 to 2021 there have been significantly
 more total All-Star appearances from first round picks compared to both
@@ -111,26 +121,23 @@ cumulative first round pick All-Star selections compared to \~200 from
 the secound round and \~150 undrafted All-Stars. This distribution
 demonstrated the importance of earlier draft picks as this plot shows
 that over 75% of All-Star selections come from the first round of the
-draft. This outcome could encourage the idea of “tanking” as if bad
+draft. This outcome could encourage the idea of “tanking” as, if bad
 teams lose on purpose, they could get earlier draft picks. However,
 despite the large majority of All-Star selections being from the first
 round, second round picks are often basically traded away for little to
 no value and do not hold much trade value. Our group concluded that NBA
 general managers should still hold some value on those picks, as, we
-felt that the distribution is still large enough to demonstrate to
-management that those picks are worth holding onto. This chart also
-displays that it is often worth it for teams to consider picking up
-players after the draft if they go undrafted. Many teams do not consider
-adding players to their team that do not get drafted, but, considering
-that almost 10% of the NBA’s top talent has not been drafted over the
-last 70 years, we think it is important for teams to pick up undrafted
-players, especially due to the fact that they are often on much smaller
-contracts and are low risk investments. However, more recently (as you
-can see by adjusting the range of years on the app) the proportion of
-second round picks and undrafted All-Star selections has decreased. For
-example, since 2010 there has not been any undrafted All-Star
-selections, which could signify that NBA teams are doing a better job
-drafting and undrafted players have less value than they did previously.
+felt that the distribution is large enough to demonstrate that those
+picks are worth holding onto. We concluded that it is also worth it for
+teams to consider picking up undrafted players, they are almost 10% of
+the NBA’s All-Stars over the last 70 years and are often on much smaller
+contracts and are, therefore, low risk investments. However, more
+recently (as you can see by adjusting the range of years on the app) the
+proportion of second round picks and undrafted All-Star selections has
+decreased. For example, since 2010 there has not been any undrafted
+All-Star selections, which could signify that NBA teams are doing a
+better job drafting and undrafted players have less value than they did
+previously.
 
 Next, for the “Team” tab, we looked at the distribution of total
 All-Star appearances for each team over a range of years. First, as many
@@ -184,13 +191,30 @@ significant factor in that distribution.
 -   Screenshots?
 -   What are our conclusions!
 
-![alt text here](images/all_stars_by_state.png)
+<figure>
+<img src="images/all_stars_by_state.png" style="width:50.0%" alt="alt text here" /><figcaption aria-hidden="true">alt text here</figcaption>
+</figure>
+
+<figure>
+<img src="images/all_stars_by_college_total_app.gif" style="width:50.0%" alt="alt text here" /><figcaption aria-hidden="true">alt text here</figcaption>
+</figure>
+
+<figure>
+<img src="images/all_stars_by_college_by_player.gif" style="width:50.0%" alt="alt text here" /><figcaption aria-hidden="true">alt text here</figcaption>
+</figure>
+
+<figure>
+<img src="images/all_stars_by_college_total_app_oad.gif" style="width:50.0%" alt="alt text here" /><figcaption aria-hidden="true">alt text here</figcaption>
+</figure>
+
+<figure>
+<img src="images/all_stars_by_college_total_app_oad.gif" style="width:50.0%" alt="alt text here" /><figcaption aria-hidden="true">alt text here</figcaption>
+</figure>
+
+<figure>
+<img src="images/all_stars_by_location_college_map.gif" style="width:50.0%" alt="alt text here" /><figcaption aria-hidden="true">alt text here</figcaption>
+</figure>
 
 # Overall Conclusions
 
 # NBA Players Geographical Data
-
-This project intends to use a Shiny app to examine where NBA players and
-NBA All-Stars originate from. It will showcase both players’ hometowns
-and the location of their college. Our project proposal is found in the
-Proposal folder.
