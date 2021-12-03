@@ -60,7 +60,10 @@ state_map_fn <- function(per_capita = T, year_start = 1951, year_end = 2021){
                            labels = paste(c(seq(0, 5*(max(mapping_data$n)%/%5+1), by = 10)))) +
       theme_void() +labs(fill = NULL, title = "Number of All-Stars by birth state",
                          subtitle = paste0("United States, ", year_start, " to ", year_end)) +
-      theme(plot.background = element_rect(fill = "gainsboro"),
+      theme(panel.background = element_rect(fill = "gainsboro"),
+            panel.border = element_rect(fill = NA, color = "black", size = 1),
+            plot.title = element_text(family = "Times", size = 24, hjust = 0.01),
+            plot.subtitle = element_text(family = "Times", size = 16, margin=margin(3,0,4,0), hjust = 0.01),
             legend.position = c(0.03, 0.3),
             legend.key.size = unit(0.3, "cm"), legend.direction="vertical") +
       theme(aspect.ratio=0.6)
@@ -81,7 +84,10 @@ state_map_fn <- function(per_capita = T, year_start = 1951, year_end = 2021){
       labs(fill = NULL, title = "Number of All-Stars by birth state",
            subtitle = paste0("Per million residents, ", year_start, " to ", year_end))+
     theme_void() +
-      theme(plot.background = element_rect(fill = "gainsboro"),
+      theme(panel.background = element_rect(fill = "gainsboro"),
+            panel.border = element_rect(fill = NA, color = "black", size = 1),
+            plot.title = element_text(family = "Times", size = 24, hjust = 0.01),
+            plot.subtitle = element_text(family = "Times", size = 16, margin=margin(3,0,4,0), hjust = 0.01),
             legend.position = c(0.03, 0.3),
             legend.key.size = unit(0.3, "cm"), legend.direction="vertical") +
       theme(aspect.ratio=0.6)
