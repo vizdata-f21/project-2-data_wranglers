@@ -45,9 +45,13 @@ We also wanted to see which teams have had the most cumulative All-Star selectio
 - Screenshots?
 - What are our conclusions!
 
+![alt text here](images/){width=50%}
 
 
-# Queston 2
+
+
+
+# Question 2
 
 The two tabs associated with this question are in our Shiny app are "Draft Positions" and "Team".
 
