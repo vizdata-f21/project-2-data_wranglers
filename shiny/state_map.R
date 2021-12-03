@@ -73,21 +73,21 @@ state_map_fn <- function(per_capita = T, year_start = 1951, year_end = 2021){
       geom_polygon(aes(fill = states_pop$percap), color = "white") +
       scale_fill_gradient2(low = muted("red"), mid = "white",
                            high = muted("green"), 
-                           midpoint = mean(c(max(states_pop$percap),
-                                             mean(states_pop$percap), 0)),
+                           midpoint = mean(c(max(states_pop$percap, na.rm = TRUE),
+                                             mean(states_pop$percap, na.rm = TRUE), 0)),
                            guide = guide_legend(label.position = "bottom"),
-                           limits = c(0, max(states_pop$percap)),
+                           limits = c(0, max(states_pop$percap, na.rm = TRUE) + 1),
                            breaks = c(seq(0, round(max(states_pop$percap, na.rm = TRUE)+1), by = 1)),
                            labels = c(seq(0, round(max(states_pop$percap, na.rm = TRUE)+1), by = 1))) +
-      theme_void() +
+      labs(fill = NULL, title = "Number of All-Stars by birth state",
+           subtitle = paste0("Per million residents, ", year_start, " to ", year_end))+
+    theme_void() +
       theme(plot.background = element_rect(fill = "gainsboro"),
             legend.position = c(0.03, 0.3),
             legend.key.size = unit(0.3, "cm"), legend.direction="vertical") +
       theme(aspect.ratio=0.6)
     
   }
-  
-  #+labs(fill = NULL, title = "All-Stars by birth state",subtitle = paste0("United States, ", year_start, " to ", year_end)) 
   
   state_map
   
