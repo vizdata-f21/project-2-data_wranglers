@@ -212,7 +212,7 @@ ui <- fluidPage(
                     ),
                     tabItem(
                       tabName = "world_map",
-                      h1("All-Stars by Country"),
+                      h1("All-Stars by Birth Country"),
                       sidebarLayout(
                         position = "right",
                         sidebarPanel(
