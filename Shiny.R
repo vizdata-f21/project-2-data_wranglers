@@ -119,6 +119,8 @@ ui <- fluidPage(
                     ),
                     tabItem(
                       tabName = "state_map",
+                      radioButtons("per_capita", "Per million residents?",
+                                   choices = c("Yes" = T, "No" = F), selected = T),
                       sliderInput("year_range_state", "Year Range",
                                   min = 1951, max = 2021, value = c(1951, 2021), sep = "", ticks = FALSE),
                       actionButton("plot_usa_state_button", "Plot!"),
@@ -339,7 +341,7 @@ server <- function(input, output, session) {
   # ALL STARS BY BIRTHPLACE (US) -------------------------------------------------------            
   
   func_out_state_usa <- eventReactive(input$plot_usa_state_button, {
-    state_map_fn(year_start = input$year_range_state[[1]],
+    state_map_fn(per_capita = input$per_capita, year_start = input$year_range_state[[1]],
                  year_end = input$year_range_state[[2]])
   })
   

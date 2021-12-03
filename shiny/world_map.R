@@ -39,13 +39,14 @@ world_map_fn <- function(year_start = 1951, year_end = 2021){
                          high = "red",
                          guide = guide_legend(label.position = "bottom"),
                         trans = "log",
-                        limits = c(1, max(mapping_data$n)%/%1)
+                        limits = c(1, max(mapping_data$n)),
+                        breaks = c(1,5,10,400)
                         ) +
     theme_void() +
-    labs(fill = NULL) +
+    labs(fill = NULL, title = "All-Stars by Birthplace",
+         subtitle = paste0("Worldwide, ", year_start, " to ", year_end)) +
     theme(plot.background = element_rect(fill = "gainsboro"),
-          legend.position = c(0.2, 0.15),
-          legend.key.size = unit(0.1, "cm"), legend.direction="horizontal") +
+          legend.position = c(0.2, 0.4)) +
     theme(aspect.ratio=0.6)
   
   world_map
