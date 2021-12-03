@@ -50,6 +50,8 @@ data that could help NBA team’s more effectively make management
 decisions. We will answer each of our research questions, described with
 more depth below, with interactive visualizations in our Shiny app.
 
+# Data
+
 # Research Questoins
 
 1.  Where are NBA All-Stars originally from geographically? How many
@@ -149,6 +151,55 @@ picks and undrafted All-Star selections has decreased. For example,
 since 2010 there has not been any undrafted All-Star selections, which
 could signify that NBA teams are doing a better job drafting and
 undrafted players have less value than they did previously.
+
+Next, for the “Team” tab, we looked at the distribution of total
+All-Star appearances for each team over a range of years that could also
+be interactively chosen by the user. First, as many teams have changed
+cities and/or names over the course of the last 70 years, I used the
+mutate variable to rename each team by their current name and city. For
+example, the Los Angeles Lakers used to be the Minneapolis Lakers, so I
+used the mutate function so the total All-Stars would all be shown under
+the name “Los Angeles Lakers”. I also, similarly, created a new variable
+called “sum\_all\_stars” which I used after using the pivot functions to
+count how many All-Stars there were from draft category each year.
+Finally, for this chart I also added a variable called
+“number\_to\_rank” that would allow the user to choose the number of
+teams he wants displayed. The default is set at 30 (the total number of
+teams in the NBA). but if the user wanted a closer look at the teams
+with the most All-Stars, they could change the teams to range to 10, for
+example, and the app would only display the teams with the 10 most
+All-Stars cumulatively each year. The distribution over the full range
+of years is illustrated below:
+
+![alt text here](images/NBATeamDistribution.png)
+
+As you could see in the plot above, as we hypothesized the larger market
+teams (from bigger, more attractive cities) have had pretty
+significantlymore all-star selections than most of the smaller market
+teams. Four of the top five teams with the most total All-Star
+appearances are from arguably the biggest markets in the NBA in the
+Boston Celtics, LA Lakers, Philadelphia 76ers, and New York Knicks. The
+teams with the lowest amount of total All-Star appearances are all from
+smaller maket cities, including Memphis, Charlotte, New Orleans, and
+Minnesota.
+
+The difference in the distribution of All-Stars was more significant
+than we originally anticipated as well. For example, the Celtics and
+Lakers have both had over 140 All-Stars, while 22 of the 30 NBA teams
+have had less than 80 total All-Star appearances. This demonstrates that
+the teams with the most All-Stars have had significantly more All-Stars
+than the majority of teams (more than double for many of them).
+
+The total All-Star appearances could be explained by bigger markets, but
+also by managers building successful teams that have more championships.
+The Lakers and Celtics have not only had the most All-Stars but both
+teams have had the most NBA championships. This is likely due to a
+combination of team and draft success, as well as their cities being
+attractive enough to bring in the best NBA players. The distribution of
+talent in the NBA clearly has not been even over the course of the
+league’s history, and it is clear that the influence of cities that
+players may be more likely to want to play in plays a pretty significant
+factor in that distribution.
 
 # Question 3
 
