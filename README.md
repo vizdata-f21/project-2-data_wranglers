@@ -4,7 +4,10 @@ Data Wranglers
 
 Our Shiny App can be found
 [here](https://ohenry34.shinyapps.io/data-wranglers/). Our source code
-can be found [here](https://github.com/vizdata-f21) (the shiny folder,
+can be found
+[here](https://github.com/vizdata-f21/project-2-data_wranglers) (the
+[shiny
+folder](https://github.com/vizdata-f21/project-2-data_wranglers/tree/main/shiny),
 specifically, holds our code, while Shiny.R is our complete App).
 
 A link to a screen recording for our presentation can be found [here
