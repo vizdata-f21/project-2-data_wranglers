@@ -34,9 +34,9 @@ world_map_fn <- function(year_start = 1951, year_end = 2021){
   mapping_data <- full_join(by_country, mapworld, by = "nationality")
   
   world_map <- ggplot(mapping_data, aes(long, lat, group = group))+
-    geom_polygon(aes(fill = n), color = "black") +
-    scale_fill_continuous(low = "white",
-                         high = "red",
+    geom_polygon(aes(fill = n), color = "white") +
+    scale_fill_continuous(low = muted("#17408B"),
+                         high = muted("#C9082A"),
                          guide = guide_legend(label.position = "bottom"),
                         trans = "log",
                         limits = c(1, max(mapping_data$n)),
