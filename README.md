@@ -7,6 +7,9 @@ Our Shiny App can be found
 can be found [here](https://github.com/vizdata-f21) (the shiny folder,
 specifically, holds our code, while Shiny.R is our complete App).
 
+A link to a screen recording for our presentation can be found [here
+(YouTube)](https://youtu.be/XccwwLk0Ssc).
+
 # Introduction
 
 The NBA is an increasingly global league where its top talent comes from
