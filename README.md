@@ -18,30 +18,20 @@ A link to a screen recording for our presentation can be found [here
 # Introduction
 
 The NBA is an increasingly global league where its top talent comes from
-countries all over the world and colleges around the United States. Over
-the years, more and more of the NBA’s All-Star talent have come from
-outside the United States, which has brought along many fans globally.
-As fans of basketball, we were very interested in looking at how many
+countries all over the world and colleges around the United States.
+As fans of basketball, we were very interested in looking at which teams All-Stars
+played for, where they were drafted, and how many
 NBA All-Stars (or the NBA’s best players) come from countries other than
 the United States and how international talent has grown over the years.
+This could also be used by NBA scouts and general managers to see how important
+international scouting is and whether they should focus a lot of their
+attention going into an NBA draft on foreign players.
 
 Additionally, as Duke and college basketball fans, we wanted to explore
 which colleges had the most NBA All-Stars and which states had the most
-colleges with top NBA talent too. We chose to analyze which colleges
-produce the best NBA players and draw conclusions to see if the best NBA
-players come from prominent college basketball schools, such as Duke or
-Kentucky, or from colleges that aren’t as consistently good at
-basketball. Our Shiny App enables users to analyze which colleges are
+colleges with top NBA talent too. Our Shiny App enables users to analyze which colleges are
 most useful in producing NBA All-Star players, and where these colleges
 are found.
-
-Our Shiny App also includes an interactive section that allows users to
-visualize where NBA All-Stars were from originally (that includes both a
-world map and a map of the US to see which states they are from) and see
-how that has changed over the years. This could also be used by NBA
-talent evaluators and general managers to see how important
-international scouting is and whether they should focus a lot of their
-attention going into an NBA draft on foreign players.
 
 # Data
 
@@ -67,8 +57,8 @@ data was scrape-able.
     the NBA draft? Which teams did these All-Stars play for?
 
 3.  Where are NBA All-Stars originally from geographically? How many
-    All-Stars, on average, are there from outside the United States per
-    year?
+    All-Stars, have there been from outside the United States per
+    year? Which states have produced the most all stars per capita?
 
 # NBA All-Stars by College
 
@@ -87,11 +77,7 @@ measures the amount of All-Stars a college has produced since the
 introduction of the All-Star game in 1951. We allow the user to define
 whether they would like to count every appearance made in an All-Star
 game or to only count each player once per college, even if they made
-several All-Star games. We also allowed the user to define the length of
-the animation, the number of frames per second, and the length of the
-pause at the end of the animation loop. We chose to let the user define
-the year range for the animation and the number of colleges to include
-in the ranking. Our options provided are shown below.
+several All-Star games. We have other user options as well, as shown below.
 
 <figure>
 <img src="images/colleges-tab.png" style="width:80.0%" alt="“Colleges” tab user interface" /><figcaption aria-hidden="true">“Colleges” tab user interface</figcaption>
@@ -198,10 +184,6 @@ which many great NBA players have emerged. Wyoming and Montana also
 stand out, but their values are more a product of their minuscule
 populations.
 
-Which colleges did the most NBA All-Star players attend? Geographically,
-which regions in the US are those colleges in that produce the most NBA
-All-Star players?
-
 # NBA All-Stars by Draft, Team
 
 For our second question, we wanted to see how important early picks in
@@ -299,29 +281,95 @@ markets in Boston, LA, Philadelphia, and New York. The teams with the
 lowest amount of total All-Star appearances are from smaller market
 cities, including Memphis, Charlotte, New Orleans, and Minnesota.
 
-The difference in the distribution of All-Stars was more significant
-than we originally anticipated as well. For example, the Celtics and
-Lakers have both had over 140 All-Stars, while 22 of the 30 NBA teams
-have had less than 80 total All-Star appearances.
-
 The total All-Star appearances could be explained by bigger markets, but
 also by managers building successful teams that resulted in more
 championships. The Lakers and Celtics have not only had the most
 All-Stars but they have had the most NBA championships. This is likely
 due to a combination of team and draft success, as well as their cities
-being attractive enough to bring in the best NBA players. The
-distribution of talent in the NBA clearly has not been even over the
-course of the league’s history, and it is clear that the influence of
-cities that players may be more likely to want to play in plays a pretty
-significant factor in that distribution.
+being attractive enough to bring in the best NBA players.
 
 # Question 3
 
--   Which tabs are associated with this question
--   Motivation!
--   How did we clean
--   Screenshots?
--   What are our conclusions!
+Our third research question was motivated by a curiosity to not only understand
+the recent surge in international talent in the NBA, but also to identify which
+states were more likely to produce an NBA All-Star than others.
+
+The tabs in our shiny app that correspond to this question are the "World Map"
+tab and the "U.S. Map" tab. For all the visualizations in these two tabs, we
+have filtered the data to only include one appearance per player, so players
+aren't counted twice. We started by cleaning the data. The original All-Star
+NBA data had a nationality value for each player, but this value often had
+multiple values in it. This was because players may have been born abroad but
+grew up or studied in the United States. We cleaned up this column and then
+joined this data with U.S. states data for the same players to have one table
+that included players' nationalities and their city and state of birth, if born
+in the United States.
+
+For the world map, we plotted the chloropleth using ggplot2 default mapping data
+then joined this data with our All-Star data to get counts for the number of
+All-Stars from different countries. Here is an example visualization below:
+
+<figure>
+<img src="images/worldmap.png" style="width:80.0%" alt=/><figcaption aria-hidden="true"></figcaption>
+</figure>
+
+The year range is set to the maximum, 1951-2021, but this
+is adjustable. The polygons representing countries on the map are filled in
+on a log scale, with blue representing the lower end of the scale and red the
+upper end. These colors match the colors in the NBA logo. The log scale was
+necessary as the United States has produced many more All-Stars than any other
+country, as expected. But, in the visualization below from 1951-1990, we can see
+that very few international countries had produced All-Stars.
+
+<figure>
+<img src="images/worldmap2.png" style="width:80.0%" alt=/><figcaption aria-hidden="true"></figcaption>
+</figure>
+
+This comparison between the two visualizations helps us see that the NBA has
+become a more international league recently, and better players from Europe,
+Africa, Asia, and other countries are starting to make a real impact on the
+league. Even still, there are very few international All-Stars, and we expect
+there to be more in the coming years, as scouts and teams use data like this to
+find international stars. One thing we found interesting is that there has never
+been a Canadian-born NBA All-Star, although this also may change in the coming 
+years with Canadian talent like Andrew Wiggins and Shai Gilgeous-Alexander.
+
+Now, moving to the U.S. Map tab, our motivation was to map the number of All-
+Stars that each state has produced, not by their college state but by their
+birth state. The tab has an option for whether the data should be shown "Per
+million residents," and also a slider for the year range of the data.
+
+<figure>
+<img src="images/mapoption.png" style="width:80.0%" alt="“U.S. Map” tab user interface" /><figcaption aria-hidden="true">“U.S. Map” tab user interface</figcaption>
+</figure>
+
+The first visualization below is not per capita, just the pure number of All-
+Stars by birth state.
+
+<figure>
+<img src="images/statemap2.png" style="width:80.0%" alt=/><figcaption aria-hidden="true"></figcaption>
+</figure>
+
+We can see from the visualization that many states in the Midwest have never
+produced All-Star talent, and this may be because basketball is not as popular
+at young ages in those states. But, states like California and New York, who
+have a historical basketball culture and immensely large populations, have
+produced more all stars than any other state. This may also be because of these
+states being home to "prep schools," which are high performance athletic high
+schools for elite athletes. Many athletes born in these states choose to go to
+prep schools near home, and this prepares them better for college and the NBA.
+
+The next visualization is All-Stars per capita, or Per million residents.
+
+<figure>
+<img src="images/statemap1.png" style="width:80.0%" alt="" /><figcaption aria-hidden="true"></figcaption>
+</figure>
+
+This visualization shows that California and New York are actually not producing
+the highest number of All-Stars per million residents. The states that have
+produced the most All-Stars per million residents are Louisiana, Arkansas,
+and Kentucky. These states have smaller populations but also a strong basketball
+culture, and this contributes to them producing high level NBA talent.
 
 # Overall Conclusions
 
@@ -332,3 +380,25 @@ elite high school basketball players which has enabled them to see their
 former players thrive in the NBA. UNC and UCLA are other schools that
 have produced many All-Star players, which is reasonable, as both
 schools have had immense success throughout their histories.
+
+When examining draft positions, we found that, as expected, players drafted in
+the first round make up a much larger proportion of All-Stars than either those
+drafted in the second round or undrafted players. But, what we found interesting
+was that there have been almost the same number of undrafted All-Stars as those
+drafted in the second round. This is why, recently, we have seen many players
+choose to go undrafted rather than slip to the second round and wait for an
+opportunity that suits them. Looking at All-Stars by team, we visualized what
+we expected - big market teams that have been around for a long time have had
+many more all stars than smaller market teams, some of which were established
+more recently.
+
+Finally, examining birth countries and states of All-Stars, we can see that,
+recently, there has been a surge in the number of international All-Stars as the
+league scouts more talent from abroad. We expect there to be even more
+international All-Stars in the coming years and beyond. When looking at birth
+states, we see that large states with historical basketball culture and many
+prep schools, like California and New York, have produced the largest number
+of All-Stars, but smaller states like Louisiana, Arkansas, and Kentucky
+have produced more All-Stars per capita.
+
+
