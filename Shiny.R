@@ -19,6 +19,23 @@ source("shiny/state_map.R")
 
 ui <- fluidPage(
   title = "NBA All-Star Analysis",
+  chooseSliderSkin(color = "#17408B"),
+  
+  tags$head(tags$style(HTML("
+                                .btn {
+                                color:white;
+                                text-align: left;
+                                #border-color:#17408B;
+                                background-color:#17408B;}
+                                .btn:hover{
+                                #border-color:#C9082A;
+                                background-color: white;color:#17408B;font-weight: bold;
+                                }
+                                .btn:focus{
+                                background-color:white;
+                                }
+
+                                "))),
   
   
   dashboardPage(skin = "black",
@@ -91,19 +108,21 @@ ui <- fluidPage(
                               code("robots.txt"), "file that the data was scrape-able.")),
                     tabItem(
                       tabName = "as_college",
-                      radioButtons("duplicate_players", "What would you like to count?",
+                      h1("All-Stars by College"),
+                      sidebarLayout(
+                        position = "right", sidebarPanel(
+                      radioButtons(width='80%', "duplicate_players", "What would you like to count?",
                                    choices = c("Total All-Star Game appearances by players" = T,
                                                "Number of players who have made an All-Star Game" = F), selected = T),
-                      p(span("Example:", style = "font-weight: bold; color: gray"), span(HTML("If you would like to count Michael Jordan's 14<br/>All-Star appearances 
+                      p(span("Example:", style = "font-weight: bold; color: gray"), span(HTML("If you would like to count Michael Jordan's 14 All-Star appearances 
                              14 times for UNC, choose"), style = "color: gray"), span("Option 1.", style = "font-weight: bold; color: gray"),
-                        span(HTML("<br/>If you would like to count Michael Jordan being an NBA<br/>All-Star just 1 time 
-                             for UNC, choose"), style = "color: gray"), span("Option 2.", style = "font-weight: bold; color: gray")),
+                        span(HTML("<br/>If you would like to give UNC credit just 1 time for Michael Jordan's All-Star appearances, choose"), style = "color: gray"), span("Option 2.", style = "font-weight: bold; color: gray")),
                       sliderInput("year_range_by_college", "Year Range",
                                   min = 1951, max = 2021, value = c(1951, 2021), sep = "", ticks = FALSE), 
                       sliderInput("colleges_to_rank", "Colleges to Rank:",
                                   value = 10, min = 3, max = 20, ticks = FALSE),
                       p(span("Caution:", style = "font-weight: bold; color: gray"),
-                        span(HTML("Choosing higher animation length and FPS values<br/>will cause the animation to 
+                        span(HTML("Choosing higher animation length and FPS values will cause the animation to 
                              take longer to render!<br/>(But will look nicer!)"), style = "color: gray")),
                       sliderInput("duration_anim_by_college", "Animation Length (seconds):",
                                   value = 10, min = 5, max = 30, step = 5, ticks = FALSE),
@@ -111,31 +130,33 @@ ui <- fluidPage(
                                   value = 10, min = 5, max = 40, step = 5, ticks = FALSE),
                       sliderTextInput("end_pause_anim_by_college_in", "Pause at End of Animation:",
                                       choices = c("Short", "Medium", "Long"), selected = "Medium"),
-                      actionButton("animate_by_college", "Animate!"),
-                      br(), br(),
-                      imageOutput("plot_anim_by_college"),
-                      br(), br(), br(),br(), br(), br(),br(), br(), br(),  style='width: 2000px'
+                      actionButton("animate_by_college", "Animate!")),
+                      mainPanel(imageOutput("plot_anim_by_college")))
                     ),
                     
                     tabItem(
                       tabName = "as_state",
+                      h1("All-Stars by College State"),
+                      sidebarLayout(
+                        position = "right",sidebarPanel(
                       radioButtons("per_capita", "Per million residents?",
                                    choices = c("Yes" = T, "No" = F), selected = T),
                       sliderInput("year_range_by_state_loc", "Year Range",
                                   min = 1951, max = 2021, value = c(1951, 2021), sep = "", ticks = FALSE),
-                      actionButton("plot_by_state", "Plot!"),
-                      br(), br(),
-                      plotOutput("plot_result_by_state"),
-                      br(), br(), br(),br(), br(), br(),br(), br(), br(),
-                      br(), br(), br(),br(), br(), br(),br(), br(), br()
+                      actionButton("plot_by_state", "Plot!")),
+                      mainPanel(plotOutput("plot_result_by_state")))
                     ),
                     
                     tabItem(
                       tabName = "as_loc",
+                      h1("All-Stars by College Location"),
+                      sidebarLayout(
+                        position = "right",
+                        sidebarPanel(
                       sliderInput("year_range_by_college_loc", "Year Range",
                                   min = 1951, max = 2021, value = c(1951, 2021), sep = "", ticks = FALSE),
                         p(span("Caution:", style = "font-weight: bold; color: gray"),
-                          span(HTML("Choosing higher animation length and FPS values<br/>will cause the animation to 
+                          span(HTML("Choosing higher animation length and FPS values will cause the animation to 
                              take longer to render!<br/>(But will look nicer!)"), style = "color: gray")),
                       sliderInput("duration_anim_loc", "Animation Length (seconds):",
                                   value = 10, min = 5, max = 30, step = 5, ticks = FALSE),
@@ -143,17 +164,19 @@ ui <- fluidPage(
                                   value = 10, min = 5, max = 40, step = 5, ticks = FALSE),
                       sliderTextInput("end_pause_anim_by_college_loc", "Pause at End of Animation:",
                                       choices = c("Short", "Medium", "Long"), selected = "Medium"),
-                      actionButton("plot_anim_by_college_loc_button", "Animate!"),
-                      br(), br(),
-                      imageOutput("plot_anim_by_college_loc"),
-                      br(), br(), br(),br(), br(), br(),br(), br(), br()
+                      actionButton("plot_anim_by_college_loc_button", "Animate!")),
+                      mainPanel(imageOutput("plot_anim_by_college_loc")))
                     ),
                     tabItem(
                       tabName = "as_draft",
+                      h1("All-Stars by Draft Round"),
+                      sidebarLayout(
+                        position = "right",
+                        sidebarPanel(
                       sliderInput("year_range_by_draft", "Year Range",
                                   min = 1951, max = 2021, value = c(1951, 2021), sep = "", ticks = FALSE),
                         p(span("Caution:", style = "font-weight: bold; color: gray"),
-                          span(HTML("Choosing higher animation length and FPS values<br/>will cause the animation to 
+                          span(HTML("Choosing higher animation length and FPS values will cause the animation to 
                              take longer to render!<br/>(But will look nicer!)"), style = "color: gray")),
                       sliderInput("duration_anim_by_draft", "Animation Length (seconds):",
                                   value = 10, min = 5, max = 30, step = 5, ticks = FALSE),
@@ -161,20 +184,22 @@ ui <- fluidPage(
                                   value = 10, min = 5, max = 40, step = 5, ticks = FALSE),
                       sliderTextInput("end_pause_anim_by_draft", "Pause at End of Animation:",
                                       choices = c("Short", "Medium", "Long"), selected = "Medium"),
-                      actionButton("anim_by_draft_button", "Animate!"),
-                      br(), br(),
-                      imageOutput("plot_anim_by_draft"),
-                      br(), br(), br(),br(), br(), br(),br(), br(), br()
+                      actionButton("anim_by_draft_button", "Animate!")),
+                      mainPanel(imageOutput("plot_anim_by_draft")))
                     ),
                     
                     tabItem(
                       tabName = "as_team",
+                      h1("All-Stars by Team"),
+                      sidebarLayout(
+                        position = "right",
+                        sidebarPanel(
                       sliderInput("year_range_by_team", "Year Range",
                                   min = 1951, max = 2021, value = c(1951, 2021), sep = "", ticks = FALSE),
                       sliderInput("teams_to_rank", "Teams to Rank (with the most All-Stars):",
                                   value = 30, min = 3, max = 30, ticks = FALSE),
                         p(span("Caution:", style = "font-weight: bold; color: gray"),
-                          span(HTML("Choosing higher animation length and FPS values<br/>will cause the animation to 
+                          span(HTML("Choosing higher animation length and FPS values will cause the animation to 
                              take longer to render!<br/>(But will look nicer!)"), style = "color: gray")),
                       sliderInput("duration_anim_by_team", "Animation Length (seconds):",
                                   value = 10, min = 5, max = 30, step = 5, ticks = FALSE),
@@ -182,28 +207,31 @@ ui <- fluidPage(
                                   value = 10, min = 5, max = 40, step = 5, ticks = FALSE),
                       sliderTextInput("end_pause_anim_by_team", "Pause at End of Animation:",
                                       choices = c("Short", "Medium", "Long"), selected = "Medium"),
-                      actionButton("anim_by_team_button", "Animate!"),
-                      br(), br(),
-                      imageOutput("plot_anim_by_team"),
-                      br(), br(), br(),br(), br(), br(),br(), br(), br()
+                      actionButton("anim_by_team_button", "Animate!")),
+                      mainPanel(imageOutput("plot_anim_by_team")))
                     ),
                     tabItem(
                       tabName = "world_map",
+                      h1("All-Stars by Country"),
+                      sidebarLayout(
+                        position = "right",
+                        sidebarPanel(
                       sliderInput("year_range_world", "Year Range",
                                   min = 1951, max = 2021, value = c(1951, 2021), sep = "", ticks = FALSE),
-                      actionButton("plot_world_button", "Plot!"),
-                      plotOutput("plot_world")
+                      actionButton("plot_world_button", "Plot!")),
+                      mainPanel(plotOutput("plot_world")))
                     ),
                     tabItem(
                       tabName = "state_map",
+                      h1("All-Stars by Birth State"),
+                      sidebarLayout(
+                        position = "right",sidebarPanel(
                       radioButtons("per_capita_state", "Per million residents?",
                                    choices = c("Yes" = T, "No" = F), selected = T),
                       sliderInput("year_range_state", "Year Range",
                                   min = 1951, max = 2021, value = c(1951, 2021), sep = "", ticks = FALSE),
-                      actionButton("plot_usa_state_button", "Plot!"),
-                      br(), br(),
-                      plotOutput("plot_state"),
-                      br(), br(), br(),br(), br(), br(),br(), br(), br()
+                      actionButton("plot_usa_state_button", "Plot!")),
+                      mainPanel(plotOutput("plot_state")))
                     )
                     
                   )
