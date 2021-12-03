@@ -37,12 +37,12 @@ ui <- fluidPage(
                     menuItem("Home", tabName = "home", icon = icon("home")),
                     menuItem("All-Stars", icon = icon("star"), startExpanded = TRUE,
                              menuSubItem("Colleges", tabName = "as_college"),
+                             menuSubItem("College Map", tabName = "as_loc"),
                              menuSubItem("College State", tabName = "as_state"),
                              menuSubItem("Draft Positions", tabName = "as_draft"),
                              menuSubItem("Team", tabName = "as_team"),
                              menuSubItem("World Map", tabName = "world_map"),
-                             menuSubItem("U.S. Map", tabName = "state_map"),
-                             menuSubItem("College Map", tabName = "as_loc")
+                             menuSubItem("U.S. Map", tabName = "state_map")
                     )
                   )
                 ),
