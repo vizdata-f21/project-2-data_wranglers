@@ -119,7 +119,7 @@ number_of_all_stars_by_college <- function (duplicate_players = T,
       breaks = c(5*(0:8))
     ) +
     geom_text(
-      x = 30, y = -10,
+      x = 30, y = -(as.numeric(number_to_rank)),
       aes(label = as.character(year)),
       size = 25,  
       family = "Times",
