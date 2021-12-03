@@ -52,13 +52,13 @@ state_map_fn <- function(per_capita = T, year_start = 1951, year_end = 2021){
   if(per_capita == F){
     state_map <- ggplot(mapping_data, aes(long, lat, group = group))+
       geom_polygon(aes(fill = n), color = "white") +
-      scale_fill_gradient2(low = muted("red"), mid = "white",
-                           high = muted("green"), midpoint = mean(c(max(mapping_data$n), mean(mapping_data$n), 0)),
+      scale_fill_gradient2(low = muted("#C9082A"), mid = "white",
+                           high = muted("#17408B"), midpoint = mean(c(max(mapping_data$n), mean(mapping_data$n), 0)),
                            guide = guide_legend(label.position = "bottom"),
                            limits = c(0, 5*(max(mapping_data$n)%/%5+1)),
                            breaks = c(seq(0, 5*(max(mapping_data$n)%/%5+1), by = 10)),
                            labels = paste(c(seq(0, 5*(max(mapping_data$n)%/%5+1), by = 10)))) +
-      theme_void() +labs(fill = NULL, title = "Number of All-Stars by birth date",
+      theme_void() +labs(fill = NULL, title = "Number of All-Stars by birth state",
                          subtitle = paste0("United States, ", year_start, " to ", year_end)) +
       theme(plot.background = element_rect(fill = "gainsboro"),
             legend.position = c(0.03, 0.3),
@@ -70,8 +70,8 @@ state_map_fn <- function(per_capita = T, year_start = 1951, year_end = 2021){
     
     state_map <- ggplot(states_pop, aes(long, lat, group = group))+
       geom_polygon(aes(fill = states_pop$percap), color = "white") +
-      scale_fill_gradient2(low = muted("red"), mid = "white",
-                           high = muted("green"), 
+      scale_fill_gradient2(low = muted("#C9082A"), mid = "white",
+                           high = muted("#17408B"), 
                            midpoint = mean(c(max(states_pop$percap, na.rm = TRUE),
                                              mean(states_pop$percap, na.rm = TRUE), 0)),
                            guide = guide_legend(label.position = "bottom"),
