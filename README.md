@@ -310,7 +310,7 @@ then joined this data with our All-Star data to get counts for the number of
 All-Stars from different countries. Here is an example visualization below:
 
 <figure>
-<img src="images/worldmap.png" style="width:80.0%" alt=/><figcaption aria-hidden="true"></figcaption>
+<img src="images/worldmap.png" style="width:80.0%" alt="" /><figcaption aria-hidden="true"></figcaption>
 </figure>
 
 The year range is set to the maximum, 1951-2021, but this
@@ -322,7 +322,7 @@ country, as expected. But, in the visualization below from 1951-1990, we can see
 that very few international countries had produced All-Stars.
 
 <figure>
-<img src="images/worldmap2.png" style="width:80.0%" alt=/><figcaption aria-hidden="true"></figcaption>
+<img src="images/worldmap2.png" style="width:80.0%" alt="" /><figcaption aria-hidden="true"></figcaption>
 </figure>
 
 This comparison between the two visualizations helps us see that the NBA has
@@ -347,7 +347,7 @@ The first visualization below is not per capita, just the pure number of All-
 Stars by birth state.
 
 <figure>
-<img src="images/statemap2.png" style="width:80.0%" alt=/><figcaption aria-hidden="true"></figcaption>
+<img src="images/statemap2.png" style="width:80.0%" alt="" /><figcaption aria-hidden="true"></figcaption>
 </figure>
 
 We can see from the visualization that many states in the Midwest have never
