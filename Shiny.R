@@ -7,6 +7,7 @@ library(scales)
 library(shinymaterial)
 library(shinyWidgets)
 # windowsFonts("Times" = windowsFont("Times"))
+# NBA COLOR CODES: #17408B (blue) and #C9082A (red)
 
 source("shiny/all_star_colleges.R")
 source("shiny/college_locations.R")
@@ -20,12 +21,20 @@ ui <- fluidPage(
   title = "NBA All-Star Analysis",
   
   
-  dashboardPage(skin = "green",
-                dashboardHeader(title = "NBA All-Stars",
+  dashboardPage(skin = "black",
+                dashboardHeader(title = span(
+                  img(src="https://pngimg.com/uploads/nba/nba_PNG14.png", height = "100%", align = "left"),
+                  strong("NBA All-Stars"),
+                  img(src="https://i.guim.co.uk/img/media/86302dbcc55f07d65c45bb3baf8c864e36bd4320/0_155_3600_2159/master/3600.jpg?width=1200&height=1200&quality=85&auto=format&fit=crop&s=df936fc2e7b2b84a58f2e293ecde27de", height = "100%", align = "right"),
+                  img(src="https://nypost.com/wp-content/uploads/sites/2/2021/06/Kevin-Durant-1.jpg?quality=80&strip=all", height = "100%", align = "right"),
+                  img(src="https://ca-times.brightspotcdn.com/dims4/default/1ab5cea/2147483647/strip/true/crop/2048x1365+0+0/resize/1486x990!/quality/90/?url=https%3A%2F%2Fcalifornia-times-brightspot.s3.amazonaws.com%2F10%2F7c%2Ffaa3b146abc9a51ca5a5acf6219f%2Fla-sp-sn-dan-gilbert-lebron-james-20140707-001", height = "100%", align = "right"),
+                  img(src="https://phantom-marca.unidadeditorial.es/68bef1f479f444ff1a1cc282ebfe9099/resize/1320/f/jpg/assets/multimedia/imagenes/2021/11/20/16373850780611.jpg", height = "100%", align = "right"),
+                  img(src="https://kubrick.htvapps.com/htv-prod-media.s3.amazonaws.com/images/zion-cover-1618697232.jpg?crop=1.00xw:0.846xh;0,0.0147xh&resize=900:*", height = "100%", align = "right")),
                                 titleWidth = '100%'),
                 dashboardSidebar(
                   width = 150,
                   sidebarMenu(
+                    menuItem("Home", tabName = "home", icon = icon("home")),
                     menuItem("All-Stars", icon = icon("star"), startExpanded = TRUE,
                              menuSubItem("Colleges", tabName = "as_college"),
                              menuSubItem("College State", tabName = "as_state"),
@@ -39,6 +48,12 @@ ui <- fluidPage(
                 ),
                 dashboardBody(
                   tabItems(
+                    tabItem(tabName = "home",
+                            br(),
+                            p("This Shiny App was created by the", strong("Data Wranglers"),", a group in Dr. Mine Çetinkaya-Rundel's class, Advanced Data Visualization.
+                              Sarab Bhasin, Owen Henry, and Zach Khazzam contributed to the project."),
+                            br(),
+                            h1("Data")),
                     tabItem(
                       tabName = "as_college",
                       radioButtons("duplicate_players", "What would you like to count?",
@@ -50,12 +65,14 @@ ui <- fluidPage(
                                   value = 10, min = 3, max = 20, ticks = FALSE),
                       sliderInput("duration_anim_by_college", "Duration:",
                                   value = 10, min = 5, max = 30, step = 5, ticks = FALSE),
-                      sliderInput("fps_anim_by_college", "Frames per Second:",
+                      sliderInput("fps_anim_by_college", "Frames per Second: ",
                                   value = 10, min = 5, max = 40, step = 5, ticks = FALSE),
                       sliderTextInput("end_pause_anim_by_college_in", "Pause at End of Animation:",
                                       choices = c("Short", "Medium", "Long"), selected = "Medium"),
                       actionButton("animate_by_college", "Animate!"),
-                      imageOutput("plot_anim_by_college")
+                      br(), br(),
+                      imageOutput("plot_anim_by_college"),
+                      br(), br(), br(),br(), br(), br(),br(), br(), br()
                     ),
                     
                     tabItem(
@@ -65,7 +82,10 @@ ui <- fluidPage(
                       sliderInput("year_range_by_state_loc", "Year Range",
                                   min = 1951, max = 2021, value = c(1951, 2021), sep = "", ticks = FALSE),
                       actionButton("plot_by_state", "Plot!"),
-                      plotOutput("plot_result_by_state")
+                      br(), br(),
+                      plotOutput("plot_result_by_state"),
+                      br(), br(), br(),br(), br(), br(),br(), br(), br(),
+                      br(), br(), br(),br(), br(), br(),br(), br(), br()
                     ),
                     
                     tabItem(
@@ -79,7 +99,9 @@ ui <- fluidPage(
                       sliderInput("end_pause_anim_loc", "End Pause:",
                                   value = 25, min = 5, max = 100, step = 5, ticks = FALSE),
                       actionButton("plot_anim_by_college_loc_button", "Animate!"),
-                      imageOutput("plot_anim_by_college_loc")
+                      br(), br(),
+                      imageOutput("plot_anim_by_college_loc"),
+                      br(), br(), br(),br(), br(), br(),br(), br(), br()
                     ),
                     tabItem(
                       tabName = "as_draft",
@@ -92,7 +114,9 @@ ui <- fluidPage(
                       sliderTextInput("end_pause_anim_by_draft", "Pause at End of Animation:",
                                       choices = c("Short", "Medium", "Long"), selected = "Medium"),
                       actionButton("anim_by_draft_button", "Animate!"),
-                      imageOutput("plot_anim_by_draft")
+                      br(), br(),
+                      imageOutput("plot_anim_by_draft"),
+                      br(), br(), br(),br(), br(), br(),br(), br(), br()
                     ),
                     
                     tabItem(
@@ -108,7 +132,9 @@ ui <- fluidPage(
                       sliderTextInput("end_pause_anim_by_team", "Pause at End of Animation:",
                                       choices = c("Short", "Medium", "Long"), selected = "Medium"),
                       actionButton("anim_by_team_button", "Animate!"),
-                      imageOutput("plot_anim_by_team")
+                      br(), br(),
+                      imageOutput("plot_anim_by_team"),
+                      br(), br(), br(),br(), br(), br(),br(), br(), br()
                     ),
                     tabItem(
                       tabName = "world_map",
@@ -124,7 +150,9 @@ ui <- fluidPage(
                       sliderInput("year_range_state", "Year Range",
                                   min = 1951, max = 2021, value = c(1951, 2021), sep = "", ticks = FALSE),
                       actionButton("plot_usa_state_button", "Plot!"),
-                      plotOutput("plot_state")
+                      br(), br(),
+                      plotOutput("plot_state"),
+                      br(), br(), br(),br(), br(), br(),br(), br(), br()
                     )
                     
                   )

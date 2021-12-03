@@ -55,7 +55,7 @@ First, for the "Draft Positions" tab to clean up the data I had to create a new 
 
 Our Shiny app displays a clear distribution of which NBA draft picks cumulatively over a range of years (that are interactively chosen by the user) are from each round of the draft or are undrafted. The distribution over the full range of years is illustrated below:
 
-![alt text here](images/NBADraftDistribution.png)
+![alt text here](images/NBADraftDistribution.png){width=50%}
 
 As you can see above, from 1951 to 2021 there have been significantly more total All-Star appearances from first round picks compared to both second round picks and undrafted players over the full range of years. There have been about 1300 cumulative first round pick All-Star selections compared to about 200 from the secound round and only about 150 undrafted All-Stars. This distribution could be very important for NBA management decisions and illustrated a critical and interesting outcome for our group's benefit. First, it demonstrates the importance of earlier draft picks as this plot shows that over 75% of All-Star selections come from the first round of the draft. This outcome could encourage the idea of "tanking" as if bad teams lose on purpose, they could get earlier draft picks. However, despite the large majority of All-Star selections being from the first round, second round picks are often basically traded away for little to no value and do not hold much trade value, and our team has concluded that NBA general managers should still hold some value on those picks. Despite only 200 All-Star selections being from the second round over the last 70 years, we felt that is still large enough to demonstrate to management that those picks are worth holding onto. This chart also displays that it is often worth it for teams to consider picking up players after the draft if they go undrafted. Many teams do not consider adding players to their team that do not get drafted, but, considering that almost 10% of the NBA's top talent has not been drafted over the last 70 years, we think it is very important for teams to pick up undrafted players, especially due to the fact that they are often on much smaller contracts and are low risk investments for teams. However, more recently (as you can see by adjusting the range of years on the app) the proportion of second round picks and undrafted All-Star selections has decreased. For example, since 2010 there has not been any undrafted All-Star selections, which could signify that NBA teams are doing a better job drafting and undrafted players have less value than they did previously. 
 
@@ -72,14 +72,25 @@ The total All-Star appearances could be explained by bigger markets, but also by
 
 # Question 3
 
+
+
 - Which tabs are associated with this question
 - Motivation
 - How did we clean
 - Screenshots?
 - What are our conclusions!
 
-![alt text here](images/all_stars_by_state.png)
+![alt text here](images/all_stars_by_state.png){width=50%}
 
+![alt text here](images/all_stars_by_college_total_app.gif){width=50%}
+
+![alt text here](images/all_stars_by_college_by_player.gif){width=50%}
+
+![alt text here](images/all_stars_by_college_total_app_oad.gif){width=50%}
+
+![alt text here](images/all_stars_by_college_total_app_oad.gif){width=50%}
+
+![alt text here](images/all_stars_by_location_college_map.gif){width=50%}
 
 
 # Overall Conclusions
@@ -87,5 +98,3 @@ The total All-Star appearances could be explained by bigger markets, but also by
 
 
 # NBA Players Geographical Data
-
-This project intends to use a Shiny app to examine where NBA players and NBA All-Stars originate from. It will showcase both players' hometowns and the location of their college. Our project proposal is found in the Proposal folder.
