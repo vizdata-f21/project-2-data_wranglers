@@ -6,6 +6,7 @@ library(gganimate)
 library(scales)
 library(shinymaterial)
 library(shinyWidgets)
+library(rsconnect)
 # windowsFonts("Times" = windowsFont("Times"))
 # NBA COLOR CODES: #17408B (blue) and #C9082A (red)
 

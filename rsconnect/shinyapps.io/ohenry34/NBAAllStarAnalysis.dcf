@@ -1,0 +1,13 @@
+name: NBAAllStarAnalysis
+title: NBAAllStarAnalysis
+username:
+account: ohenry34
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 5258317
+bundleId: 5322227
+url: https://ohenry34.shinyapps.io/NBAAllStarAnalysis/
+when: 1638509743.75761
+asMultiple: FALSE
+asStatic: FALSE
+ignoredFiles: .github/ISSUE_TEMPLATE/instructor-feedback.md|.github/ISSUE_TEMPLATE/peer-review.md|proposal/proposal.md|proposal/proposal.Rmd|proposal/README.md
