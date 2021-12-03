@@ -88,7 +88,7 @@ ui <- fluidPage(
                               tags$a(href="https://data.ed.gov/dataset/college-scorecard-all-data-files-through-6-2020/resources",
                               "The United States Department of Education.")),
                             p("Prior to scraping data from Wikipedia, Basketball Reference, and RealGM, we verified using the",
-                              code("robots.txt"), "file that scraping was scrape-able.")),
+                              code("robots.txt"), "file that the data was scrape-able.")),
                     tabItem(
                       tabName = "as_college",
                       radioButtons("duplicate_players", "What would you like to count?",
