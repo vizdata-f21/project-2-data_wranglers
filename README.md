@@ -1,4 +1,4 @@
-Project 2
+Project 2: NBA All-Stars
 ================
 Data Wranglers
 
@@ -64,7 +64,7 @@ data was scrape-able.
 
 # NBA All-Stars by College
 
-Our third research question was primarily motivated by our group members
+Our first research question was primarily motivated by our group members
 being Duke basketball fans and fans of college basketball as a whole. We
 wanted to do a deeper dive into relationships between college basketball
 teams and NBA player success. In our analysis, we defined a player’s
@@ -86,7 +86,7 @@ the year range for the animation and the number of colleges to include
 in the ranking. Our options provided are shown below.
 
 <figure>
-<img src="images/colleges-tab.png" style="width:50.0%" alt="“Colleges” tab user interface" /><figcaption aria-hidden="true">“Colleges” tab user interface</figcaption>
+<img src="images/colleges-tab.png" style="width:80.0%" alt="“Colleges” tab user interface" /><figcaption aria-hidden="true">“Colleges” tab user interface</figcaption>
 </figure>
 
 To give us a broad sense of what colleges have been most successful in
@@ -153,34 +153,36 @@ players have attended. Customizability for the user in the Shiny App is
 shown below.
 
 <figure>
-<img src="images/colleges-loc-tab.png" style="width:50.0%" alt="“Colleges Map” tab user interface" /><figcaption aria-hidden="true">“Colleges Map” tab user interface</figcaption>
+<img src="images/colleges-loc-tab.png" style="width:80.0%" alt="“Colleges Map” tab user interface" /><figcaption aria-hidden="true">“Colleges Map” tab user interface</figcaption>
 </figure>
 
 <figure>
-<img src="images/collegesmap-tab.png" style="width:50.0%" alt="“College State” tab user interface" /><figcaption aria-hidden="true">“College State” tab user interface</figcaption>
+<img src="images/collegesmap-tab.png" style="width:80.0%" alt="“College State” tab user interface" /><figcaption aria-hidden="true">“College State” tab user interface</figcaption>
 </figure>
 
 We chose to use our Shiny App to examine the geography of where NBA
 All-Stars have gone to college over time.
 
 <figure>
-<img src="images/all_stars_by_location_college_map.gif" style="width:50.0%" alt="Map of All-Star players’ college locations, 1951-2021" /><figcaption aria-hidden="true">Map of All-Star players’ college locations, 1951-2021</figcaption>
+<img src="images/all_stars_by_location_college_map.gif" style="width:80.0%" alt="Map of All-Star players’ college locations, 1951-2021" /><figcaption aria-hidden="true">Map of All-Star players’ college locations, 1951-2021</figcaption>
 </figure>
 
 We then chose to look on a bigger scale, comparing across states. To
 avoid problems that arise with red-green colorblindness, we chose a
 blue-red color palette, using the NBA logo’s colors for guidance.
 
-![All-Star players’ college locations by state,
-1951-2021](images/all_stars_by_state.png)
+<figure>
+<img src="images/all_stars_by_state.png" style="width:75.0%" alt="All-Star players’ college locations by state, 1951-2021" /><figcaption aria-hidden="true">All-Star players’ college locations by state, 1951-2021</figcaption>
+</figure>
 
 California, North Carolina, and Kentucky stand out most among states.
 However, because states with many people in them would be more likely to
 have NBA All-Star players attend college there, we wanted to standardize
 states for comparison by population.
 
-![All-Star players’ college locations by state (per million residents),
-1951-2021](images/all_stars_by_state_pc.png)
+<figure>
+<img src="images/all_stars_by_state_pc.png" style="width:75.0%" alt="All-Star players’ college locations by state (per million residents), 1951-2021" /><figcaption aria-hidden="true">All-Star players’ college locations by state (per million residents), 1951-2021</figcaption>
+</figure>
 
 After normalizing states, Kentucky and North Carolina are still among
 the leaders. These states feature heralded basketball programs from

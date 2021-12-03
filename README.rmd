@@ -1,5 +1,5 @@
 ---
-title: "Project 2"
+title: "Project 2: NBA All-Stars"
 author: "Data Wranglers"
 output: github_document
 ---
@@ -30,13 +30,13 @@ This data comes from [Basketball Reference](https://www.basketball-reference.com
 
 # NBA All-Stars by College
 
-Our third research question was primarily motivated by our group members being Duke basketball fans and fans of college basketball as a whole. We wanted to do a deeper dive into relationships between college basketball teams and NBA player success. In our analysis, we defined a player's college as being the place that they attended immediately prior to starting their NBA career, regardless of whether they graduated.
+Our first research question was primarily motivated by our group members being Duke basketball fans and fans of college basketball as a whole. We wanted to do a deeper dive into relationships between college basketball teams and NBA player success. In our analysis, we defined a player's college as being the place that they attended immediately prior to starting their NBA career, regardless of whether they graduated.
 
 In our Shiny App, we explored these relationships in the first three tabs: the "Colleges", "College Map", and "College State" tabs.
 
 In the "Colleges" tab, we created a dynamic racing bar chart that measures the amount of All-Stars a college has produced since the introduction of the All-Star game in 1951. We allow the user to define whether they would like to count every appearance made in an All-Star game or to only count each player once per college, even if they made several All-Star games. We also allowed the user to define the length of the animation, the number of frames per second, and the length of the pause at the end of the animation loop. We chose to let the user define the year range for the animation and the number of colleges to include in the ranking. Our options provided are shown below.
 
-!["Colleges" tab user interface](images/colleges-tab.png){width=50%}
+!["Colleges" tab user interface](images/colleges-tab.png){width=80%}
 
 To give us a broad sense of what colleges have been most successful in producing All-Star NBA players, we chose to plot the number of All-Star game appearances over time by college, yielding the result that Kentucky, UCLA, and UNC are the leaders of the pack.
 
@@ -61,21 +61,21 @@ In both total All-Star game appearances and number of players with an All-Star a
 
 To find where NBA players attended colleges geographically, we plotted both a chloropleth map of states and a point location map showing where players have attended. Customizability for the user in the Shiny App is shown below.
 
-!["Colleges Map" tab user interface](images/colleges-loc-tab.png){width=50%}
+!["Colleges Map" tab user interface](images/colleges-loc-tab.png){width=80%}
 
-!["College State" tab user interface](images/collegesmap-tab.png){width=50%}
+!["College State" tab user interface](images/collegesmap-tab.png){width=80%}
 
 We chose to use our Shiny App to examine the geography of where NBA All-Stars have gone to college over time.
 
-![Map of All-Star players' college locations, 1951-2021](images/all_stars_by_location_college_map.gif){width=50%}
+![Map of All-Star players' college locations, 1951-2021](images/all_stars_by_location_college_map.gif){width=80%}
 
 We then chose to look on a bigger scale, comparing across states. To avoid problems that arise with red-green colorblindness, we chose a blue-red color palette, using the NBA logo's colors for guidance.
 
-![All-Star players' college locations by state, 1951-2021](images/all_stars_by_state.png)
+![All-Star players' college locations by state, 1951-2021](images/all_stars_by_state.png){width="75%"}
 
 California, North Carolina, and Kentucky stand out most among states. However, because states with many people in them would be more likely to have NBA All-Star players attend college there, we wanted to standardize states for comparison by population.
 
-![All-Star players' college locations by state (per million residents), 1951-2021](images/all_stars_by_state_pc.png)
+![All-Star players' college locations by state (per million residents), 1951-2021](images/all_stars_by_state_pc.png){width="75%"}
 
 After normalizing states, Kentucky and North Carolina are still among the leaders. These states feature heralded basketball programs from which many great NBA players have emerged. Wyoming and Montana also stand out, but their values are more a product of their minuscule populations.
 
